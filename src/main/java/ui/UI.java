@@ -5,6 +5,6 @@ package ui;
  *
  * @author <Frederik Keis Dinsen>
  */
-public class UI {
-
+public interface UI {
+    void StartUI();
 }
