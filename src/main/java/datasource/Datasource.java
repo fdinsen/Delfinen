@@ -9,6 +9,7 @@ import model.Times;
 import model.TrainingTime;
 import model.CompetitionTime;
 import model.SwimmingDiscipline;
+import model.Member;
 
 /**
  *
