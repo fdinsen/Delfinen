@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
 public class Member {
+
     private int memberID;
     private String memberName;
     private String phoneNumber;
@@ -16,7 +17,7 @@ public class Member {
     private double subscription;
     private TeamType teamType;
 
-    public Member(int memberID, String memberName, String phoneNumber, String adresse, String email, LocalDate birthDate, int trainerId, MembershipStatus membershipStatus, MembershipType membershipType, double subscription, TeamType teamType) {
+    public Member(int memberID, String memberName, String phoneNumber, String adresse, String email, LocalDate birthDate, int trainerId, MembershipStatus membershipStatus, MembershipType membershipType, double subscription) {
         this.memberID = memberID;
         this.memberName = memberName;
         this.phoneNumber = phoneNumber;
@@ -26,23 +27,34 @@ public class Member {
         this.trainerId = trainerId;
         this.membershipStatus = membershipStatus;
         this.membershipType = membershipType;
-        this.teamType = teamType;
+        
+        if(calculateAge() < 18){
+            this.teamType = teamType.JUNIOR;
+        }else{
+            this.teamType = teamType.SENIOR;
+        }
         
         calculateSubscription();
     }
-    private void calculateSubscription(){
-        
+
+    private long calculateAge() {
         LocalDate now = LocalDate.now();
-        long years = birthDate.until(now,ChronoUnit.YEARS);
-        
-        if(membershipStatus == membershipStatus.PASSIVE){
+        long years = birthDate.until(now, ChronoUnit.YEARS);
+        return years;
+    }
+
+    private void calculateSubscription() {
+
+        long years = calculateAge();
+
+        if (membershipStatus == membershipStatus.PASSIVE) {
             subscription = 500.0;
-        }else{
-            if(years < 18){
+        } else {
+            if (years < 18) {
                 subscription = 1000.0;
-            }else if(years < 60){
+            } else if (years < 60) {
                 subscription = 1600.0;
-            }else{
+            } else {
                 subscription = 1600.0 * 0.75;
             }
         }
@@ -51,6 +63,5 @@ public class Member {
     public double getSubscription() {
         return subscription;
     }
-    
-    
+
 }
