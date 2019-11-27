@@ -6,7 +6,7 @@ CREATE TABLE `members` (
 	`member_id` int(11) NOT null auto_increment,
     `member_name` varchar(45) NOT null,
     `phone_number` varchar(8) Not null,
-    `adresses` varchar(45) NOT null, 
+    `address` varchar(45) NOT null, 
     `email` varchar(45) NOT null,
     `birthday` date NOT null,
     `trainer_id` int(11) default 0,
