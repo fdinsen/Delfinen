@@ -1,15 +1,16 @@
 package datasource;
 
-import java.io.IOException;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import model.Member;
 import model.MembershipStatus;
 import model.MembershipType;
 import org.junit.Test;
-import static org.junit.Assert.*;
+
+import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  *
@@ -73,7 +74,7 @@ public class MemberMapperTest extends TestBaseIntegration {
     }
 
     @Test
-    public void testCreateTwoMembersWithSamePhoneNumber() {
+    public void testCreateAndGetTwoMembersWithSamePhoneNumber() {
         LocalDate dato = LocalDate.now();
         Member member1 = new Member("navn", "555111", "addresse", "email@email.com", dato, 0, MembershipStatus.PASSIVE, MembershipType.COMPETITIVE);
 
@@ -105,13 +106,46 @@ public class MemberMapperTest extends TestBaseIntegration {
     
     
 
-    
+    @Test
     public void testUpdateMember() {
-        System.out.println("updateMember");
-        Member member = null;
-        MemberMapper instance = new MemberMapper();
-        instance.updateMember(member);
-        fail("The test case is a prototype.");
+        String expectedName = "Morten";
+        String expectedPhone = "12392712";
+        String expectedEmail = "test@testing.com";
+        String expectedAddress = "TestVej 5";
+        LocalDate expectedBirthday = LocalDate.now();
+        MembershipStatus expectedMemberStatus = MembershipStatus.PASSIVE;
+        MembershipType expectedMemberType = MembershipType.COMPETITIVE;
+
+        MemberMapper instanceMemberMapper = new MemberMapper();
+        ArrayList<Member> memberToChange = instanceMemberMapper.getMemberByPhone("12345678");
+        memberToChange.get(0).setName(expectedName);
+        memberToChange.get(0).setPhone(expectedPhone);
+        memberToChange.get(0).setEmail(expectedEmail);
+        memberToChange.get(0).setAddress(expectedAddress);
+        memberToChange.get(0).setBirthday(expectedBirthday);
+        memberToChange.get(0).setMemberStatus(expectedMemberStatus);
+        memberToChange.get(0).setMemberType(expectedMemberType);
+
+
+        instanceMemberMapper.updateMember(memberToChange.get(0));
+
+        ArrayList<Member> actual = instanceMemberMapper.getMemberByPhone("12392712");
+        String actualName = actual.get(0).getName();
+        String actualPhone = actual.get(0).getPhone();
+        String actualEmail = actual.get(0).getEmail();
+        String actualAddress = actual.get(0).getAddress();
+        LocalDate actualBirthday = actual.get(0).getBirthday();
+        MembershipStatus actualMemberStatus = actual.get(0).getMembershipStatus();
+        MembershipType actualMemberType = actual.get(0).getMembershipType();
+
+        //Assert
+        assertEquals(expectedName,actualName);
+        assertEquals(expectedPhone,actualPhone);
+        assertEquals(expectedEmail,actualEmail);
+        assertEquals(expectedAddress,actualAddress);
+        assertEquals(expectedBirthday,actualBirthday);
+        assertEquals(expectedMemberStatus,actualMemberStatus);
+        assertEquals(expectedMemberType,actualMemberType);
     }
 
     @Test
@@ -119,7 +153,6 @@ public class MemberMapperTest extends TestBaseIntegration {
         MemberMapper instanceMemberMapper = new MemberMapper();
         ArrayList<Member> actual = instanceMemberMapper.getMemberByPhone("12345678");
 
-        //Member1
         assertEquals(1, actual.get(0).getMemberId());
         assertEquals("John", actual.get(0).getName());
         assertEquals("12345678", actual.get(0).getPhone());
@@ -138,7 +171,6 @@ public class MemberMapperTest extends TestBaseIntegration {
         MemberMapper instanceMemberMapper = new MemberMapper();
         ArrayList<Member> actual = instanceMemberMapper.getMemberByName("Simon");
 
-        //Member1
         assertEquals(2, actual.get(0).getMemberId());
         assertEquals("Simon", actual.get(0).getName());
         assertEquals("23456789", actual.get(0).getPhone());
@@ -152,15 +184,22 @@ public class MemberMapperTest extends TestBaseIntegration {
         assertEquals(MembershipType.COMPETITIVE, actual.get(0).getMembershipType());
     }
 
-    
+    @Test
     public void testGetMemberByEmail() {
-        System.out.println("getMemberByEmail");
-        String email = "";
-        MemberMapper instance = new MemberMapper();
-        ArrayList<Member> expResult = null;
-        ArrayList<Member> result = instance.getMemberByEmail(email);
-        assertEquals(expResult, result);
-        fail("The test case is a prototype.");
+        MemberMapper instanceMemberMapper = new MemberMapper();
+        ArrayList<Member> actual = instanceMemberMapper.getMemberByEmail("SUzan@gmail.com");
+
+        assertEquals(3, actual.get(0).getMemberId());
+        assertEquals("Suzan", actual.get(0).getName());
+        assertEquals("34567890", actual.get(0).getPhone());
+        assertEquals("Veeeej 1", actual.get(0).getAddress());
+        assertEquals("SUzan@gmail.com", actual.get(0).getEmail());
+        String str = "1940-05-06";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate date = LocalDate.parse(str, formatter);
+        assertEquals(date, actual.get(0).getBirthday());
+        assertEquals(MembershipStatus.ACTIVE, actual.get(0).getMembershipStatus());
+        assertEquals(MembershipType.COMPETITIVE, actual.get(0).getMembershipType());
     }
     
 }
