@@ -7,4 +7,8 @@ package model;
  */
 public class CompetitionTime extends Times {
 
+    public CompetitionTime(int timeInMs, SwimmingDiscipline sd) {
+        super(timeInMs, sd);
+    }
+
 }

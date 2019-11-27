@@ -66,7 +66,7 @@ DROP TABLE IF EXISTS `training_times`;
 
 CREATE TABLE `training_times` (
 	`t_time_id` int(11) NOT null auto_increment,
-	`date` date NOT null,
+	`t_date` date NOT null,
     `member_id` int(11) NOT null,
     `t_time_ms` int(11) NOT null,
     `swimming_discipline` enum ('CRAWL','BACK CRAWL','BREASTSTROKE','BUTTERFLY') NOT null,

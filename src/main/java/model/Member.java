@@ -37,6 +37,25 @@ public class Member {
         
         calculateSubscription();
     }
+    
+    public Member(String memberName, String phoneNumber, String adresse, String email, LocalDate birthDate, int trainerId, MembershipStatus membershipStatus, MembershipType membershipType) {
+        this.memberName = memberName;
+        this.phoneNumber = phoneNumber;
+        this.adresse = adresse;
+        this.email = email;
+        this.birthDate = birthDate;
+        this.trainerId = trainerId;
+        this.membershipStatus = membershipStatus;
+        this.membershipType = membershipType;
+        
+        if(calculateAge() < 18){
+            this.teamType = teamType.JUNIOR;
+        }else{
+            this.teamType = teamType.SENIOR;
+        }
+        
+        calculateSubscription();
+    }
 
     private long calculateAge() {
         LocalDate now = LocalDate.now();
