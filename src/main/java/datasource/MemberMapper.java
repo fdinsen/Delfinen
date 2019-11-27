@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Date;  
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -13,7 +14,7 @@ import model.Member;
 import model.MembershipStatus;
 import model.MembershipType;
 
-public class memberMapper {
+public class MemberMapper {
     private Connection con = null;
     
     public void createMember(Member member){
@@ -27,16 +28,18 @@ public class memberMapper {
             ps.setString(2, member.getPhone());
             ps.setString(3, member.getAddress());
             ps.setString(4, member.getEmail());
-            ps.setDate(5, member.getBirthday());
+            //Localdate to sql.date
+            Date date = java.sql.Date.valueOf(member.getBirthday().toString());
+            ps.setDate(5, date);
             ps.setInt(6, member.getTrainerId());
-            ps.setString(7, member.getMembershipStatus());
-            ps.setString(8, member.getMembershipType());
+            ps.setString(7, member.getMembershipStatus().toString());
+            ps.setString(8, member.getMembershipType().toString());
             
             ps.execute();
             ps.close();
 
         } catch (SQLException ex) {
-            Logger.getLogger(memberMapper.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MemberMapper.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println("Kunne ikke oprette ny bruger, prøv igen");
         }
     }
@@ -52,17 +55,18 @@ public class memberMapper {
             ps.setString(2, member.getPhone());
             ps.setString(3, member.getAddress());
             ps.setString(4, member.getEmail());
-            ps.setDate(5, member.getBirthday());
+            Date date = java.sql.Date.valueOf(member.getBirthday().toString());
+            ps.setDate(5, date);
             ps.setInt(6, member.getTrainerId());
-            ps.setString(7, member.getMembershipStatus());
-            ps.setString(8, member.getMembershipType());
+            ps.setString(7, member.getMembershipStatus().toString());
+            ps.setString(8, member.getMembershipType().toString());
             ps.setInt(9, member.getMemberId());
             
             ps.execute();
             ps.close();
 
         } catch (SQLException ex) {
-            Logger.getLogger(memberMapper.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MemberMapper.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println("Kunne ikke opdatere medlemet, prøv igen");
         }
     }
@@ -93,7 +97,7 @@ public class memberMapper {
             }
             
         } catch (SQLException ex) {
-            Logger.getLogger(memberMapper.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MemberMapper.class.getName()).log(Level.SEVERE, null, ex);
         }
         return members;
     }
@@ -123,7 +127,7 @@ public class memberMapper {
             }
             
         } catch (SQLException ex) {
-            Logger.getLogger(memberMapper.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MemberMapper.class.getName()).log(Level.SEVERE, null, ex);
         }
         return members;
     }
@@ -153,7 +157,7 @@ public class memberMapper {
             }
             
         } catch (SQLException ex) {
-            Logger.getLogger(memberMapper.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MemberMapper.class.getName()).log(Level.SEVERE, null, ex);
         }
         return members;
     }
