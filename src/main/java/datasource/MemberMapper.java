@@ -24,7 +24,7 @@ public class MemberMapper {
                 + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         try {
 
-            PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement ps = con.prepareStatement(SQL);
             ps.setString(1, member.getName());
             ps.setString(2, member.getPhone());
             ps.setString(3, member.getAddress());
@@ -50,7 +50,7 @@ public class MemberMapper {
         String SQL = "UPDATE members SET member_name = ?, phone_number = ?, address = ?, email = ?, birthday = ?, trainer_id = ?, membership_status = ?, membership_type = ? WHERE member_id = ?";
         try {
 
-            PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement ps = con.prepareStatement(SQL);
             ps.setString(1, member.getName());
             ps.setString(2, member.getPhone());
             ps.setString(3, member.getAddress());
@@ -97,6 +97,7 @@ public class MemberMapper {
             con.close();
 
         } catch (SQLException ex) {
+            System.out.println("Problem med at finde bruger via telefon nr., prøv igen");
             Logger.getLogger(MemberMapper.class.getName()).log(Level.SEVERE, null, ex);
         }
         return members;
@@ -126,6 +127,7 @@ public class MemberMapper {
             stmt.close();
             con.close();
         } catch (SQLException ex) {
+            System.out.println("Problem med at finde bruger via navnet., prøv igen");
             Logger.getLogger(MemberMapper.class.getName()).log(Level.SEVERE, null, ex);
         }
         return members;
@@ -156,6 +158,7 @@ public class MemberMapper {
             con.close();
 
         } catch (SQLException ex) {
+            System.out.println("Problem med at finde bruger via email., prøv igen");
             Logger.getLogger(MemberMapper.class.getName()).log(Level.SEVERE, null, ex);
         }
         return members;
