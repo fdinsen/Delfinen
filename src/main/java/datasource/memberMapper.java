@@ -12,7 +12,6 @@ import java.util.logging.Logger;
 import model.Member;
 import model.MembershipStatus;
 import model.MembershipType;
-import model.TeamType;
 
 public class memberMapper {
     private Connection con = null;
@@ -69,9 +68,10 @@ public class memberMapper {
     }
     
     
-    public List<Member> getMemberByPhone(String phone){
+    public ArrayList<Member> getMemberByPhone(String phone){
         Statement stmt;
-
+        ArrayList<Member> members = new ArrayList<>();
+            
         try {
             con = DBConnector.getConnection();
             stmt = con.createStatement();
@@ -89,21 +89,73 @@ public class memberMapper {
                 stmt.close();
                 con.close();
                 Member member = new Member(memberId, memberName, phone, address, email, birthday, trainerId, membershipStatus, membershipType);
-                
+                members.add(member);
             }
             
         } catch (SQLException ex) {
             Logger.getLogger(memberMapper.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return member;
+        return members;
     }
     
-    public List<Member> getMemberByName(String name){
-        
+    public ArrayList<Member> getMemberByName(String name){
+        Statement stmt;
+        ArrayList<Member> members = new ArrayList<>();
+            
+        try {
+            con = DBConnector.getConnection();
+            stmt = con.createStatement();
+            ResultSet rsMember = stmt.executeQuery("SELECT * FROM members WHERE member_name = " + name);
+            while (rsMember.next()) {
+                int memberId = rsMember.getInt("membership_id");
+                String memberPhone= rsMember.getString("membership_phone");
+                String address = rsMember.getString("address");
+                String email = rsMember.getString("email");
+                LocalDate birthday = rsMember.getDate("birthday").toLocalDate();
+                int trainerId = rsMember.getInt("trainer_id");
+                MembershipStatus membershipStatus = MembershipStatus.valueOf(rsMember.getString("membership_status"));
+                MembershipType membershipType = MembershipType.valueOf(rsMember.getString("membership_type"));
+                rsMember.close();
+                stmt.close();
+                con.close();
+                Member member = new Member(memberId, name, memberPhone, address, email, birthday, trainerId, membershipStatus, membershipType);
+                members.add(member);
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(memberMapper.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return members;
     }
     
-    public List<Member> getMemberByEmail(String email){
-        
+    public ArrayList<Member> getMemberByEmail(String email){
+        Statement stmt;
+        ArrayList<Member> members = new ArrayList<>();
+            
+        try {
+            con = DBConnector.getConnection();
+            stmt = con.createStatement();
+            ResultSet rsMember = stmt.executeQuery("SELECT * FROM members WHERE email = " + email);
+            while (rsMember.next()) {
+                int memberId = rsMember.getInt("membership_id");
+                String memberName = rsMember.getString("membership_name");
+                String memberPhone= rsMember.getString("membership_phone");
+                String address = rsMember.getString("address");
+                LocalDate birthday = rsMember.getDate("birthday").toLocalDate();
+                int trainerId = rsMember.getInt("trainer_id");
+                MembershipStatus membershipStatus = MembershipStatus.valueOf(rsMember.getString("membership_status"));
+                MembershipType membershipType = MembershipType.valueOf(rsMember.getString("membership_type"));
+                rsMember.close();
+                stmt.close();
+                con.close();
+                Member member = new Member(memberId, memberName, memberPhone, address, email, birthday, trainerId, membershipStatus, membershipType);
+                members.add(member);
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(memberMapper.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return members;
     }
 }
 
