@@ -104,16 +104,16 @@ public class MemberMapper {
     }
 
     public ArrayList<Member> getMemberByName(String name) {
-        Statement stmt;
         ArrayList<Member> members = new ArrayList<>();
 
         try {
             con = DBConnector.getConnection();
-            stmt = con.createStatement();
-            ResultSet rsMember = stmt.executeQuery("SELECT * FROM members WHERE member_name = " + name);
+            PreparedStatement stmt = con.prepareStatement("SELECT * FROM members WHERE member_name = ?");
+            stmt.setString(1, name);
+            ResultSet rsMember = stmt.executeQuery();
             while (rsMember.next()) {
                 int memberId = rsMember.getInt("member_id");
-                String memberPhone = rsMember.getString("member_phone");
+                String memberPhone = rsMember.getString("phone_number");
                 String address = rsMember.getString("address");
                 String email = rsMember.getString("email");
                 LocalDate birthday = rsMember.getDate("birthday").toLocalDate();
