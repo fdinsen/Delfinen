@@ -10,8 +10,8 @@ CREATE TABLE `members` (
     `email` varchar(45) NOT null,
     `birthday` date NOT null,
     `trainer_id` int(11) default 0,
-    `membership_status` enum  ('active','passive') NOT null,
-    `membership_type` enum ('casual','competition') NOT null,
+    `membership_status` enum  ('ACTIVE','PASSIVE') NOT null,
+    `membership_type` enum ('CASUAL','COMPETITIVE') NOT null,
     PRIMARY KEY (`member_id`)
 );
 
@@ -22,7 +22,6 @@ DROP TABLE IF EXISTS `restance`;
 CREATE TABLE `restance` (
 	`restance_id` int(11) NOT null auto_increment,
 	`member_id` int(11) NOT null,
-    `owe_money` tinyint NOT null,
     PRIMARY KEY (`restance_id`)
 );
 
@@ -45,7 +44,7 @@ DROP TABLE IF EXISTS `competitions`;
 CREATE TABLE `competitions` (
 	`competitions_id` int(11) NOT null auto_increment,
 	`t_id` int(11) NOT null,
-    `swimming_discipline` enum ('crawl','back crawl','breaststroke','butterfly') NOT null,
+    `swimming_discipline` enum ('CRAWL','BACK CRAWL','BREASTSTROKE','BUTTERFLY') NOT null,
     PRIMARY KEY (`competitions_id`)
 );
 
@@ -70,7 +69,7 @@ CREATE TABLE `training_times` (
 	`date` date NOT null,
     `member_id` int(11) NOT null,
     `t_time_ms` int(11) NOT null,
-    `swimming_discipline` enum ('crawl','back crawl','breaststroke','butterfly') NOT null,
+    `swimming_discipline` enum ('CRAWL','BACK CRAWL','BREASTSTROKE','BUTTERFLY') NOT null,
     PRIMARY KEY (`t_time_id`)
 );
 
@@ -91,7 +90,7 @@ DROP TABLE IF EXISTS `member_swiming_discipline`;
 CREATE TABLE `member_swiming_discipline` (
 	`msd_id` int(11) NOT null auto_increment,
 	`member_id` int(11) NOT null,
-    `discipline_name` enum ('crawl','back crawl','breaststroke','butterfly') NOT null,
+    `discipline_name` enum ('CRAWL','BACK CRAWL','BREASTSTROKE','BUTTERFLY') NOT null,
     PRIMARY KEY (`msd_id`)
 );
 
