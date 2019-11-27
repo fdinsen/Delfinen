@@ -1,14 +1,27 @@
 package main;
 
+import Controllers.Controller;
 import datasource.DataSource;
 import factory.DataSourceFactory;
 import factory.DataSources;
+import ui.MainConsoleUI;
+import ui.UI;
 
 /**
  *
  * @author <Frederik Keis Dinsen>
  */
 public class Main {
-    DataSourceFactory dataSourceFactory = new DataSourceFactory();
-    DataSource dataSource = dataSourceFactory.getDataSource(DataSources.DATABASE);
+
+    public static void main(String[] args) {
+
+        DataSourceFactory dataSourceFactory = new DataSourceFactory();
+        DataSource dataSource = dataSourceFactory.getDataSource(DataSources.DATABASE);
+        UI ui = new MainConsoleUI();
+        Controller controller = ui.selectUser();
+        ui.setController(controller);
+        ui.startUI();
+
+    }
+
 }

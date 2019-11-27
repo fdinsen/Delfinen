@@ -2,7 +2,14 @@
 package datasource;
 
 import java.util.List;
-
+import model.Trainer;
+import model.Competition;
+import model.Tournament;
+import model.Times;
+import model.TrainingTime;
+import model.CompetitionTime;
+import model.SwimmingDiscipline;
+import model.Member;
 /**
  *
  * @author <Frederik Keis Dinsen>

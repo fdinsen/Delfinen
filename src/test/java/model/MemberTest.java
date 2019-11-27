@@ -26,7 +26,7 @@ public class MemberTest {
     @Test
     public void testGetPassiveSub() {
         birthday = LocalDate.of(1996,1,20);
-        Member john = new Member(0, "John", "1234", "Vejvej 1", "1@1", birthday, 0, MembershipStatus.PASSIVE, MembershipType.COMPETITIVE, 0, TeamType.JUNIOR);
+        Member john = new Member(0, "John", "1234", "Vejvej 1", "1@1", birthday, 0, MembershipStatus.PASSIVE, MembershipType.COMPETITIVE);
         double expResult = 500.0;
         double result = john.getSubscription();
         assertEquals(expResult, result, 0.0);
@@ -35,7 +35,7 @@ public class MemberTest {
     @Test
     public void testGetActiveUnder18Sub(){
         birthday = LocalDate.of(2005, 1, 20);
-        Member john = new Member(0, "John", "1234", "Vejvej 1", "1@1", birthday, 0, MembershipStatus.ACTIVE, MembershipType.COMPETITIVE, 0, TeamType.JUNIOR);
+        Member john = new Member(0, "John", "1234", "Vejvej 1", "1@1", birthday, 0, MembershipStatus.ACTIVE, MembershipType.COMPETITIVE);
         double expResult = 1000.0;
         double result = john.getSubscription();
         assertEquals(expResult, result, 0.0);
@@ -44,7 +44,7 @@ public class MemberTest {
     @Test
     public void testGetActiveAbove18Sub(){
         birthday = LocalDate.of(1996, 1, 20);
-        Member john = new Member(0, "John", "1234", "Vejvej 1", "1@1", birthday, 0, MembershipStatus.ACTIVE, MembershipType.COMPETITIVE, 0, TeamType.SENIOR);
+        Member john = new Member(0, "John", "1234", "Vejvej 1", "1@1", birthday, 0, MembershipStatus.ACTIVE, MembershipType.COMPETITIVE);
         double expResult = 1600.0;
         double result = john.getSubscription();
         assertEquals(expResult, result, 0.0);   
@@ -52,7 +52,7 @@ public class MemberTest {
     @Test
     public void testAGetActiveAbove60Sub(){
         birthday = LocalDate.of(1950,1,20);
-        Member john = new Member(0, "John", "1234", "Vejvej 1", "1@1", birthday, 0, MembershipStatus.ACTIVE, MembershipType.COMPETITIVE, 0, TeamType.SENIOR);
+        Member john = new Member(0, "John", "1234", "Vejvej 1", "1@1", birthday, 0, MembershipStatus.ACTIVE, MembershipType.COMPETITIVE);
         double expResult = 1200.0;
         double result = john.getSubscription();
         assertEquals(expResult, result, 0.0);
