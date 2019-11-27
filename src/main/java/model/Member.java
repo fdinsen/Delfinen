@@ -120,4 +120,7 @@ public class Member {
         return memberID;
     }
 
+    public void setName(String name) {
+        this.memberName = name;
+    }
 }
