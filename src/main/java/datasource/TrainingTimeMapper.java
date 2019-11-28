@@ -37,7 +37,10 @@ public class TrainingTimeMapper {
 
     public List<TrainingTime> getMemberTimes(int memberID) {
         ArrayList<TrainingTime> trainningTimes = new ArrayList<>();
-        String SQL = "SELECT * FROM training_times where member_id = ?";
+        String SQL = "SELECT t_date, members.member_id, t_time_ms, "
+                + "swimming_discipline, members.member_name FROM training_times "
+                + "join members on training_times.member_id = members.member_id "
+                + "where members.member_id = ?";
         con = DBConnector.getConnection();
 
         try {
@@ -52,8 +55,9 @@ public class TrainingTimeMapper {
                 String t_date = result.getString("t_date");
                 int t_time_ms = result.getInt("t_time_ms");
                 String sd = result.getString("swimming_discipline");
+                String name = result.getString("member_name");
                 LocalDate ld = LocalDate.parse(t_date);
-                TrainingTime tt = new TrainingTime(memeberId,ld , t_time_ms, SwimmingDiscipline.valueOf(sd));
+                TrainingTime tt = new TrainingTime(memeberId,ld , t_time_ms, SwimmingDiscipline.valueOf(sd),name);
                 
                 trainningTimes.add(tt);
             }
