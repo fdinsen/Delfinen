@@ -2,12 +2,9 @@ package datasource;
 
 import model.Competition;
 import model.SwimmingDiscipline;
-import model.Tournament;
 import org.junit.Test;
 
 import java.io.IOException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import static org.junit.Assert.assertEquals;
@@ -135,7 +132,7 @@ public class CompetitionsMapperTest extends TestBaseIntegration{
         SwimmingDiscipline expectedSwimingDiscipline1 = SwimmingDiscipline.BUTTERFLY;
 
         CompetitionMapper instanceCompetitionMapper = new CompetitionMapper();
-        Competition CompetitionToBeUpdated = new Competition(expectedCID,expectedTID,expectedSwimingDiscipline1);;
+        Competition CompetitionToBeUpdated = new Competition(expectedCID,expectedTID,expectedSwimingDiscipline1);
         instanceCompetitionMapper.updateTournament(CompetitionToBeUpdated);
 
         actual = instanceCompetitionMapper.getAllCompetitions(expectedTID);

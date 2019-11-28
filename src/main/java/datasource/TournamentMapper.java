@@ -1,8 +1,5 @@
 package datasource;
 
-import model.Member;
-import model.MembershipStatus;
-import model.MembershipType;
 import model.Tournament;
 
 import java.sql.*;

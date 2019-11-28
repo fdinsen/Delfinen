@@ -28,7 +28,6 @@ public class MemberMapper {
             ps.setString(2, member.getPhone());
             ps.setString(3, member.getAddress());
             ps.setString(4, member.getEmail());
-            //Localdate to sql.date
             Date date = java.sql.Date.valueOf(member.getBirthday().toString());
             ps.setDate(5, date);
             ps.setInt(6, member.getTrainerId());
