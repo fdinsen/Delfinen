@@ -17,15 +17,15 @@ public class Tournament {
         this.Location = tLocation;
     }
 
-    public int gettId() {
+    public int getId() {
         return tId;
     }
 
-    public String gettName() {
+    public String getName() {
         return tName;
     }
 
-    public LocalDate gettDate() {
+    public LocalDate getDate() {
         return tDate;
     }
 
