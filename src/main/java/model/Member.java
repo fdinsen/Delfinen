@@ -120,4 +120,31 @@ public class Member {
         return memberID;
     }
 
+    public void setName(String name) {
+        this.memberName = name;
+    }
+
+    public void setPhone(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setAddress(String address) {
+        this.adresse = address;
+    }
+
+    public void setBirthday(LocalDate birthday) {
+        this.birthDate = birthday;
+    }
+
+    public void setMemberStatus(MembershipStatus memberStatus) {
+        this.membershipStatus = memberStatus;
+    }
+
+    public void setMemberType(MembershipType memberType) {
+        this.membershipType = memberType;
+    }
 }

@@ -7,7 +7,7 @@ package datasource;
 
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.List;
+import java.util.ArrayList;
 import model.SwimmingDiscipline;
 import model.TrainingTime;
 import org.junit.Test;
@@ -19,23 +19,39 @@ import static org.junit.Assert.*;
  */
 public class TrainingTimeMapperTest extends TestBaseIntegration{
     
-    DBFacade dbf = new DBFacade();
-    
     public TrainingTimeMapperTest() throws IOException{
     }
 
     /**
      * Test of addTime method, of class TrainingTimeMapper.
      */
-    /*
+    
     @Test
     public void testAddTime() {
         LocalDate ld = LocalDate.of(2018,11,05);
-        TrainingTime trainingTime = new TrainingTime(1, ld, 75000 , SwimmingDiscipline.CRAWL);
+        TrainingTimeMapper instanceOfTTMapper = new TrainingTimeMapper();
+        TrainingTime trainingTime = new TrainingTime(8, ld, 75000 , SwimmingDiscipline.CRAWL);
+        int exspectedMs = 75000;
+        instanceOfTTMapper.addTime(trainingTime);
         
-        dbf.addTime(trainingTime);
+        ArrayList<TrainingTime> liste = (ArrayList<TrainingTime>) instanceOfTTMapper.getMemberTimes(8);
         
-        fail("The test case is a prototype.");
+        int actualMs = liste.get(0).getTimeInMS();
+        assertEquals(exspectedMs, actualMs);
     }
-    */
+    @Test
+    public void testGetMemberTime(){
+        ArrayList<TrainingTime> liste = new ArrayList<>();
+        TrainingTimeMapper instanceOfTTMapper = new TrainingTimeMapper();
+        int expsectedMs = 60000;
+        SwimmingDiscipline exspectedSD = SwimmingDiscipline.CRAWL;
+        liste = (ArrayList<TrainingTime>) instanceOfTTMapper.getMemberTimes(1);
+        
+        int actualMs = liste.get(0).getTimeInMS();
+        SwimmingDiscipline actualSd = liste.get(0).getSd();
+        
+        assertEquals(expsectedMs, actualMs);
+        assertEquals(exspectedSD, actualSd);
+    }
+    
 }

@@ -12,12 +12,18 @@ INSERT INTO restance (member_id) VALUES (1),(2),(4);
 TRUNCATE TABLE training_times;
 INSERT INTO training_times (t_date, member_id, t_time_ms, swimming_discipline) VALUES ('2018-11-27',1,60000,'CRAWL');
 INSERT INTO training_times (t_date, member_id, t_time_ms, swimming_discipline) VALUES ('2018-11-27',1,65000,'BUTTERFLY');
-INSERT INTO training_times (t_date, member_id, t_time_ms, swimming_discipline) VALUES ('2018-11-27',1,66000,'BREASTSTROKE');
+INSERT INTO training_times (t_date, member_id, t_time_ms, swimming_discipline) VALUES ('2018-11-27',1,66000,'BACKSTROKE');
 INSERT INTO training_times (t_date, member_id, t_time_ms, swimming_discipline) VALUES ('2018-11-27',2,60000,'CRAWL');
-INSERT INTO training_times (t_date, member_id, t_time_ms, swimming_discipline) VALUES ('2018-11-27',2,64000,'BREASTSTROKE');
-INSERT INTO training_times (t_date, member_id, t_time_ms, swimming_discipline) VALUES ('2018-11-27',2,66000,'BREASTSTROKE');
-INSERT INTO training_times (t_date, member_id, t_time_ms, swimming_discipline) VALUES ('2018-11-27',2,68000,'BREASTSTROKE');
+INSERT INTO training_times (t_date, member_id, t_time_ms, swimming_discipline) VALUES ('2018-11-27',2,64000,'BACKSTROKE');
+INSERT INTO training_times (t_date, member_id, t_time_ms, swimming_discipline) VALUES ('2018-11-27',2,66000,'BACKSTROKE');
+INSERT INTO training_times (t_date, member_id, t_time_ms, swimming_discipline) VALUES ('2018-11-27',2,68000,'BACKSTROKE');
 INSERT INTO training_times (t_date, member_id, t_time_ms, swimming_discipline) VALUES ('2018-11-27',2,69000,'CRAWL');
-INSERT INTO training_times (t_date, member_id, t_time_ms, swimming_discipline) VALUES ('2018-11-27',6,70000,'BREASTSTROKE');
+INSERT INTO training_times (t_date, member_id, t_time_ms, swimming_discipline) VALUES ('2018-11-27',6,70000,'BACKSTROKE');
 INSERT INTO training_times (t_date, member_id, t_time_ms, swimming_discipline) VALUES ('2018-11-27',6,80000,'BUTTERFLY');
 INSERT INTO training_times (t_date, member_id, t_time_ms, swimming_discipline) VALUES ('2018-11-27',6,120000,'BUTTERFLY');
+
+--Tournaments
+INSERT INTO `delfinen`.`tournaments` (`t_id`, `t_name`, `t_date`, `t_location`) VALUES ('1', 'JuleCup', '2019-02-18', 'Espergærde');
+INSERT INTO `delfinen`.`tournaments` (`t_id`, `t_name`, `t_date`, `t_location`) VALUES ('2', 'SommerCup', '2019-07-28', 'Oslo');
+INSERT INTO `delfinen`.`tournaments` (`t_id`, `t_name`, `t_date`, `t_location`) VALUES ('3', 'VinterCup', '2019-12-31', 'Kbh');
+INSERT INTO `delfinen`.`tournaments` (`t_id`, `t_name`, `t_date`, `t_location`) VALUES ('4', 'FerieCup', '2018-08-19', 'Roskilde');

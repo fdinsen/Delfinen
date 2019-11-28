@@ -11,8 +11,8 @@ public class TrainingTime extends Times {
     private int memeberID;
     private LocalDate date;
     
-    public TrainingTime(int memberID, LocalDate date, int timeInMs, SwimmingDiscipline sd){
-        super(timeInMs,sd);
+    public TrainingTime(int memberID, LocalDate date, int timeInMs, SwimmingDiscipline sd, String name){
+        super(timeInMs,sd,name);
         this.memeberID = memberID;
         this.date = date;
         
