@@ -37,7 +37,7 @@ public class TestBaseIntegration {
 
     private void rebuildDB() {
         try (Connection connection = DBConnector.getConnection();
-                Statement stmt = connection.createStatement()) {
+                Statement stmt = connection.createStatement();){
             for (String sqlStatement : DBSetUp) {
                 if (!sqlStatement.isEmpty()) {
                     stmt.executeUpdate(sqlStatement);

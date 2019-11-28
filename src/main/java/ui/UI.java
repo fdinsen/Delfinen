@@ -1,5 +1,5 @@
-
 package ui;
+//import java.util.regex;
 import Controllers.Controller;
 import java.util.Scanner;
 /**
@@ -17,5 +17,9 @@ public abstract class UI {
         System.out.println(messageToPrint);
         int response = scan.nextInt();
         return response;
+    }
+    
+    public void checkInputType(String input) {
+        
     }
 }
