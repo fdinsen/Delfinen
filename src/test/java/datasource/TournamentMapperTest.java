@@ -112,4 +112,28 @@ public class TournamentMapperTest extends TestBaseIntegration{
         assertEquals(expectedLocation, actual.get(0).getLocation());
         assertEquals(expectedSize,actual.size());
     }
+
+    @Test
+    public void TestUpdateTournament() {
+        int expectedID = 1;
+        String expectedName = "FerieCup";
+        String str = "2015-08-19";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate expectedDate = LocalDate.parse(str, formatter);
+        String expectedLocation = "Roskilde";
+        int expectedSize = 1;
+        Tournament tournamentToBeAdded = new Tournament(expectedID,expectedName,expectedDate,expectedLocation);
+
+        ArrayList<Tournament> actual;
+        TournamentMapper instanceTournamentMapper = new TournamentMapper();
+        instanceTournamentMapper.updateTournament(tournamentToBeAdded);
+
+        actual = instanceTournamentMapper.getAllTournaments(2015);
+
+        assertEquals(expectedID, actual.get(0).getId());
+        assertEquals(expectedName, actual.get(0).getName());
+        assertEquals(expectedDate, actual.get(0).getDate());
+        assertEquals(expectedLocation, actual.get(0).getLocation());
+        assertEquals(expectedSize,actual.size());
+    }
 }

@@ -10,5 +10,5 @@ package model;
  * @author <Frederik Keis Dinsen>
  */
 public enum SwimmingDiscipline {
-    CRAWL, BACKCRAWL, BUTTERFLY, BACKSTROKE;
+    CRAWL, BACKCRAWL, BUTTERFLY, BREASTSTROKE;
 }
