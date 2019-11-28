@@ -1,3 +1,9 @@
+TRUNCATE TABLE competition_times;
+INSERT INTO `delfinen`.`competition_times` (`c_time_id`, `competitions_id`, `member_id`, `c_time_ms`) VALUES ('1', '1', '12', '1234');
+INSERT INTO `delfinen`.`competition_times` (`c_time_id`, `competitions_id`, `member_id`, `c_time_ms`) VALUES ('2', '1', '2', '4321');
+INSERT INTO `delfinen`.`competition_times` (`c_time_id`, `competitions_id`, `member_id`, `c_time_ms`) VALUES ('3', '1', '4', '1001');
+INSERT INTO `delfinen`.`competition_times` (`c_time_id`, `competitions_id`, `member_id`, `c_time_ms`) VALUES ('4', '2', '2', '500');
+INSERT INTO `delfinen`.`competition_times` (`c_time_id`, `competitions_id`, `member_id`, `c_time_ms`) VALUES ('5', '2', '3', '600');
 TRUNCATE TABLE competitions;
 INSERT INTO `delfinen`.`competitions` (`competitions_id`, `t_id`, `swimming_discipline`) VALUES ('1', '1', 'CRAWL');
 INSERT INTO `delfinen`.`competitions` (`competitions_id`, `t_id`, `swimming_discipline`) VALUES ('2', '1', 'BUTTERFLY');
