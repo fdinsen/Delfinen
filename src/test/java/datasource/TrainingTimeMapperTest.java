@@ -17,7 +17,7 @@ import static org.junit.Assert.*;
  *
  * @author simon
  */
-public class TrainingTimeMapperTest extends TestBaseIntegration{
+public class TrainingTimeMapperTest extends TestDataSetup{
     
     public TrainingTimeMapperTest() throws IOException{
     }

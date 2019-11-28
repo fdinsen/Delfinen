@@ -13,7 +13,7 @@ import static org.junit.Assert.assertEquals;
  *
  * @author olvvang
  */
-public class CompetitionsMapperTest extends TestBaseIntegration{
+public class CompetitionsMapperTest extends TestDataSetup{
 
     public CompetitionsMapperTest() throws IOException {
     }

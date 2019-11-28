@@ -16,7 +16,7 @@ import static org.junit.Assert.assertEquals;
  *
  * @author olvvang
  */
-public class MemberMapperTest extends TestBaseIntegration {
+public class MemberMapperTest extends TestDataSetup {
 
     public MemberMapperTest() throws IOException {
     }

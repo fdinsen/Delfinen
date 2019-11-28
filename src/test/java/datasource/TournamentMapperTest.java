@@ -13,7 +13,7 @@ import static org.junit.Assert.*;
  *
  * @author olvvang
  */
-public class TournamentMapperTest extends TestBaseIntegration{
+public class TournamentMapperTest extends TestDataSetup{
 
     public TournamentMapperTest() throws IOException {
     }

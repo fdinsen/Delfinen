@@ -14,7 +14,7 @@ import static org.junit.Assert.assertEquals;
  *
  * @author olvvang
  */
-public class CompetitionTimeMapperTest extends TestBaseIntegration{
+public class CompetitionTimeMapperTest extends TestDataSetup{
 
     public CompetitionTimeMapperTest() throws IOException {
     }

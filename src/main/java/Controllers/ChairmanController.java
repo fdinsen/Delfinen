@@ -8,4 +8,8 @@ import model.*;
  */
 public class ChairmanController extends Controller{
 
+    @Override
+    public String toString() {
+        return "Formand";
+    }
 }

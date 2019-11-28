@@ -14,11 +14,11 @@ import org.junit.Before;
  *
  * @author <Frederik Keis Dinsen>
  */
-public class TestBaseIntegration {
+public class TestDataSetup {
 
     private ArrayList<String> DBSetUp = scanFromFile("delfinenTestData.sql");
 
-    public TestBaseIntegration() throws IOException {
+    public TestDataSetup() throws IOException {
     }
 
     public ArrayList<String> scanFromFile(String filename) {
