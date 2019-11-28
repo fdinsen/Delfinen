@@ -87,6 +87,7 @@ public class TournamentMapperTest extends TestBaseIntegration{
     @Test
     public void TestAddTwoTournaments() {
         int expectedID = 5;
+        int expectedID2 = 6;
         String expectedName = "MelCup";
         String str = "2017-08-19";
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -94,7 +95,7 @@ public class TournamentMapperTest extends TestBaseIntegration{
         String expectedLocation = "Roskilde";
         int expectedSize = 2;
         Tournament tournamentToBeAdded = new Tournament(expectedID,expectedName,expectedDate,expectedLocation);
-        Tournament tournamentToBeAdded2 = new Tournament(expectedID+1,expectedName+2,expectedDate,expectedLocation+2);
+        Tournament tournamentToBeAdded2 = new Tournament(expectedID2,expectedName+2,expectedDate,expectedLocation+2);
 
         ArrayList<Tournament> actual;
         TournamentMapper instanceTournamentMapper = new TournamentMapper();
