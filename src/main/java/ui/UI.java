@@ -1,15 +1,21 @@
 
 package ui;
 import Controllers.Controller;
+import java.util.Scanner;
 /**
  *
  * @author <Frederik Keis Dinsen>
  */
-public interface UI {
+public abstract class UI {
     
-    void startUI();
+    public void print(String messageToPrint) {
+        System.out.println(messageToPrint);
+    }
     
-    public Controller selectUser();
-    
-    public void setController(Controller controller);
+    public int getInput(String messageToPrint) {
+        Scanner scan = new Scanner(System.in);
+        System.out.println(messageToPrint);
+        int response = scan.nextInt();
+        return response;
+    }
 }

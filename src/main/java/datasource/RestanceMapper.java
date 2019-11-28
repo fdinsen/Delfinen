@@ -39,13 +39,13 @@ public class RestanceMapper {
                 String email = rs.getString("email");
                 LocalDate birthday = rs.getDate("birthday").toLocalDate();
                 int trainerId = rs.getInt("trainer_id");
-                MembershipStatus membershipStatus = 
-                        MembershipStatus.valueOf(rs.getString("membership_status"));
-                MembershipType membershipType = 
-                        MembershipType.valueOf(rs.getString("membership_type"));
+                MembershipStatus membershipStatus
+                        = MembershipStatus.valueOf(rs.getString("membership_status"));
+                MembershipType membershipType
+                        = MembershipType.valueOf(rs.getString("membership_type"));
                 membersWithRestance.add(
-                        new Member(memberId, memberName, phoneNumber, address, 
-                                email, birthday, trainerId, 
+                        new Member(memberId, memberName, phoneNumber, address,
+                                email, birthday, trainerId,
                                 membershipStatus, membershipType));
             }
             rs.close();
@@ -56,15 +56,15 @@ public class RestanceMapper {
         return membersWithRestance;
     }
 
-    public boolean userHasRestance(int memberId) {
+    public boolean memberHasRestance(int memberId) {
         boolean memberExists = false;
         con = DBConnector.getConnection();
         String SQL = "SELECT * FROM restance join members ON restance.member_id = "
-                    + "members.member_id WHERE members.member_id = ?";
+                + "members.member_id WHERE members.member_id = ?";
         try (PreparedStatement ps = con.prepareStatement(SQL)) {
             ps.setInt(1, memberId);
             ResultSet rs = ps.executeQuery();
-            
+
             memberExists = rs.next();
         } catch (SQLException ex) {
             Logger.getLogger(RestanceMapper.class.getName()).log(Level.SEVERE, null, ex);
@@ -72,6 +72,57 @@ public class RestanceMapper {
 
         return memberExists;
     }
-    
-    
+
+    public boolean markAsPaid(int memberId) {
+        if (memberHasRestance(memberId)) {
+            con = DBConnector.getConnection();
+            String SQL = "DELETE FROM restance WHERE member_id = ?";
+            try (PreparedStatement ps = con.prepareStatement(SQL)) {
+                ps.setInt(1, memberId);
+                ps.execute();
+                ps.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(RestanceMapper.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            return false;
+        }
+        return true;
+    }
+
+    public boolean makeNewSeason() {
+        if (getAllRestance().isEmpty()) {
+            con = DBConnector.getConnection();
+            String SQLGettingMembers = "SELECT member_id FROM members";
+            String SQLInsertingMembers = "INSERT INTO restance (member_id) VALUES (?)";
+            ArrayList<Integer> listOfMembers = new ArrayList();
+
+            try (PreparedStatement ps = con.prepareStatement(SQLGettingMembers)) {
+                ResultSet rs = ps.executeQuery();
+                while (rs.next()) {
+                    listOfMembers.add(rs.getInt("member_id"));
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(RestanceMapper.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            if (!listOfMembers.isEmpty()) {
+                try (PreparedStatement ps = con.prepareStatement(SQLInsertingMembers)) {
+                    for (Integer id : listOfMembers) {
+                        ps.setInt(1, id);
+                        ps.execute();
+                    }
+                } catch (SQLException ex) {
+                    Logger.getLogger(RestanceMapper.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } else {
+                System.out.println("Something that shouldn't happen went wrong "
+                        + "in the MakeNewSeason() method in RestanceMapper.");
+            }
+
+        } else {
+            return false;
+        }
+        return true;
+    }
+
 }

@@ -17,7 +17,7 @@ public class Main {
 
         DataSourceFactory dataSourceFactory = new DataSourceFactory();
         DataSource dataSource = dataSourceFactory.getDataSource(DataSources.DATABASE);
-        UI ui = new MainConsoleUI();
+        MainConsoleUI ui = new MainConsoleUI();
         Controller controller = ui.selectUser();
         ui.setController(controller);
         ui.startUI();

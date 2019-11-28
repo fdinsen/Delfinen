@@ -76,15 +76,105 @@ public class RestanceMapperTest extends TestBaseIntegration {
      * Test of userHasRestance method, of class RestanceMapper.
      */
     @Test
-    public void testUserHasRestance() {
+    public void testUserHasRestancePositive() {
         //Arrange
-        
+        RestanceMapper instance = new RestanceMapper();
         
         //Act
-        
+        boolean memberHasRestance = instance.memberHasRestance(1);
         
         //Assert
-        fail("test not implemented");
+        assertTrue(memberHasRestance);
+    }
+    
+    @Test
+    public void testUserHasRestanceNegative() {
+        //Arrange
+        RestanceMapper instance = new RestanceMapper();
+        
+        //Act
+        boolean memberHasRestance = instance.memberHasRestance(3);
+        
+        //Assert
+        assertFalse(memberHasRestance);
+    }
+    
+    @Test
+    public void testMarkAsPaidOnNonExistentMember() {
+        //Arrange
+        RestanceMapper instance = new RestanceMapper();
+        
+        //Act
+        boolean operationSucceeded = instance.markAsPaid(2316161);
+        
+        //Assert
+        assertFalse(operationSucceeded);
+    }
+    
+    @Test
+    public void testMarkAsPaidOnDatabase() {
+        //Arrange
+        RestanceMapper instance = new RestanceMapper();
+        
+        //Act
+        boolean isMemberPresentBeforeOperation = instance.memberHasRestance(1);
+        instance.markAsPaid(1);
+        boolean isMemberPresentAfterOperation = instance.memberHasRestance(1);
+        
+        //Assert
+        assertTrue(isMemberPresentBeforeOperation);
+        assertFalse(isMemberPresentAfterOperation);
+    }
+    
+    @Test
+    public void testMakeNewSeasonBySize() {
+        //Arrange
+        RestanceMapper instance = new RestanceMapper();
+        instance.markAsPaid(1);
+        instance.markAsPaid(2);
+        instance.markAsPaid(4);
+        int expectedSize = 6;
+        int actualSize;
+        
+        //Act
+        instance.makeNewSeason();
+        actualSize = instance.getAllRestance().size();
+        
+        //Assert
+        assertEquals(expectedSize, actualSize);
+    }
+    
+    @Test
+    public void testMakeNewSeasonByContent() {
+        //Arrange
+        RestanceMapper instance = new RestanceMapper();
+        instance.markAsPaid(1);
+        instance.markAsPaid(2);
+        instance.markAsPaid(4);
+        int expMemberId = 3;
+        String expMemberName = "Suzan";
+        String expPhoneNum = "34567890";
+        String expAddress = "Veeeej 1";
+        String expEmail = "SUzan@gmail.com";
+        String expBirthday = "1940-05-06";
+        int expTrainerId = 2;
+        MembershipStatus expMemStatus = MembershipStatus.ACTIVE;
+        MembershipType expMemType = MembershipType.COMPETITIVE;
+        
+        //Act
+        instance.makeNewSeason();
+        Member actual = instance.getAllRestance().get(2);
+        
+        //Assert
+        assertEquals(expMemberId, actual.getMemberId());
+        assertEquals(expMemberName, actual.getName());
+        assertEquals(expPhoneNum, actual.getPhone());
+        assertEquals(expAddress, actual.getAddress());
+        assertEquals(expEmail, actual.getEmail());
+        assertEquals(expBirthday, actual.getBirthday().toString());
+        assertEquals(expTrainerId, actual.getTrainerId());
+        assertEquals(expMemStatus, actual.getMembershipStatus());
+        assertEquals(expMemType, actual.getMembershipType());
     }
     
 }
