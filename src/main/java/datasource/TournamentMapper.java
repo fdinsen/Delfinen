@@ -5,10 +5,7 @@ import model.MembershipStatus;
 import model.MembershipType;
 import model.Tournament;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -44,5 +41,25 @@ public class TournamentMapper {
             Logger.getLogger(MemberMapper.class.getName()).log(Level.SEVERE, null, ex);
         }
         return tournaments;
+    }
+    public void addTournament(Tournament tournament) {
+        con = DBConnector.getConnection();
+        String SQL = "INSERT INTO tournaments (t_name, t_date, t_location)"
+                + "VALUES (?, ?, ?)";
+        try {
+
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ps.setString(1, tournament.getName());
+            Date date = java.sql.Date.valueOf(tournament.getDate().toString());
+            ps.setDate(2, date);
+            ps.setString(3, tournament.getLocation());
+
+            ps.execute();
+            ps.close();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(MemberMapper.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Kunne ikke tilføje stævne, prøv igen");
+        }
     }
 }

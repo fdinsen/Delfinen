@@ -13,13 +13,13 @@ import static org.junit.Assert.*;
  *
  * @author olvvang
  */
-public class TournamentMapperTest {
-    public TournamentMapperTest() throws IOException {
+public class TournamentMapperTest extends TestBaseIntegration{
 
+    public TournamentMapperTest() throws IOException {
     }
 
     @Test
-    public void getAllTournaments2019() {
+    public void TestgetAllTournaments2019() {
         ArrayList<Tournament> actual;
         TournamentMapper instanceTournamentMapper = new TournamentMapper();
         actual = instanceTournamentMapper.getAllTournaments(2019);
@@ -40,7 +40,7 @@ public class TournamentMapperTest {
     }
 
     @Test
-    public void getAllTournaments2018() {
+    public void TestgetAllTournaments2018() {
         ArrayList<Tournament> actual;
         TournamentMapper instanceTournamentMapper = new TournamentMapper();
         actual = instanceTournamentMapper.getAllTournaments(2018);
@@ -54,6 +54,58 @@ public class TournamentMapperTest {
         int expectedSize = 1;
 
         assertEquals(expectedID1, actual.get(0).getId());
+        assertEquals(expectedName, actual.get(0).getName());
+        assertEquals(expectedDate, actual.get(0).getDate());
+        assertEquals(expectedLocation, actual.get(0).getLocation());
+        assertEquals(expectedSize,actual.size());
+    }
+
+    @Test
+    public void TestAddTournament() {
+        int expectedID = 5;
+        String expectedName = "FerieCup";
+        String str = "2017-08-19";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate expectedDate = LocalDate.parse(str, formatter);
+        String expectedLocation = "Roskilde";
+        int expectedSize = 1;
+        Tournament tournamentToBeAdded = new Tournament(expectedID,expectedName,expectedDate,expectedLocation);
+
+        ArrayList<Tournament> actual;
+        TournamentMapper instanceTournamentMapper = new TournamentMapper();
+        instanceTournamentMapper.addTournament(tournamentToBeAdded);
+
+        actual = instanceTournamentMapper.getAllTournaments(2017);
+
+        assertEquals(expectedID, actual.get(0).getId());
+        assertEquals(expectedName, actual.get(0).getName());
+        assertEquals(expectedDate, actual.get(0).getDate());
+        assertEquals(expectedLocation, actual.get(0).getLocation());
+        assertEquals(expectedSize,actual.size());
+    }
+
+    @Test
+    public void TestAddTwoTournaments() {
+        int expectedID = 5;
+        String expectedName = "MelCup";
+        String str = "2017-08-19";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate expectedDate = LocalDate.parse(str, formatter);
+        String expectedLocation = "Roskilde";
+        int expectedSize = 2;
+        Tournament tournamentToBeAdded = new Tournament(expectedID,expectedName,expectedDate,expectedLocation);
+        Tournament tournamentToBeAdded2 = new Tournament(expectedID+1,expectedName+2,expectedDate,expectedLocation+2);
+
+        ArrayList<Tournament> actual;
+        TournamentMapper instanceTournamentMapper = new TournamentMapper();
+
+        //Adding
+        instanceTournamentMapper.addTournament(tournamentToBeAdded);
+        instanceTournamentMapper.addTournament(tournamentToBeAdded2);
+
+        actual = instanceTournamentMapper.getAllTournaments(2017);
+
+        assertEquals(expectedID, actual.get(0).getId());
         assertEquals(expectedName, actual.get(0).getName());
         assertEquals(expectedDate, actual.get(0).getDate());
         assertEquals(expectedLocation, actual.get(0).getLocation());
