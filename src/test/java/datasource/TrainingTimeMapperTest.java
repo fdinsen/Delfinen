@@ -30,7 +30,7 @@ public class TrainingTimeMapperTest extends TestBaseIntegration{
     public void testAddTime() {
         LocalDate ld = LocalDate.of(2018,11,05);
         TrainingTimeMapper instanceOfTTMapper = new TrainingTimeMapper();
-        TrainingTime trainingTime = new TrainingTime(8, ld, 75000 , SwimmingDiscipline.CRAWL);
+        TrainingTime trainingTime = new TrainingTime(8, ld, 75000 , SwimmingDiscipline.CRAWL, "Simon");
         int exspectedMs = 75000;
         instanceOfTTMapper.addTime(trainingTime);
         
