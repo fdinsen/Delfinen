@@ -1,3 +1,10 @@
+TRUNCATE TABLE competitions;
+INSERT INTO `delfinen`.`competitions` (`competitions_id`, `t_id`, `swimming_discipline`) VALUES ('1', '1', 'CRAWL');
+INSERT INTO `delfinen`.`competitions` (`competitions_id`, `t_id`, `swimming_discipline`) VALUES ('2', '1', 'BUTTERFLY');
+INSERT INTO `delfinen`.`competitions` (`competitions_id`, `t_id`, `swimming_discipline`) VALUES ('3', '1', 'BREASTSTROKE');
+INSERT INTO `delfinen`.`competitions` (`competitions_id`, `t_id`, `swimming_discipline`) VALUES ('4', '2', 'BREASTSTROKE');
+INSERT INTO `delfinen`.`competitions` (`competitions_id`, `t_id`, `swimming_discipline`) VALUES ('5', '2', 'BUTTERFLY');
+INSERT INTO `delfinen`.`competitions` (`competitions_id`, `t_id`, `swimming_discipline`) VALUES ('6', '2', 'BACKCRAWL');
 TRUNCATE TABLE tournaments;
 INSERT INTO `delfinen`.`tournaments` (`t_id`, `t_name`, `t_date`, `t_location`) VALUES ('1', 'JuleCup', '2019-02-18', 'Espergærde');
 INSERT INTO `delfinen`.`tournaments` (`t_id`, `t_name`, `t_date`, `t_location`) VALUES ('2', 'SommerCup', '2019-07-28', 'Oslo');
