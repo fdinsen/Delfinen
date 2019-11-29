@@ -59,13 +59,13 @@ public class RestanceMapper {
         return membersWithRestance;
     }
 
-    public boolean memberHasRestance(int memberId) {
+    public boolean memberHasRestance(int memberID) {
         boolean memberExists = false;
         con = DBConnector.getConnection();
         String SQL = "SELECT * FROM restance join members ON restance.member_id = "
                 + "members.member_id WHERE members.member_id = ?";
         try (PreparedStatement ps = con.prepareStatement(SQL)) {
-            ps.setInt(1, memberId);
+            ps.setInt(1, memberID);
             ResultSet rs = ps.executeQuery();
 
             memberExists = rs.next();
@@ -76,12 +76,12 @@ public class RestanceMapper {
         return memberExists;
     }
 
-    public boolean markAsPaid(int memberId) {
-        if (memberHasRestance(memberId)) {
+    public boolean markAsPaid(int memberID) {
+        if (memberHasRestance(memberID)) {
             con = DBConnector.getConnection();
             String SQL = "DELETE FROM restance WHERE member_id = ?";
             try (PreparedStatement ps = con.prepareStatement(SQL)) {
-                ps.setInt(1, memberId);
+                ps.setInt(1, memberID);
                 ps.execute();
                 ps.close();
             } catch (SQLException ex) {
