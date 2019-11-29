@@ -90,7 +90,7 @@ DROP TABLE IF EXISTS `member_swiming_discipline`;
 CREATE TABLE `member_swiming_discipline` (
 	`msd_id` int(11) NOT null auto_increment,
 	`member_id` int(11) NOT null,
-    `discipline_name` enum ('CRAWL','BACK CRAWL','BREASTSTROKE','BUTTERFLY') NOT null,
+    `discipline_name` enum ('CRAWL','BACKCRAWL','BREASTSTROKE','BUTTERFLY') NOT null,
     PRIMARY KEY (`msd_id`)
 );
 
