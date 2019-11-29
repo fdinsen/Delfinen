@@ -30,14 +30,14 @@ public class TrainingTimeMapperTest extends TestBaseIntegration{
     public void testAddTime() {
         LocalDate ld = LocalDate.of(2018,11,05);
         TrainingTimeMapper instanceOfTTMapper = new TrainingTimeMapper();
-        TrainingTime trainingTime = new TrainingTime(8, ld, 75000 , SwimmingDiscipline.CRAWL, "Simon");
-        int exspectedMs = 75000;
+        TrainingTime trainingTime = new TrainingTime(1, ld, 75000 , SwimmingDiscipline.CRAWL, "Simon");
+        int exsectlength = 4;
         instanceOfTTMapper.addTime(trainingTime);
         
-        ArrayList<TrainingTime> liste = (ArrayList<TrainingTime>) instanceOfTTMapper.getMemberTimes(8);
+        ArrayList<TrainingTime> liste = (ArrayList<TrainingTime>) instanceOfTTMapper.getMemberTimes(1);
         
-        int actualMs = liste.get(0).getTimeInMS();
-        assertEquals(exspectedMs, actualMs);
+        int actualMs = liste.size();
+        assertEquals(exsectlength, actualMs);
     }
     @Test
     public void testGetMemberTime(){
