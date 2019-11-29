@@ -53,5 +53,17 @@ public class TrainingTimeMapperTest extends TestDataSetup{
         assertEquals(expsectedMs, actualMs);
         assertEquals(exspectedSD, actualSd);
     }
+    @Test
+    public void testGetTop5(){
+        
+        TrainingTimeMapper instanceOfTTMapper = new TrainingTimeMapper();
+        int expsected = 5;
+        
+        ArrayList<TrainingTime> liste = (ArrayList<TrainingTime>) instanceOfTTMapper.getTop5(SwimmingDiscipline.CRAWL);
+        int actual = liste.size();
+        
+        assertEquals(expsected, actual);
+        
+    }
     
 }

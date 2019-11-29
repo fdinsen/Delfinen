@@ -23,6 +23,10 @@ INSERT INTO members (member_name,phone_number,address,email,birthday,trainer_id,
 INSERT INTO members (member_name,phone_number,address,email,birthday,trainer_id, membership_status, membership_type) VALUES ("Cecillie","45678901","Veeeej 2","Cecilie@gmail.com",'2010-01-22',0,'PASSIVE','CASUAL');
 INSERT INTO members (member_name,phone_number,address,email,birthday,trainer_id, membership_status, membership_type) VALUES ("Mathias","56789012","Veeeej 2","Mathias@gmail.com",'1939-10-22',0,'PASSIVE','CASUAL');
 INSERT INTO members (member_name,phone_number,address,email,birthday,trainer_id, membership_status, membership_type) VALUES  ("Mikkel","67890123","Veeeej 3","Mikkel@gmail.com",'1990-10-22',3,'ACTIVE','COMPETITIVE');
+INSERT INTO members (member_name,phone_number,address,email,birthday,trainer_id, membership_status, membership_type) VALUES  ("Peter","78901234","Vejen 1","Peter@gmail.com",'1989-10-22',3,'ACTIVE','COMPETITIVE');
+INSERT INTO members (member_name,phone_number,address,email,birthday,trainer_id, membership_status, membership_type) VALUES  ("Thomas","89012345","Vejen 2","Thomas@gmail.com",'1988-10-22',3,'ACTIVE','COMPETITIVE');
+INSERT INTO members (member_name,phone_number,address,email,birthday,trainer_id, membership_status, membership_type) VALUES  ("Henrik","90123456","Vejen 3","Henrik@gmail.com",'1987-10-22',3,'ACTIVE','COMPETITIVE');
+INSERT INTO members (member_name,phone_number,address,email,birthday,trainer_id, membership_status, membership_type) VALUES  ("Bjørn","99001122","Vejen 4","Bjørn@gmail.com",'1988-10-22',3,'ACTIVE','COMPETITIVE');
 TRUNCATE TABLE trainers;
 INSERT INTO trainers (trainer_name) VALUES ("TrainerJohn"), ("TrainerJoe"), ("TrainerMagrette");
 TRUNCATE TABLE restance;
@@ -39,3 +43,20 @@ INSERT INTO training_times (t_date, member_id, t_time_ms, swimming_discipline) V
 INSERT INTO training_times (t_date, member_id, t_time_ms, swimming_discipline) VALUES ('2018-11-27',6,70000,'BREASTSTROKE');
 INSERT INTO training_times (t_date, member_id, t_time_ms, swimming_discipline) VALUES ('2018-11-27',6,80000,'BUTTERFLY');
 INSERT INTO training_times (t_date, member_id, t_time_ms, swimming_discipline) VALUES ('2018-11-27',6,120000,'BUTTERFLY');
+INSERT INTO training_times (t_date, member_id, t_time_ms, swimming_discipline) VALUES ('2018-11-27',7,66000,'CRAWL');
+INSERT INTO training_times (t_date, member_id, t_time_ms, swimming_discipline) VALUES ('2018-11-27',8,67000,'CRAWL');
+INSERT INTO training_times (t_date, member_id, t_time_ms, swimming_discipline) VALUES ('2018-11-27',9,68000,'CRAWL');
+INSERT INTO training_times (t_date, member_id, t_time_ms, swimming_discipline) VALUES ('2018-11-27',10,69000,'CRAWL');
+INSERT INTO training_times (t_date, member_id, t_time_ms, swimming_discipline) VALUES ('2018-11-27',7,70000,'BUTTERFLY');
+INSERT INTO training_times (t_date, member_id, t_time_ms, swimming_discipline) VALUES ('2018-11-27',8,71000,'BUTTERFLY');
+INSERT INTO training_times (t_date, member_id, t_time_ms, swimming_discipline) VALUES ('2018-11-27',9,72000,'BUTTERFLY');
+INSERT INTO training_times (t_date, member_id, t_time_ms, swimming_discipline) VALUES ('2018-11-27',10,73000,'BUTTERFLY');
+INSERT INTO training_times (t_date, member_id, t_time_ms, swimming_discipline) VALUES ('2018-11-27',7,74000,'BREASTSTROKE');
+INSERT INTO training_times (t_date, member_id, t_time_ms, swimming_discipline) VALUES ('2018-11-27',8,75000,'BREASTSTROKE');
+INSERT INTO training_times (t_date, member_id, t_time_ms, swimming_discipline) VALUES ('2018-11-27',9,76000,'BREASTSTROKE');
+INSERT INTO training_times (t_date, member_id, t_time_ms, swimming_discipline) VALUES ('2018-11-27',10,78000,'BREASTSTROKE');
+INSERT INTO training_times (t_date, member_id, t_time_ms, swimming_discipline) VALUES ('2018-11-27',7,79000,'BACKCRAWL');
+INSERT INTO training_times (t_date, member_id, t_time_ms, swimming_discipline) VALUES ('2018-11-27',8,80000,'BACKCRAWL');
+INSERT INTO training_times (t_date, member_id, t_time_ms, swimming_discipline) VALUES ('2018-11-27',9,81000,'BACKCRAWL');
+INSERT INTO training_times (t_date, member_id, t_time_ms, swimming_discipline) VALUES ('2018-11-27',10,82000,'BACKCRAWL');
+

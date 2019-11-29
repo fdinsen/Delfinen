@@ -73,7 +73,9 @@ public class TrainingTimeMapper {
 
     public List<TrainingTime> getTop5(SwimmingDiscipline sd) {
         ArrayList<TrainingTime> trainningTimes = new ArrayList<>(); 
-        String SQL = "SELECT * FROM delfinen.training_times where swimming_discipline = ? group by member_id order by t_time_ms;";
+        String SQL = "SELECT * FROM delfinen.training_times "
+                + "where swimming_discipline = ? "
+                + "group by member_id order by t_time_ms limit 5";
         
         con = DBConnector.getConnection();
         
