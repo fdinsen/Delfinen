@@ -20,6 +20,7 @@ public class MemberMapper {
     private Connection con = null;
 
     public void createMember(Member member) {
+        TimeZone.setDefault(TimeZone.getTimeZone("GMT+1"));
         con = DBConnector.getConnection();
         String SQL = "INSERT INTO members (member_name, phone_number, address, email, birthday, trainer_id, membership_status, membership_type) "
                 + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
@@ -47,6 +48,7 @@ public class MemberMapper {
     }
 
     public void deleteMember(int memberId) {
+        TimeZone.setDefault(TimeZone.getTimeZone("GMT+1"));
         con = DBConnector.getConnection();
         String SQL = "DELETE FROM members WHERE member_id = ?";
 
@@ -63,6 +65,7 @@ public class MemberMapper {
     }
 
     public void updateMember(Member member) {
+        TimeZone.setDefault(TimeZone.getTimeZone("GMT+1"));
         con = DBConnector.getConnection();
         String SQL = "UPDATE members SET member_name = ?, phone_number = ?, address = ?, email = ?, birthday = ?, trainer_id = ?, membership_status = ?, membership_type = ? WHERE member_id = ?";
         try {
@@ -73,7 +76,8 @@ public class MemberMapper {
             ps.setString(3, member.getAddress());
             ps.setString(4, member.getEmail());
             Date date = java.sql.Date.valueOf(member.getBirthday().toString());
-            ps.setDate(5, date);
+            Calendar cet = Calendar.getInstance(TimeZone.getTimeZone("GMT+1"));
+            ps.setDate(5, date, cet);
             ps.setInt(6, member.getTrainerId());
             ps.setString(7, member.getMembershipStatus().toString());
             ps.setString(8, member.getMembershipType().toString());
@@ -102,7 +106,8 @@ public class MemberMapper {
                 String memberName = rsMember.getString("member_name");
                 String address = rsMember.getString("address");
                 String email = rsMember.getString("email");
-                LocalDate birthday = rsMember.getDate("birthday").toLocalDate();
+                Calendar cet = Calendar.getInstance(TimeZone.getTimeZone("GMT+1"));
+                LocalDate birthday = rsMember.getDate("birthday", cet).toLocalDate();
                 int trainerId = rsMember.getInt("trainer_id");
                 MembershipStatus membershipStatus = MembershipStatus.valueOf(rsMember.getString("membership_status"));
                 MembershipType membershipType = MembershipType.valueOf(rsMember.getString("membership_type"));
@@ -135,7 +140,8 @@ public class MemberMapper {
                 String memberPhone = rsMember.getString("phone_number");
                 String address = rsMember.getString("address");
                 String email = rsMember.getString("email");
-                LocalDate birthday = rsMember.getDate("birthday").toLocalDate();
+                Calendar cet = Calendar.getInstance(TimeZone.getTimeZone("GMT+1"));
+                LocalDate birthday = rsMember.getDate("birthday", cet).toLocalDate();
                 int trainerId = rsMember.getInt("trainer_id");
                 MembershipStatus membershipStatus = MembershipStatus.valueOf(rsMember.getString("membership_status"));
                 MembershipType membershipType = MembershipType.valueOf(rsMember.getString("membership_type"));
@@ -166,7 +172,8 @@ public class MemberMapper {
                 String memberName = rsMember.getString("member_name");
                 String memberPhone = rsMember.getString("phone_number");
                 String address = rsMember.getString("address");
-                LocalDate birthday = rsMember.getDate("birthday").toLocalDate();
+                Calendar cet = Calendar.getInstance(TimeZone.getTimeZone("GMT+1"));
+                LocalDate birthday = rsMember.getDate("birthday", cet).toLocalDate();
                 int trainerId = rsMember.getInt("trainer_id");
                 MembershipStatus membershipStatus = MembershipStatus.valueOf(rsMember.getString("membership_status"));
                 MembershipType membershipType = MembershipType.valueOf(rsMember.getString("membership_type"));
