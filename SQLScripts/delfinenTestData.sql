@@ -24,7 +24,7 @@ INSERT INTO members (member_name,phone_number,address,email,birthday,trainer_id,
 INSERT INTO members (member_name,phone_number,address,email,birthday,trainer_id, membership_status, membership_type) VALUES ("Mathias","56789012","Veeeej 2","Mathias@gmail.com",'1939-10-22',0,'PASSIVE','CASUAL');
 INSERT INTO members (member_name,phone_number,address,email,birthday,trainer_id, membership_status, membership_type) VALUES  ("Mikkel","67890123","Veeeej 3","Mikkel@gmail.com",'1990-10-22',3,'ACTIVE','COMPETITIVE');
 TRUNCATE TABLE trainers;
-INSERT INTO trainers (trainer_id_name) VALUES ("TrainerJohn"), ("TrainerJoe"), ("TrainerMagrette");
+INSERT INTO trainers (trainer_name) VALUES ("TrainerJohn"), ("TrainerJoe"), ("TrainerMagrette");
 TRUNCATE TABLE restance;
 INSERT INTO restance (member_id) VALUES (1),(2),(4);
 TRUNCATE TABLE training_times;

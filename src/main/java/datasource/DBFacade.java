@@ -8,7 +8,7 @@ import model.Tournament;
 import model.Times;
 import model.TrainingTime;
 import model.CompetitionTime;
-import model.SwimmingDiscipline;
+import enums.SwimmingDiscipline;
 import model.Member;
 /**
  *

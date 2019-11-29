@@ -79,7 +79,7 @@ DROP TABLE IF EXISTS `trainers`;
 
 CREATE TABLE `trainers` (
 	`trainer_id` int(11) NOT null auto_increment,
-	`trainer_id_name` varchar(45) NOT null,
+	`trainer_name` varchar(45) NOT null,
     PRIMARY KEY (`trainer_id`)
 );
 

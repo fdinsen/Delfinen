@@ -42,7 +42,21 @@ public class UITest {
         int actual;
         
         //Act
-        actual = instance.checkInputType("44491881a");
+        actual = instance.checkInputType(" 44491881");
+        
+        //Assert
+        assertEquals(exp, actual);
+    }
+    
+    @Test
+    public void testCheckInputTypePhoneNegative16Digits() {
+        //Arrange
+        UI instance = new UIImpl();
+        int exp = -1;
+        int actual;
+        
+        //Act
+        actual = instance.checkInputType("4449188112345678");
         
         //Assert
         assertEquals(exp, actual);

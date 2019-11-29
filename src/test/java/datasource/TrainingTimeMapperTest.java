@@ -8,7 +8,7 @@ package datasource;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import model.SwimmingDiscipline;
+import enums.SwimmingDiscipline;
 import model.TrainingTime;
 import org.junit.Test;
 import static org.junit.Assert.*;

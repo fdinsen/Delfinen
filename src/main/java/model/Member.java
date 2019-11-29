@@ -1,5 +1,8 @@
 package model;
 
+import enums.TeamType;
+import enums.MembershipStatus;
+import enums.MembershipType;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;

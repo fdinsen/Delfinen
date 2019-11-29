@@ -5,6 +5,8 @@
  */
 package model;
 
+import enums.MembershipStatus;
+import enums.MembershipType;
 import java.time.LocalDate;
 import org.junit.Test;
 import static org.junit.Assert.*;
