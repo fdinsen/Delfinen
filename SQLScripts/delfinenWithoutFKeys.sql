@@ -44,7 +44,7 @@ DROP TABLE IF EXISTS `competitions`;
 CREATE TABLE `competitions` (
 	`competitions_id` int(11) NOT null auto_increment,
 	`t_id` int(11) NOT null,
-    `swimming_discipline` enum ('CRAWL','BACK CRAWL','BREASTSTROKE','BUTTERFLY') NOT null,
+    `swimming_discipline` enum ('CRAWL','BACKCRAWL','BREASTSTROKE','BUTTERFLY') NOT null,
     PRIMARY KEY (`competitions_id`)
 );
 
@@ -69,7 +69,7 @@ CREATE TABLE `training_times` (
 	`t_date` date NOT null,
     `member_id` int(11) NOT null,
     `t_time_ms` int(11) NOT null,
-    `swimming_discipline` enum ('CRAWL','BACK CRAWL','BREASTSTROKE','BUTTERFLY') NOT null,
+    `swimming_discipline` enum ('CRAWL','BACKCRAWL','BREASTSTROKE','BUTTERFLY') NOT null,
     PRIMARY KEY (`t_time_id`)
 );
 
