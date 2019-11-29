@@ -1,7 +1,7 @@
 package datasource;
 
 import model.Competition;
-import model.SwimmingDiscipline;
+import enums.SwimmingDiscipline;
 import org.junit.Test;
 
 import java.io.IOException;

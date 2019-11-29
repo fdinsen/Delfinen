@@ -12,8 +12,8 @@ import java.util.TimeZone;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Member;
-import model.MembershipStatus;
-import model.MembershipType;
+import enums.MembershipStatus;
+import enums.MembershipType;
 
 public class MemberMapper {
 
@@ -147,12 +147,9 @@ public class MemberMapper {
             ResultSet rsMember = stmt.executeQuery();
             while (rsMember.next()) {
                 int memberId = rsMember.getInt("member_id");
-                System.out.println(rsMember.getInt("member_id"));
                 String memberName = rsMember.getString("member_name");
                 String memberPhone = rsMember.getString("phone_number");
                 String address = rsMember.getString("address");
-                System.out.println(rsMember.getDate("birthday"));
-                System.out.println(rsMember.getDate("birthday").toLocalDate());
                 Calendar cet = Calendar.getInstance(TimeZone.getTimeZone("GMT+1"));
                 LocalDate birthday = rsMember.getDate("birthday",cet).toLocalDate();
                 int trainerId = rsMember.getInt("trainer_id");

@@ -1,8 +1,8 @@
 package datasource;
 
 import model.Member;
-import model.MembershipStatus;
-import model.MembershipType;
+import enums.MembershipStatus;
+import enums.MembershipType;
 import org.junit.Test;
 
 import java.io.IOException;
