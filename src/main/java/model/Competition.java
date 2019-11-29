@@ -1,6 +1,8 @@
 
 package model;
 
+import enums.SwimmingDiscipline;
+
 public class Competition {
     private int competitionsId;
     private int tournamentID;

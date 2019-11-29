@@ -12,8 +12,8 @@ import java.util.TimeZone;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Member;
-import model.MembershipStatus;
-import model.MembershipType;
+import enums.MembershipStatus;
+import enums.MembershipType;
 
 /**
  *

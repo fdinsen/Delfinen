@@ -5,6 +5,8 @@ import model.Tournament;
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.TimeZone;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -23,7 +25,8 @@ public class TournamentMapper {
             while (rsTournaments.next()) {
                 int tId = rsTournaments.getInt("t_id");
                 String tName = rsTournaments.getString("t_name");
-                LocalDate tDate = rsTournaments.getDate("t_date").toLocalDate();
+                Calendar cet = Calendar.getInstance(TimeZone.getTimeZone("GMT+1"));
+                LocalDate tDate = rsTournaments.getDate("t_date",cet).toLocalDate();
                 String tLocation = rsTournaments.getString("t_location");
 
                 Tournament tournament = new Tournament(tId,tName,tDate,tLocation);
@@ -49,7 +52,8 @@ public class TournamentMapper {
             PreparedStatement ps = con.prepareStatement(SQL);
             ps.setString(1, tournament.getName());
             Date date = java.sql.Date.valueOf(tournament.getDate().toString());
-            ps.setDate(2, date);
+            Calendar cet = Calendar.getInstance(TimeZone.getTimeZone("GMT+1"));
+            ps.setDate(2, date,cet);
             ps.setString(3, tournament.getLocation());
 
             ps.execute();
@@ -69,7 +73,8 @@ public class TournamentMapper {
             PreparedStatement ps = con.prepareStatement(SQL);
             ps.setString(1, tournament.getName());
             Date date = java.sql.Date.valueOf(tournament.getDate().toString());
-            ps.setDate(2, date);
+            Calendar cet = Calendar.getInstance(TimeZone.getTimeZone("GMT+1"));
+            ps.setDate(2, date,cet);
             ps.setString(3, tournament.getLocation());
             ps.setInt(4, tournament.getId());
 
