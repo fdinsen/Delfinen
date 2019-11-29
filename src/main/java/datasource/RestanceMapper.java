@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.TimeZone;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Member;
@@ -37,7 +39,8 @@ public class RestanceMapper {
                 String phoneNumber = rs.getString("phone_number");
                 String address = rs.getString("address");
                 String email = rs.getString("email");
-                LocalDate birthday = rs.getDate("birthday").toLocalDate();
+                Calendar cet = Calendar.getInstance(TimeZone.getTimeZone("GMT+1"));
+                LocalDate birthday = rs.getDate("birthday",cet).toLocalDate();
                 int trainerId = rs.getInt("trainer_id");
                 MembershipStatus membershipStatus
                         = MembershipStatus.valueOf(rs.getString("membership_status"));

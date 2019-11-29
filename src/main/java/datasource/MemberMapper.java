@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.TimeZone;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Member;
@@ -29,7 +31,8 @@ public class MemberMapper {
             ps.setString(3, member.getAddress());
             ps.setString(4, member.getEmail());
             Date date = java.sql.Date.valueOf(member.getBirthday().toString());
-            ps.setDate(5, date);
+            Calendar cet = Calendar.getInstance(TimeZone.getTimeZone("GMT+1"));
+            ps.setDate(5, date,cet);
             ps.setInt(6, member.getTrainerId());
             ps.setString(7, member.getMembershipStatus().toString());
             ps.setString(8, member.getMembershipType().toString());
@@ -54,7 +57,8 @@ public class MemberMapper {
             ps.setString(3, member.getAddress());
             ps.setString(4, member.getEmail());
             Date date = java.sql.Date.valueOf(member.getBirthday().toString());
-            ps.setDate(5, date);
+            Calendar cet = Calendar.getInstance(TimeZone.getTimeZone("GMT+1"));
+            ps.setDate(5, date,cet);
             ps.setInt(6, member.getTrainerId());
             ps.setString(7, member.getMembershipStatus().toString());
             ps.setString(8, member.getMembershipType().toString());
@@ -82,7 +86,8 @@ public class MemberMapper {
                 String memberName = rsMember.getString("member_name");
                 String address = rsMember.getString("address");
                 String email = rsMember.getString("email");
-                LocalDate birthday = rsMember.getDate("birthday").toLocalDate();
+                Calendar cet = Calendar.getInstance(TimeZone.getTimeZone("GMT+1"));
+                LocalDate birthday = rsMember.getDate("birthday",cet).toLocalDate();
                 int trainerId = rsMember.getInt("trainer_id");
                 MembershipStatus membershipStatus = MembershipStatus.valueOf(rsMember.getString("membership_status"));
                 MembershipType membershipType = MembershipType.valueOf(rsMember.getString("membership_type"));
@@ -114,7 +119,8 @@ public class MemberMapper {
                 String memberPhone = rsMember.getString("phone_number");
                 String address = rsMember.getString("address");
                 String email = rsMember.getString("email");
-                LocalDate birthday = rsMember.getDate("birthday").toLocalDate();
+                Calendar cet = Calendar.getInstance(TimeZone.getTimeZone("GMT+1"));
+                LocalDate birthday = rsMember.getDate("birthday",cet).toLocalDate();
                 int trainerId = rsMember.getInt("trainer_id");
                 MembershipStatus membershipStatus = MembershipStatus.valueOf(rsMember.getString("membership_status"));
                 MembershipType membershipType = MembershipType.valueOf(rsMember.getString("membership_type"));
@@ -141,10 +147,14 @@ public class MemberMapper {
             ResultSet rsMember = stmt.executeQuery();
             while (rsMember.next()) {
                 int memberId = rsMember.getInt("member_id");
+                System.out.println(rsMember.getInt("member_id"));
                 String memberName = rsMember.getString("member_name");
                 String memberPhone = rsMember.getString("phone_number");
                 String address = rsMember.getString("address");
-                LocalDate birthday = rsMember.getDate("birthday").toLocalDate();
+                System.out.println(rsMember.getDate("birthday"));
+                System.out.println(rsMember.getDate("birthday").toLocalDate());
+                Calendar cet = Calendar.getInstance(TimeZone.getTimeZone("GMT+1"));
+                LocalDate birthday = rsMember.getDate("birthday",cet).toLocalDate();
                 int trainerId = rsMember.getInt("trainer_id");
                 MembershipStatus membershipStatus = MembershipStatus.valueOf(rsMember.getString("membership_status"));
                 MembershipType membershipType = MembershipType.valueOf(rsMember.getString("membership_type"));
