@@ -72,8 +72,35 @@ public class TrainingTimeMapper {
     }
 
     public List<TrainingTime> getTop5(SwimmingDiscipline sd) {
-
-        throw new UnsupportedOperationException("Not supported yet");
+        ArrayList<TrainingTime> trainningTimes = new ArrayList<>(); 
+        String SQL = "SELECT * FROM delfinen.training_times where swimming_discipline = ? group by member_id order by t_time_ms;";
+        
+        con = DBConnector.getConnection();
+        
+        try {
+            PreparedStatement ps = con.prepareStatement(SQL);
+            
+            ps.setString(1, sd.toString());
+            
+            ResultSet result = ps.executeQuery();
+            
+            while(result.next()){
+                
+                int memberID = result.getInt("member_id");
+                String t_date = result.getString("t_date");
+                LocalDate ld = LocalDate.parse(t_date);
+                
+                int timeInMs = result.getInt("t_time_ms");
+                String sDiscipline = result.getString("swimming_discipline");
+                
+                trainningTimes.add(new TrainingTime(memberID, ld , timeInMs, SwimmingDiscipline.valueOf(sDiscipline)));
+                
+            }
+            
+        } catch (SQLException ex) {
+            System.out.println(ex + " could not get top 5");
+        }
+        return trainningTimes;
     }
 
 }

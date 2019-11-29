@@ -3,12 +3,14 @@ package model;
 import enums.TeamType;
 import enums.MembershipStatus;
 import enums.MembershipType;
-import java.sql.Date;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
 public class Member {
-
+    private final double PASSIVE_SUBSCRIPTION = 500.0;
+    private final double JUNIOR_SUBSCRIPTION = 1000.0;
+    private final double SENIOR_SUBSCRIPTION = 1600.0;
+    private final double SENIOR_SUBSCRIPTION_WITHDISCOUNT = 1200.0;
     private int memberID;
     private String memberName;
     private String phoneNumber;
@@ -71,14 +73,14 @@ public class Member {
         long years = calculateAge();
 
         if (membershipStatus == membershipStatus.PASSIVE) {
-            subscription = 500.0;
+            subscription = PASSIVE_SUBSCRIPTION;
         } else {
             if (years < 18) {
-                subscription = 1000.0;
+                subscription = JUNIOR_SUBSCRIPTION;
             } else if (years < 60) {
-                subscription = 1600.0;
+                subscription = SENIOR_SUBSCRIPTION;
             } else {
-                subscription = 1600.0 * 0.75;
+                subscription = SENIOR_SUBSCRIPTION_WITHDISCOUNT;
             }
         }
     }
