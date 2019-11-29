@@ -3643,7 +3643,7 @@
 											"top": 952,
 											"width": 158,
 											"height": 13,
-											"text": "BACKSTROKE",
+											"text": "BREASTSTROKE",
 											"horizontalAlignment": 0
 										}
 									],
@@ -7211,7 +7211,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFup0lzoZ5EWq8="
 									},
-									"name": "BACKSTROKE"
+									"name": "BREASTSTROKE"
 								}
 							]
 						},
@@ -12896,7 +12896,7 @@
 									"font": "Arial;13;0",
 									"left": 525.5,
 									"top": 1367.5,
-									"width": 141.23779296875,
+									"width": 140,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAFuorfo9OjSkEI="
@@ -13294,7 +13294,7 @@
 									"font": "Arial;13;0",
 									"left": 503.5,
 									"top": 1487.5,
-									"width": 190.3623046875,
+									"width": 190,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAFuorlfgOk7pG8="
@@ -13692,7 +13692,7 @@
 									"font": "Arial;13;0",
 									"left": 502,
 									"top": 827.5,
-									"width": 183.3671875,
+									"width": 183,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAFuornlQOmaYAM="
