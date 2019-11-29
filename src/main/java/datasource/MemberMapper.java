@@ -32,7 +32,7 @@ public class MemberMapper {
             ps.setString(4, member.getEmail());
             Date date = java.sql.Date.valueOf(member.getBirthday().toString());
             Calendar cet = Calendar.getInstance(TimeZone.getTimeZone("GMT+1"));
-            ps.setDate(5, date,cet);
+            ps.setDate(5, date, cet);
             ps.setInt(6, member.getTrainerId());
             ps.setString(7, member.getMembershipStatus().toString());
             ps.setString(8, member.getMembershipType().toString());
@@ -43,6 +43,22 @@ public class MemberMapper {
         } catch (SQLException ex) {
             Logger.getLogger(MemberMapper.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println("Kunne ikke oprette ny bruger, prøv igen");
+        }
+    }
+
+    public void deleteMember(int memberId) {
+        con = DBConnector.getConnection();
+        String SQL = "DELETE FROM members WHERE member_id = ?";
+
+        try {
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ps.setInt(1, memberId);
+
+            ps.execute();
+            ps.close();
+
+        } catch (SQLException ex) {
+            System.out.println(ex + " cannot delete member");
         }
     }
 
@@ -58,7 +74,7 @@ public class MemberMapper {
             ps.setString(4, member.getEmail());
             Date date = java.sql.Date.valueOf(member.getBirthday().toString());
             Calendar cet = Calendar.getInstance(TimeZone.getTimeZone("GMT+1"));
-            ps.setDate(5, date,cet);
+            ps.setDate(5, date, cet);
             ps.setInt(6, member.getTrainerId());
             ps.setString(7, member.getMembershipStatus().toString());
             ps.setString(8, member.getMembershipType().toString());
@@ -87,7 +103,7 @@ public class MemberMapper {
                 String address = rsMember.getString("address");
                 String email = rsMember.getString("email");
                 Calendar cet = Calendar.getInstance(TimeZone.getTimeZone("GMT+1"));
-                LocalDate birthday = rsMember.getDate("birthday",cet).toLocalDate();
+                LocalDate birthday = rsMember.getDate("birthday", cet).toLocalDate();
                 int trainerId = rsMember.getInt("trainer_id");
                 MembershipStatus membershipStatus = MembershipStatus.valueOf(rsMember.getString("membership_status"));
                 MembershipType membershipType = MembershipType.valueOf(rsMember.getString("membership_type"));
@@ -120,7 +136,7 @@ public class MemberMapper {
                 String address = rsMember.getString("address");
                 String email = rsMember.getString("email");
                 Calendar cet = Calendar.getInstance(TimeZone.getTimeZone("GMT+1"));
-                LocalDate birthday = rsMember.getDate("birthday",cet).toLocalDate();
+                LocalDate birthday = rsMember.getDate("birthday", cet).toLocalDate();
                 int trainerId = rsMember.getInt("trainer_id");
                 MembershipStatus membershipStatus = MembershipStatus.valueOf(rsMember.getString("membership_status"));
                 MembershipType membershipType = MembershipType.valueOf(rsMember.getString("membership_type"));
@@ -151,7 +167,7 @@ public class MemberMapper {
                 String memberPhone = rsMember.getString("phone_number");
                 String address = rsMember.getString("address");
                 Calendar cet = Calendar.getInstance(TimeZone.getTimeZone("GMT+1"));
-                LocalDate birthday = rsMember.getDate("birthday",cet).toLocalDate();
+                LocalDate birthday = rsMember.getDate("birthday", cet).toLocalDate();
                 int trainerId = rsMember.getInt("trainer_id");
                 MembershipStatus membershipStatus = MembershipStatus.valueOf(rsMember.getString("membership_status"));
                 MembershipType membershipType = MembershipType.valueOf(rsMember.getString("membership_type"));

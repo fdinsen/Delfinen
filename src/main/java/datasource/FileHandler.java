@@ -58,17 +58,17 @@ public class FileHandler implements DataSource {
     }
 
     @Override
-    public Member getRestance(int memberID) {
+    public boolean memberHasRestance(int memberID) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void markAsPaid(int memberID) {
+    public boolean markAsPaid(int memberID) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void makeNewSeason() {
+    public boolean makeNewSeason() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
@@ -87,7 +87,7 @@ public class FileHandler implements DataSource {
     }
 
     @Override
-    public void deleteTrainer(Trainer trainer) {
+    public void deleteTrainer(int trainerID) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -163,7 +163,7 @@ public class FileHandler implements DataSource {
     }
     
     @Override
-    public List<CompetitionTime> getAllTimes(Competition competition) {
+    public List<CompetitionTime> getAllTimes(int competitionID) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

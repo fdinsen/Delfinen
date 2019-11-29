@@ -5,7 +5,6 @@ import java.util.List;
 import model.Trainer;
 import model.Competition;
 import model.Tournament;
-import model.Times;
 import model.TrainingTime;
 import model.CompetitionTime;
 import enums.SwimmingDiscipline;
@@ -31,22 +30,23 @@ public class DBFacade implements DataSource {
 
     @Override
     public void deleteMember(int memberID) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        new MemberMapper().deleteMember(memberID);
+
     }
 
     @Override
     public List<Member> getMemberByPhone(String phonenumber) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return new MemberMapper().getMemberByPhone(phonenumber);
     }
 
     @Override
     public List<Member> getMemberByEmail(String email) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return new MemberMapper().getMemberByEmail(email);
     }
 
     @Override
     public List<Member> getMemberByName(String name) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return new MemberMapper().getMemberByName(name);
     }
 
     //----------------//
@@ -55,22 +55,22 @@ public class DBFacade implements DataSource {
     
     @Override
     public List<Member> getAllRestance() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return new RestanceMapper().getAllRestance();
     }
 
     @Override
-    public Member getRestance(int memberID) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean memberHasRestance(int memberID) {
+        return new RestanceMapper().memberHasRestance(memberID);
     }
 
     @Override
-    public void markAsPaid(int memberID) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean markAsPaid(int memberID) {
+        return new RestanceMapper().markAsPaid(memberID);
     }
 
     @Override
-    public void makeNewSeason() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean makeNewSeason() {
+        return new RestanceMapper().makeNewSeason();
     }
     
     //---------------//
@@ -79,22 +79,22 @@ public class DBFacade implements DataSource {
 
     @Override
     public void createTrainer(Trainer trainer) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        new TrainerMapper().createTrainer(trainer);
     }
 
     @Override
     public void updtateTrainer(Trainer trainer) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        new TrainerMapper().updateTrainer(trainer);
     }
 
     @Override
-    public void deleteTrainer(Trainer trainer) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void deleteTrainer(int trainerID) {
+        new TrainerMapper().deleteTrainer(trainerID);
     }
 
     @Override
     public Trainer getTrainer(int trainerID) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return new TrainerMapper().getTrainer(trainerID);
     }
 
     //------------------//
@@ -103,17 +103,17 @@ public class DBFacade implements DataSource {
     
     @Override
     public List<Tournament> getAllTournaments(int year) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return new TournamentMapper().getAllTournaments(year);
     }
 
     @Override
     public void addTournament(Tournament tournament) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        new TournamentMapper().addTournament(tournament);
     }
 
     @Override
     public void updateTournament(Tournament tournament) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        new TournamentMapper().updateTournament(tournament);
     }
 
     //-------------------//
@@ -122,17 +122,17 @@ public class DBFacade implements DataSource {
     
     @Override
     public List<Competition> getAllCompetitions(int tournamentID) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return new CompetitionMapper().getAllCompetitions(tournamentID);
     }
 
     @Override
     public void addCompetition(Competition competition) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        new CompetitionMapper().addCompetition(competition);
     }
 
     @Override
     public void updateCompetition(Competition competition) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        new CompetitionMapper().updateTournament(competition);
     }
 
     //--------------------//
@@ -141,17 +141,17 @@ public class DBFacade implements DataSource {
     
     @Override
     public void addTime(TrainingTime trainingTime) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        new TrainingTimeMapper().addTime(trainingTime);
     }
 
     @Override
     public List<TrainingTime> getMemberTimes(int memberID) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return new TrainingTimeMapper().getMemberTimes(memberID);
     }
 
     @Override
     public List<TrainingTime> getTop5(SwimmingDiscipline sd) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return new TrainingTimeMapper().getTop5(sd);
     }
 
     //-----------------------//
@@ -160,12 +160,12 @@ public class DBFacade implements DataSource {
     
     @Override
     public void addTime(CompetitionTime competitionTime) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        new CompetitionTimeMapper().addCompetitionTime(competitionTime);
     }
     
     @Override
-    public List<CompetitionTime> getAllTimes(Competition competition) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<CompetitionTime> getAllTimes(int competitionID) {
+        return new CompetitionTimeMapper().getAllCompetitionTimesTimes(competitionID);
     }
 
 }

@@ -33,9 +33,9 @@ public interface DataSource {
     // RestanceMapper //
     //----------------//
     public List<Member> getAllRestance();
-    public Member getRestance(int memberID);
-    public void markAsPaid(int memberID);
-    public void makeNewSeason();
+    public boolean memberHasRestance(int memberID);
+    public boolean markAsPaid(int memberID);
+    public boolean makeNewSeason();
     
     //---------------//
     // TrainerMapper //
@@ -43,7 +43,7 @@ public interface DataSource {
     
     public void createTrainer(Trainer trainer);
     public void updtateTrainer(Trainer trainer);
-    public void deleteTrainer(Trainer trainer);
+    public void deleteTrainer(int trainerID);
     public Trainer getTrainer(int trainerID);
 
     //------------------//
@@ -75,6 +75,6 @@ public interface DataSource {
     //-----------------------//
     
     public void addTime(CompetitionTime competitionTime);
-    public List<CompetitionTime> getAllTimes(Competition competition);
+    public List<CompetitionTime> getAllTimes(int competitionID);
     
 }

@@ -22,9 +22,7 @@ public class MemberMapperTest extends TestDataSetup {
 
     public MemberMapperTest() throws IOException {
     }
-    
-    
-    
+
     @Test
     public void testCreateMember() {
         LocalDate dato = LocalDate.now();
@@ -32,7 +30,7 @@ public class MemberMapperTest extends TestDataSetup {
         MemberMapper instanceMemberMapper = new MemberMapper();
         instanceMemberMapper.createMember(member);
         ArrayList<Member> actual = instanceMemberMapper.getMemberByPhone("555111");
-        
+
         assertEquals("navn", actual.get(0).getName());
         assertEquals("555111", actual.get(0).getPhone());
         assertEquals("addresse", actual.get(0).getAddress());
@@ -41,19 +39,19 @@ public class MemberMapperTest extends TestDataSetup {
         assertEquals(MembershipStatus.PASSIVE, actual.get(0).getMembershipStatus());
         assertEquals(MembershipType.COMPETITIVE, actual.get(0).getMembershipType());
     }
-    
+
     @Test
     public void testCreateTwoMember() {
         LocalDate dato = LocalDate.now();
         Member member1 = new Member("navn", "555111", "addresse", "email@email.com", dato, 0, MembershipStatus.PASSIVE, MembershipType.COMPETITIVE);
 
         Member member2 = new Member("navnet", "55511155", "addresseJA", "email@email.com.com", dato, 1, MembershipStatus.ACTIVE, MembershipType.CASUAL);
-        
+
         MemberMapper instanceMemberMapper = new MemberMapper();
         instanceMemberMapper.createMember(member1);
         instanceMemberMapper.createMember(member2);
         ArrayList<Member> actual = instanceMemberMapper.getMemberByPhone("555111");
-        
+
         //Member1
         assertEquals("navn", actual.get(0).getName());
         assertEquals("555111", actual.get(0).getPhone());
@@ -62,9 +60,9 @@ public class MemberMapperTest extends TestDataSetup {
         assertEquals(dato, actual.get(0).getBirthday());
         assertEquals(MembershipStatus.PASSIVE, actual.get(0).getMembershipStatus());
         assertEquals(MembershipType.COMPETITIVE, actual.get(0).getMembershipType());
-        
+
         actual = instanceMemberMapper.getMemberByPhone("55511155");
-        
+
         //Member2
         assertEquals("navnet", actual.get(0).getName());
         assertEquals("55511155", actual.get(0).getPhone());
@@ -105,8 +103,6 @@ public class MemberMapperTest extends TestDataSetup {
         assertEquals(MembershipStatus.ACTIVE, actual.get(1).getMembershipStatus());
         assertEquals(MembershipType.CASUAL, actual.get(1).getMembershipType());
     }
-    
-    
 
     @Test
     public void testUpdateMember() {
@@ -128,7 +124,6 @@ public class MemberMapperTest extends TestDataSetup {
         memberToChange.get(0).setMemberStatus(expectedMemberStatus);
         memberToChange.get(0).setMemberType(expectedMemberType);
 
-
         instanceMemberMapper.updateMember(memberToChange.get(0));
 
         ArrayList<Member> actual = instanceMemberMapper.getMemberByPhone("12392712");
@@ -141,13 +136,13 @@ public class MemberMapperTest extends TestDataSetup {
         MembershipType actualMemberType = actual.get(0).getMembershipType();
 
         //Assert
-        assertEquals(expectedName,actualName);
-        assertEquals(expectedPhone,actualPhone);
-        assertEquals(expectedEmail,actualEmail);
-        assertEquals(expectedAddress,actualAddress);
-        assertEquals(expectedBirthday,actualBirthday);
-        assertEquals(expectedMemberStatus,actualMemberStatus);
-        assertEquals(expectedMemberType,actualMemberType);
+        assertEquals(expectedName, actualName);
+        assertEquals(expectedPhone, actualPhone);
+        assertEquals(expectedEmail, actualEmail);
+        assertEquals(expectedAddress, actualAddress);
+        assertEquals(expectedBirthday, actualBirthday);
+        assertEquals(expectedMemberStatus, actualMemberStatus);
+        assertEquals(expectedMemberType, actualMemberType);
     }
 
     @Test
@@ -203,5 +198,16 @@ public class MemberMapperTest extends TestDataSetup {
         assertEquals(MembershipStatus.ACTIVE, actual.get(0).getMembershipStatus());
         assertEquals(MembershipType.COMPETITIVE, actual.get(0).getMembershipType());
     }
-    
+
+    @Test
+    public void testDeleteMember() {
+        MemberMapper instanceMemberMapper = new MemberMapper();
+
+        instanceMemberMapper.deleteMember(1);
+        int exspected = 0;
+
+        int actual = instanceMemberMapper.getMemberByName("John").size();
+
+        assertEquals(exspected, actual);
+    }
 }
