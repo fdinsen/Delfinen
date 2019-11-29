@@ -1,6 +1,7 @@
 package ui;
 
 import Controllers.*;
+import datasource.DataSource;
 
 /**
  *
@@ -9,6 +10,11 @@ import Controllers.*;
 public class MainConsoleUI extends UI {
 
     private Controller controller;
+    private final DataSource datasource;
+    
+    public MainConsoleUI(DataSource datasource) {
+        this.datasource = datasource;
+    }
 
     public void startUI(Controller controller) {
         print("Du er nu en " + controller);
@@ -29,11 +35,11 @@ public class MainConsoleUI extends UI {
             if (input != -1) {
                 switch(input) {
                     case 1:
-                        return new BookkeeperController();
+                        return new BookkeeperController(datasource);
                     case 2:
-                        return new TrainerController();
+                        return new TrainerController(datasource);
                     case 3:
-                        return new ChairmanController();
+                        return new ChairmanController(datasource);
                     default:
                         print("error");
                     

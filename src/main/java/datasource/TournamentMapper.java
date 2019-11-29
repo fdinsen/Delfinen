@@ -26,7 +26,8 @@ public class TournamentMapper {
             while (rsTournaments.next()) {
                 int tId = rsTournaments.getInt("t_id");
                 String tName = rsTournaments.getString("t_name");
-                LocalDate tDate = rsTournaments.getDate("t_date").toLocalDate();
+                Calendar cet = Calendar.getInstance(TimeZone.getTimeZone("GMT+1"));
+                LocalDate tDate = rsTournaments.getDate("t_date", cet).toLocalDate();
                 String tLocation = rsTournaments.getString("t_location");
 
                 Tournament tournament = new Tournament(tId,tName,tDate,tLocation);
