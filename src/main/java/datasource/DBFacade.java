@@ -21,12 +21,12 @@ public class DBFacade implements DataSource {
     //--------------//
     @Override
     public void createMember(Member member) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        new MemberMapper().createMember(member);
     }
 
     @Override
     public void updateMember(Member member) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        new MemberMapper().updateMember(member);
     }
 
     @Override
