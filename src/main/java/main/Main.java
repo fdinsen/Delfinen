@@ -20,7 +20,7 @@ public class Main {
         MainConsoleUI ui = new MainConsoleUI();
         Controller controller = ui.selectUser();
         ui.setController(controller);
-        ui.startUI();
+        ui.startUI(controller);
 
     }
 

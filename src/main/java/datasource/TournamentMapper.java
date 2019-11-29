@@ -1,8 +1,5 @@
 package datasource;
 
-import model.Member;
-import model.MembershipStatus;
-import model.MembershipType;
 import model.Tournament;
 
 import java.sql.*;
@@ -42,6 +39,7 @@ public class TournamentMapper {
         }
         return tournaments;
     }
+
     public void addTournament(Tournament tournament) {
         con = DBConnector.getConnection();
         String SQL = "INSERT INTO tournaments (t_name, t_date, t_location)"
@@ -60,6 +58,27 @@ public class TournamentMapper {
         } catch (SQLException ex) {
             Logger.getLogger(MemberMapper.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println("Kunne ikke tilføje stævne, prøv igen");
+        }
+    }
+
+    public void updateTournament(Tournament tournament) {
+        con = DBConnector.getConnection();
+        String SQL = "UPDATE tournaments SET t_name = ?, t_date = ?, t_location = ? WHERE t_id = ?";
+        try {
+
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ps.setString(1, tournament.getName());
+            Date date = java.sql.Date.valueOf(tournament.getDate().toString());
+            ps.setDate(2, date);
+            ps.setString(3, tournament.getLocation());
+            ps.setInt(4, tournament.getId());
+
+            ps.execute();
+            ps.close();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(MemberMapper.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Kunne ikke opdatere stævnet, prøv igen");
         }
     }
 }

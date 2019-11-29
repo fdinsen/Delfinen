@@ -18,7 +18,7 @@ import static org.junit.Assert.*;
  *
  * @author <Frederik Keis Dinsen>
  */
-public class RestanceMapperTest extends TestBaseIntegration {
+public class RestanceMapperTest extends TestDataSetup {
     
     public RestanceMapperTest() throws IOException {
     }

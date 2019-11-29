@@ -17,7 +17,7 @@ import static org.junit.Assert.*;
  *
  * @author simon
  */
-public class TrainingTimeMapperTest extends TestBaseIntegration{
+public class TrainingTimeMapperTest extends TestDataSetup{
     
     public TrainingTimeMapperTest() throws IOException{
     }
@@ -30,8 +30,13 @@ public class TrainingTimeMapperTest extends TestBaseIntegration{
     public void testAddTime() {
         LocalDate ld = LocalDate.of(2018,11,05);
         TrainingTimeMapper instanceOfTTMapper = new TrainingTimeMapper();
+<<<<<<< HEAD
         TrainingTime trainingTime = new TrainingTime(1, ld, 75000 , SwimmingDiscipline.CRAWL, "Simon");
         int exsectlength = 4;
+=======
+        TrainingTime trainingTime = new TrainingTime(8, ld, 75000 , SwimmingDiscipline.CRAWL);
+        int exspectedMs = 75000;
+>>>>>>> refs/remotes/origin/master
         instanceOfTTMapper.addTime(trainingTime);
         
         ArrayList<TrainingTime> liste = (ArrayList<TrainingTime>) instanceOfTTMapper.getMemberTimes(1);
@@ -48,7 +53,7 @@ public class TrainingTimeMapperTest extends TestBaseIntegration{
         liste = (ArrayList<TrainingTime>) instanceOfTTMapper.getMemberTimes(1);
         
         int actualMs = liste.get(0).getTimeInMS();
-        SwimmingDiscipline actualSd = liste.get(0).getSd();
+        SwimmingDiscipline actualSd = liste.get(0).getSwimmingDiscipline();
         
         assertEquals(expsectedMs, actualMs);
         assertEquals(exspectedSD, actualSd);

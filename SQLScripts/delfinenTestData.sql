@@ -1,3 +1,16 @@
+TRUNCATE TABLE competition_times;
+INSERT INTO `delfinen`.`competition_times` (`c_time_id`, `competitions_id`, `member_id`, `c_time_ms`) VALUES ('1', '1', '12', '1234');
+INSERT INTO `delfinen`.`competition_times` (`c_time_id`, `competitions_id`, `member_id`, `c_time_ms`) VALUES ('2', '1', '2', '4321');
+INSERT INTO `delfinen`.`competition_times` (`c_time_id`, `competitions_id`, `member_id`, `c_time_ms`) VALUES ('3', '1', '4', '1001');
+INSERT INTO `delfinen`.`competition_times` (`c_time_id`, `competitions_id`, `member_id`, `c_time_ms`) VALUES ('4', '2', '2', '500');
+INSERT INTO `delfinen`.`competition_times` (`c_time_id`, `competitions_id`, `member_id`, `c_time_ms`) VALUES ('5', '2', '3', '600');
+TRUNCATE TABLE competitions;
+INSERT INTO `delfinen`.`competitions` (`competitions_id`, `t_id`, `swimming_discipline`) VALUES ('1', '1', 'CRAWL');
+INSERT INTO `delfinen`.`competitions` (`competitions_id`, `t_id`, `swimming_discipline`) VALUES ('2', '1', 'BUTTERFLY');
+INSERT INTO `delfinen`.`competitions` (`competitions_id`, `t_id`, `swimming_discipline`) VALUES ('3', '1', 'BREASTSTROKE');
+INSERT INTO `delfinen`.`competitions` (`competitions_id`, `t_id`, `swimming_discipline`) VALUES ('4', '2', 'BREASTSTROKE');
+INSERT INTO `delfinen`.`competitions` (`competitions_id`, `t_id`, `swimming_discipline`) VALUES ('5', '2', 'BUTTERFLY');
+INSERT INTO `delfinen`.`competitions` (`competitions_id`, `t_id`, `swimming_discipline`) VALUES ('6', '2', 'BACKCRAWL');
 TRUNCATE TABLE tournaments;
 INSERT INTO `delfinen`.`tournaments` (`t_id`, `t_name`, `t_date`, `t_location`) VALUES ('1', 'JuleCup', '2019-02-18', 'Espergærde');
 INSERT INTO `delfinen`.`tournaments` (`t_id`, `t_name`, `t_date`, `t_location`) VALUES ('2', 'SommerCup', '2019-07-28', 'Oslo');

@@ -22,9 +22,9 @@ public class TrainingTimeMapper {
 
             PreparedStatement ps = con.prepareStatement(SQL);
             ps.setString(1, trainingTime.getDate().toString());
-            ps.setInt(2, trainingTime.getMemeberID());
+            ps.setInt(2, trainingTime.getMemberID());
             ps.setInt(3, trainingTime.getTimeInMS());
-            ps.setString(4, trainingTime.getSd().toString());
+            ps.setString(4, trainingTime.getSwimmingDiscipline().toString());
             ps.execute();
 
             ps.close();
@@ -57,7 +57,7 @@ public class TrainingTimeMapper {
                 String sd = result.getString("swimming_discipline");
                 String name = result.getString("member_name");
                 LocalDate ld = LocalDate.parse(t_date);
-                TrainingTime tt = new TrainingTime(memeberId,ld , t_time_ms, SwimmingDiscipline.valueOf(sd),name);
+                TrainingTime tt = new TrainingTime(memeberId,ld , t_time_ms, SwimmingDiscipline.valueOf(sd));
                 
                 trainningTimes.add(tt);
             }

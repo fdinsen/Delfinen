@@ -7,24 +7,21 @@ package model;
 public abstract class Times {
 
     private int timeInMS;
-    private SwimmingDiscipline sd;
-    private String name;
+    private int memberID;
 
     public int getTimeInMS() {
         return timeInMS;
     }
 
-    public SwimmingDiscipline getSd() {
-        return sd;
+
+    public int getMemberID(){
+        return memberID;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public Times(int timeInMs, SwimmingDiscipline sd, String name) {
+    public Times(int timeInMs, int memberID) {
         this.timeInMS = timeInMs;
-        this.sd = sd;
-        this.name = name;
+        this.memberID = memberID;
     }
+
+
 }

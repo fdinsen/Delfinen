@@ -8,21 +8,17 @@ import java.time.LocalDate;
  * @author <Frederik Keis Dinsen>
  */
 public class TrainingTime extends Times {
-    private int memeberID;
     private LocalDate date;
+    private SwimmingDiscipline sd;
     
-    public TrainingTime(int memberID, LocalDate date, int timeInMs, SwimmingDiscipline sd, String name){
-        super(timeInMs,sd,name);
-        this.memeberID = memberID;
+    public TrainingTime(int memberID, LocalDate date, int timeInMs, SwimmingDiscipline sd){
+        super(timeInMs,memberID);
         this.date = date;
-        
-    }
-
-    public int getMemeberID() {
-        return memeberID;
+        this.sd = sd;
     }
 
     public LocalDate getDate() {
         return date;
     }
+    public SwimmingDiscipline getSwimmingDiscipline(){return sd;}
 }
