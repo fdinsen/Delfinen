@@ -63,11 +63,11 @@ public class TournamentMapperTest extends TestDataSetup{
     @Test
     public void TestAddTournament() {
         int expectedID = 5;
-        String expectedName = "FerieCup";
+        String expectedName = "KaldeKup";
         String str = "2017-08-19";
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate expectedDate = LocalDate.parse(str, formatter);
-        String expectedLocation = "Roskilde";
+        String expectedLocation = "Modusby";
         int expectedSize = 1;
         Tournament tournamentToBeAdded = new Tournament(expectedID,expectedName,expectedDate,expectedLocation);
 
