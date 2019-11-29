@@ -50,15 +50,18 @@ public abstract class UI {
                 + "(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a"
                 + "\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])"
                 + "+)\\])";
-        String regexPhoneNumber = "(\\d{8})";
+        String regexPhoneNumber = "([0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9])";
+        String regexName = "[a-zA-Z ]+";
         if (Pattern.matches(regexEmail, input)) {
             return 0;
         } else if (Pattern.matches(regexPhoneNumber, input)) {
             return 1;
+        } else if (input.matches(regexName)) {
+            return 2;
         } else {
             try {
                 Integer.parseInt(input);
-                return 2;
+                return 3;
             } catch (NumberFormatException ex) {
                 return -1;
             }

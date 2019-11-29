@@ -42,7 +42,7 @@ public class UITest {
         int actual;
         
         //Act
-        actual = instance.checkInputType(" 44491881");
+        actual = instance.checkInputType("44g91881");
         
         //Assert
         assertEquals(exp, actual);
@@ -94,11 +94,39 @@ public class UITest {
     public void testCheckInputTypeMemberId() {
         //Arrange
         UI instance = new UIImpl();
-        int exp = 2;
+        int exp = 3;
         int actual;
         
         //Act
         actual = instance.checkInputType("54");
+                
+        //Assert
+        assertEquals(exp, actual);
+    }
+    
+    @Test
+    public void testCheckInputTypeName() {
+        //Arrange
+        UI instance = new UIImpl();
+        int exp = 2;
+        int actual;
+        
+        //Act
+        actual = instance.checkInputType("Harry Potter");
+        
+        //Assert
+        assertEquals(exp, actual);
+    }
+    
+    @Test
+    public void testCheckInputTypeNameNegative() {
+        //Arrange
+        UI instance = new UIImpl();
+        int exp = -1;
+        int actual;
+        
+        //Act
+        actual = instance.checkInputType("Peter Griffin2");
                 
         //Assert
         assertEquals(exp, actual);
