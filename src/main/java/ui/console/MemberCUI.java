@@ -6,18 +6,23 @@ import model.Member;
 import java.util.ArrayList;
 
 public class MemberCUI extends UI{
-    private int[] posibleOptionsInMenu = new int[]{1,4,5,8,13,3};
+    private int[] posibleOptionsInMenu = new int[]{1,0,2};
 
     public MemberCUI(Controller controller) {
         this.controller = controller;
         setVisibleOptionsInMenu(posibleOptionsInMenu);
-        findMember();
+        userDialog();
     }
 
-    private void findMember() {
+    public void userDialog(){
+        printUserMenu();
+        printExit();
+    }
+
+    private Member findMember() {
+        Member member = null;
         boolean exit = false;
         String input = "";
-        Member member;
         do {
             printHeader();
             print("Indtast tlf. nr., email eller navn på en bruger");
@@ -31,22 +36,16 @@ public class MemberCUI extends UI{
                     case 0:
                         //Email
                         member = chooseUser(controller.getMemberByEmail(input));
-                        printMember(member);
-                        printUserMenu();
                         exit = true;
                         break;
                     case 1:
                         //Phonenumber
                         member = chooseUser(controller.getMemberByPhone(input));
-                        printMember(member);
-                        printUserMenu();
                         exit = true;
                         break;
                     case 2:
                         //name
                         member = chooseUser(controller.getMemberByName(input));
-                        printMember(member);
-                        printUserMenu();
                         exit = true;
                         break;
                     default:
@@ -55,11 +54,22 @@ public class MemberCUI extends UI{
                 }
             }
         }while (!exit);
+        return member;
     }
 
     private void printMember(Member member) {
-            print(member.getName());
-        getMenuInput();
+            printHeader();
+            print("Navn: " + member.getName());
+            print("Telefon nr: " + member.getPhone());
+            print("Adresse: " + member.getAddress());
+            print("Email: " + member.getEmail());
+            print("Fødselsdag: " + member.getBirthday());
+            print("Træner: NOT IMPLEMENTED");
+            print("Medlemskab: " + member.getMembershipStatus());
+            print("Medlemstype: " + member.getMembershipType());
+            print("Restance: NOT IMPLEMENTED");
+            print("");
+
     }
 
     //So user can select which member he wishes to see, if the member search returns more than one
@@ -97,31 +107,22 @@ public class MemberCUI extends UI{
                 }else{
                     //Have to make the user input correspond, to the actual value of the method we need to call
                     switch (userOptions.get(input-1)){
+                        case 2:
+                            //Edit member
+                            print("Ret medlem");
+                            exit = true;
+                            break;
+                        case 0:
+                            //Create member
+                            print("Tilføj medlem");
+                            exit = true;
+                            break;
                         case 1:
-                            //See member
-                            print("Se medlem");
+                            //see member
+                            Member member = findMember();
+                            printMember(member);
+                            exit = true;
                             break;
-                        case 5:
-                            //Se restance
-                            print("Se restance");
-                            break;
-                        case 4:
-                            //edit trainer
-                            print("Rediger træner");
-                            break;
-                        case 8:
-                            //see tournament
-                            print("Se stævne");
-                            break;
-                        case 13:
-                            //show top 5
-                            print("Vis top 5");
-                            break;
-                        case 3:
-                            //create trainer
-                            print("Lav træner");
-                            break;
-
                         default:
                             print("Der er sket en fejl, prøv igen");
                     }
