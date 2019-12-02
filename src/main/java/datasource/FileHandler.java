@@ -166,5 +166,14 @@ public class FileHandler implements DataSource {
     public List<CompetitionTime> getAllTimes(int competitionID) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
+    //-----------------//
+    // PrivilegeMapper //
+    //-----------------//
+
+    @Override
+    public boolean[] getPrivileges(int id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
 }

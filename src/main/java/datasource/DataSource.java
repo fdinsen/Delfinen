@@ -77,4 +77,10 @@ public interface DataSource {
     public void addTime(CompetitionTime competitionTime);
     public List<CompetitionTime> getAllTimes(int competitionID);
     
+    //-----------------//
+    // PrivilegeMapper //
+    //-----------------//
+    
+    public boolean[] getPrivileges(int id);
+    
 }

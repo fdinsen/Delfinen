@@ -168,4 +168,13 @@ public class DBFacade implements DataSource {
         return new CompetitionTimeMapper().getAllCompetitionTimesTimes(competitionID);
     }
 
+    //-----------------//
+    // PrivilegeMapper //
+    //-----------------//
+    
+    @Override
+    public boolean[] getPrivileges(int id) {
+        return new PrivilegeMapper().getPrivileges(id);
+    }
+
 }

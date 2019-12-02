@@ -42,4 +42,13 @@ public abstract class Controller {
     public void setProfileId(int id) {
         this.profileId = id;
     }
+    
+    //-----------------//
+    // PrivilegeMapper //
+    //-----------------//
+    
+    public boolean[] getPrivileges(int ID) {
+        return datasource.getPrivileges(ID);
+    }
+    
 }
