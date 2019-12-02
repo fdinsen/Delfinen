@@ -4,8 +4,8 @@ import Controllers.Controller;
 import datasource.DataSource;
 import factory.DataSourceFactory;
 import factory.DataSources;
-import ui.MainConsoleUI;
-import ui.UI;
+import ui.console.MainConsoleUI;
+import ui.console.UI;
 
 /**
  *

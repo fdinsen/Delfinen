@@ -12,8 +12,8 @@ public class BookkeeperController extends Controller{
     //-------------//
     // CONSTRUCTOR //
     //-------------//
-    public BookkeeperController(DataSource datasource) {
-        super(datasource);
+    public BookkeeperController(DataSource datasource, int profileId) {
+        super(datasource, profileId);
     }
     
     //----------------//

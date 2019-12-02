@@ -1,4 +1,4 @@
-package ui;
+package ui.console;
 
 import Controllers.*;
 import datasource.DataSource;
@@ -8,12 +8,13 @@ import datasource.DataSource;
  * @author <Frederik Keis Dinsen>
  */
 public class MainConsoleUI extends UI {
-
+    
     private Controller controller;
     private final DataSource datasource;
     
     public MainConsoleUI(DataSource datasource) {
         this.datasource = datasource;
+        
     }
 
     public void startUI(Controller controller) {
@@ -35,14 +36,13 @@ public class MainConsoleUI extends UI {
             if (input != -1) {
                 switch(input) {
                     case 1:
-                        return new BookkeeperController(datasource);
+                        return new BookkeeperController(datasource, input);
                     case 2:
-                        return new TrainerController(datasource);
+                        return new TrainerController(datasource, input);
                     case 3:
-                        return new ChairmanController(datasource);
+                        return new ChairmanController(datasource, input);
                     default:
                         print("error");
-                    
                 }
             }
         } 

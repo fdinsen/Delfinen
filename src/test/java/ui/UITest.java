@@ -5,6 +5,7 @@
  */
 package ui;
 
+import ui.console.UI;
 import org.junit.Test;
 import static org.junit.Assert.*;
 

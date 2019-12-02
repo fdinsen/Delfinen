@@ -14,8 +14,8 @@ public class ChairmanController extends Controller{
     //-------------//
     // CONSTRUCTOR //
     //-------------//
-    public ChairmanController(DataSource datasource) {
-        super(datasource);
+    public ChairmanController(DataSource datasource, int profileId) {
+        super(datasource, profileId);
     }
 
     //--------------//

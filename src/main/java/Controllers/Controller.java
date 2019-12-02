@@ -10,12 +10,13 @@ import model.*;
  */
 public abstract class Controller {
     DataSource datasource;
-    
+    private int profileId;
     //-------------//
     // CONSTRUCTOR //
     //-------------//
-    public Controller(DataSource datasource) {
+    public Controller(DataSource datasource, int profileId) {
         this.datasource = datasource;
+        this.profileId = profileId;
     }
     
     //--------------//
@@ -34,4 +35,11 @@ public abstract class Controller {
         return (ArrayList) datasource.getMemberByName(name);
     }
     
+    public int getProfileId() {
+        return profileId;
+    }
+    
+    public void setProfileId(int id) {
+        this.profileId = id;
+    }
 }

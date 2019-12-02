@@ -10,8 +10,8 @@ import model.*;
  */
 public class TrainerController extends Controller {
 
-    public TrainerController(DataSource datasource) {
-        super(datasource);
+    public TrainerController(DataSource datasource, int profileId) {
+        super(datasource, profileId);
     }
 
     //--------------//
