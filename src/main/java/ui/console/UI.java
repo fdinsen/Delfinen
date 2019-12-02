@@ -12,6 +12,7 @@ import java.util.Scanner;
 public abstract class UI {
     protected Controller controller;
     protected ArrayList<Integer> visibleOptionsInMenu = new ArrayList<>();
+    protected ArrayList<Integer> userOptions = new ArrayList<>();
     protected String[] allMenuOptions = {
         ". Opret medlem",
         ". Se Medlem",
@@ -98,6 +99,8 @@ public abstract class UI {
         for (int menuOption : posibleOptionsInMenu) {
             //Minus 1 as the database "starts" at one
             if (controller.getUserPrivileges()[menuOption] ) {
+                System.out.println(menuOption);
+                userOptions.add(menuOption);
                 visibleOptionsInMenu.add(menuOption);
             }
         }
