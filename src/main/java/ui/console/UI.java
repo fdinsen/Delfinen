@@ -11,20 +11,20 @@ import java.util.Scanner;
  */
 public abstract class UI {
     protected Controller controller;
-    protected ArrayList<Integer> visibleOptionsInMenu;
+    protected ArrayList<Integer> visibleOptionsInMenu = new ArrayList<>();
     protected String[] allMenuOptions = {
-        ". Opret medlem\n",
-        ". Se Medlem\n",
-        ". Ret Medlem\n",
-        ". Tilføj træner\n",
-        ". Ret træner\n",
-        ". Se Restance\n",
-        ". Marker som betalt\n",
-        ". Tilføj ny træningstid\n",
-        ". Se stævner\n",
-        ". Tilføj stævne\n",
-        ". Se konkurrence\n",
-        ". Tilføj ny konkurrence\n", 
+        ". Opret medlem",
+        ". Se Medlem",
+        ". Ret Medlem",
+        ". Tilføj træner",
+        ". Ret træner",
+        ". Se Restance",
+        ". Marker som betalt",
+        ". Tilføj ny træningstid",
+        ". Se stævner",
+        ". Tilføj stævne",
+        ". Se konkurrence",
+        ". Tilføj ny konkurrence",
         ". Tilføj medlem til konkurrence",
         ". Vis top 5 svømmere",
         ". Ret konkurrence",
@@ -96,6 +96,7 @@ public abstract class UI {
     
     protected void setVisibleOptionsInMenu(int[] posibleOptionsInMenu) {
         for (int menuOption : posibleOptionsInMenu) {
+            //Minus 1 as the database "starts" at one
             if (controller.getUserPrivileges()[menuOption] ) {
                 visibleOptionsInMenu.add(menuOption);
             }

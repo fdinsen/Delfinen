@@ -17,8 +17,7 @@ public class MainConsoleUI extends UI {
     }
 
     public void startUI(Controller controller) {
-        print("Du er nu en " + controller);
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        MainMenuUI mainMenuUI = new MainMenuUI(controller);
     }
 
     public Controller selectUser() {

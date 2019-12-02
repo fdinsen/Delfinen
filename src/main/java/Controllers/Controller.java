@@ -18,7 +18,7 @@ public abstract class Controller {
     public Controller(DataSource datasource, int profileID) {
         this.datasource = datasource;
         this.userPrivileges = datasource.getPrivileges(profileID);
-        this.swimmingDiscipline = datasource.getSwimmingDisciplines();
+       // this.swimmingDiscipline = datasource.getSwimmingDisciplines();
     }
     
     //--------------//
