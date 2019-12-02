@@ -94,3 +94,25 @@ CREATE TABLE `member_swiming_discipline` (
     PRIMARY KEY (`msd_id`)
 );
 
+DROP TABLE IF exists `user_privileges`;
+
+CREATE TABLE `user_privileges`(
+	`user_piv_id` int(11) NOT NULL auto_increment,
+    `create_member` tinyInt default 0,
+	`see_member` tinyInt default 0,
+    `edit_member` tinyInt default 0,
+    `create_trainer` tinyInt default 0,
+    `edit_trainer` tinyInt default 0,
+    `see_restance` tinyInt default 0,
+    `mark_as_payed` tinyInt default 0,
+    `add_training_time` tinyInt default 0,
+    `see_tournament` tinyInt default 0,
+    `add_tournament` tinyInt default 0,
+    `see_competition` tinyInt default 0,
+    `add_competition` tinyInt default 0,
+    `add_member_to_competition` tinyInt default 0,
+    `show_top_5` tinyInt default 0,
+    `edit_competition` tinyInt default 0,
+    `edit_tournament` tinyInt default 0,
+	PRIMARY KEY (`user_piv_id`)
+);

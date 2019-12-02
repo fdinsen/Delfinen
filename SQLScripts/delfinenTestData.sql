@@ -59,4 +59,7 @@ INSERT INTO training_times (t_date, member_id, t_time_ms, swimming_discipline) V
 INSERT INTO training_times (t_date, member_id, t_time_ms, swimming_discipline) VALUES ('2018-11-27',8,80000,'BACKCRAWL');
 INSERT INTO training_times (t_date, member_id, t_time_ms, swimming_discipline) VALUES ('2018-11-27',9,81000,'BACKCRAWL');
 INSERT INTO training_times (t_date, member_id, t_time_ms, swimming_discipline) VALUES ('2018-11-27',10,82000,'BACKCRAWL');
-
+TRUNCATE TABLE user_privileges;
+INSERT INTO user_privileges (see_member,see_restance,mark_as_payed) VALUES (1,1,1);
+INSERT INTO user_privileges (see_member,edit_member, add_training_time,see_tournament,add_tournament, see_competition,add_competition,add_member_to_competition,show_top_5,edit_competition,edit_tournament) VALUES (1,1,1,1,1,1,1,1,1,1,1);
+INSERT INTO user_privileges (create_member, see_member, edit_member, create_trainer,edit_trainer) VALUES (1,1,1,1,1); 
