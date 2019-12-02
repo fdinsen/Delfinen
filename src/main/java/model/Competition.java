@@ -6,12 +6,12 @@ import enums.SwimmingDiscipline;
 public class Competition {
     private int competitionsId;
     private int tournamentID;
-    private SwimmingDiscipline swimmingDiscipline;
+    private int swimmingDisciplineID;
 
-    public Competition(int competitionsId, int tournamentID, SwimmingDiscipline swimmingDiscipline) {
+    public Competition(int competitionsId, int tournamentID, int swimmingDisciplineID) {
         this.competitionsId = competitionsId;
         this.tournamentID = tournamentID;
-        this.swimmingDiscipline = swimmingDiscipline;
+        this.swimmingDisciplineID = swimmingDisciplineID;
     }
 
     public int getCompetitionsId() {
@@ -22,7 +22,8 @@ public class Competition {
         return tournamentID;
     }
 
-    public SwimmingDiscipline getSwimmingDiscipline() {
-        return swimmingDiscipline;
+    public int getSwimmingDiscipline() {
+        return swimmingDisciplineID;
     }
+    
 }

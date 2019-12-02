@@ -19,12 +19,12 @@ public class CompetitionMapper {
 
         try {
             con = DBConnector.getConnection();
-            PreparedStatement stmt = con.prepareStatement("SELECT * FROM competitions WHERE t_id = ?");
+            PreparedStatement stmt = con.prepareStatement("SELECT * FROM delfinen.competitions where t_id = ?");
             stmt.setInt(1, tournamentID);
             ResultSet rsCompetition = stmt.executeQuery();
             while (rsCompetition.next()) {
                 int competitionsId = rsCompetition.getInt("competitions_id");
-                SwimmingDiscipline swimmingDiscipline = SwimmingDiscipline.valueOf(rsCompetition.getString("swimming_discipline"));
+                int swimmingDiscipline = rsCompetition.getInt("discipline_id");
 
                 Competition competition = new Competition(competitionsId,tournamentID,swimmingDiscipline);
                 competitions.add(competition);
@@ -42,14 +42,14 @@ public class CompetitionMapper {
 
     public void addCompetition(Competition competition) {
         con = DBConnector.getConnection();
-        String SQL = "INSERT INTO competitions (competitions_id, t_id, swimming_discipline)"
+        String SQL = "INSERT INTO competitions (competitions_id, t_id, discipline_id)"
                 + "VALUES (?, ?, ?)";
         try {
 
             PreparedStatement ps = con.prepareStatement(SQL);
             ps.setInt(1, competition.getCompetitionsId());
             ps.setInt(2, competition.getTournamentID());
-            ps.setString(3, competition.getSwimmingDiscipline().toString());
+            ps.setInt(3, competition.getSwimmingDiscipline());
 
             ps.execute();
             ps.close();
@@ -62,13 +62,13 @@ public class CompetitionMapper {
 
     public void updateTournament(Competition competition) {
         con = DBConnector.getConnection();
-        String SQL = "UPDATE competitions SET competitions_id = ?, t_id = ?, swimming_discipline = ? WHERE competitions_id = ?";
+        String SQL = "UPDATE competitions SET competitions_id = ?, t_id = ?, discipline_id = ? WHERE competitions_id = ?";
         try {
 
             PreparedStatement ps = con.prepareStatement(SQL);
             ps.setInt(1, competition.getCompetitionsId());
             ps.setInt(2, competition.getTournamentID());
-            ps.setString(3, competition.getSwimmingDiscipline().toString());
+            ps.setInt(3, competition.getSwimmingDiscipline());
             ps.setInt(4, competition.getTournamentID());
 
             ps.execute();
