@@ -1,5 +1,7 @@
 package ui.console;
 
+import Controllers.Controller;
+import java.util.ArrayList;
 import java.util.regex.*;
 import java.util.Scanner;
 
@@ -8,7 +10,31 @@ import java.util.Scanner;
  * @author <Frederik Keis Dinsen>
  */
 public abstract class UI {
-
+    protected Controller controller;
+    protected ArrayList<Integer> visibleOptionsInMenu;
+    protected String[] allMenuOptions = {
+        ". Opret medlem\n",
+        ". Se Medlem\n",
+        ". Ret Medlem\n",
+        ". Tilføj træner\n",
+        ". Ret træner\n",
+        ". Se Restance\n",
+        ". Marker som betalt\n",
+        ". Tilføj ny træningstid\n",
+        ". Se stævner\n",
+        ". Tilføj stævne\n",
+        ". Se konkurrence\n",
+        ". Tilføj ny konkurrence\n", 
+        ". Tilføj medlem til konkurrence",
+        ". Vis top 5 svømmere",
+        ". Ret konkurrence",
+        ". Ret stævne"
+    };
+    
+    protected UI() {
+        
+    }
+    
     public void print(String messageToPrint) {
         System.out.println(messageToPrint);
     }
@@ -67,4 +93,13 @@ public abstract class UI {
             }
         }
     }
+    
+    protected void setVisibleOptionsInMenu(int[] posibleOptionsInMenu) {
+        for (int menuOption : posibleOptionsInMenu) {
+            if (controller.getUserPrivileges()[menuOption] ) {
+                visibleOptionsInMenu.add(menuOption);
+            }
+        }
+    }
+    
 }
