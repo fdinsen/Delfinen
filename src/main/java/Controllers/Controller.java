@@ -2,7 +2,6 @@
 package Controllers;
 import datasource.DataSource;
 import java.util.ArrayList;
-import java.util.List;
 import model.*;
 /**
  *
@@ -10,13 +9,13 @@ import model.*;
  */
 public abstract class Controller {
     DataSource datasource;
-    private int profileId;
+    private int[] user_Privileges;
     //-------------//
     // CONSTRUCTOR //
     //-------------//
     public Controller(DataSource datasource, int profileId) {
         this.datasource = datasource;
-        this.profileId = profileId;
+        this.user_Privileges = datasource.getUser_Privileges();
     }
     
     //--------------//
@@ -34,12 +33,8 @@ public abstract class Controller {
     public ArrayList<Member> getMemberByName(String name) {
         return (ArrayList) datasource.getMemberByName(name);
     }
-    
-    public int getProfileId() {
-        return profileId;
-    }
-    
-    public void setProfileId(int id) {
-        this.profileId = id;
+
+    public int[] getUser_Privileges() {
+        return user_Privileges;
     }
 }
