@@ -29,7 +29,7 @@ public class MainConsoleUI extends UI {
             print("2. - Træner");
             print("3. - Formand");
             
-            int input = getInput();
+            int input = getMenuInput();
             
             if (input != -1) {
                 switch(input) {
