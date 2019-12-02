@@ -8,8 +8,7 @@ import datasource.DataSource;
  * @author <Frederik Keis Dinsen>
  */
 public class MainConsoleUI extends UI {
-    
-    private Controller controller;
+            
     private final DataSource datasource;
     
     public MainConsoleUI(DataSource datasource) {
@@ -51,9 +50,4 @@ public class MainConsoleUI extends UI {
         print("Something has gone horribly wrong😱");
         return null;
     }
-
-    public void setController(Controller controller) {
-        this.controller = controller;
-    }
-
 }
