@@ -10,12 +10,14 @@ import model.*;
 public abstract class Controller {
     DataSource datasource;
     private boolean[] userPrivileges;
+    private String svimmingDiscipline;
     //-------------//
     // CONSTRUCTOR //
     //-------------//
     public Controller(DataSource datasource, int profileID) {
         this.datasource = datasource;
         this.userPrivileges = datasource.getPrivileges(profileID);
+        this.svimmingDiscipline = datasource.getSvimmingDisciplines();
     }
     
     //--------------//
