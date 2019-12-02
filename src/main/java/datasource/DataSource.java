@@ -8,7 +8,6 @@ import model.Tournament;
 import model.Times;
 import model.TrainingTime;
 import model.CompetitionTime;
-import enums.SwimmingDiscipline;
 import model.Member;
 
 /**
@@ -68,7 +67,7 @@ public interface DataSource {
     
     public void addTime(TrainingTime trainingTime);
     public List<TrainingTime> getMemberTimes(int memberID);
-    public List<TrainingTime> getTop5(SwimmingDiscipline sd);
+    public List<TrainingTime> getTop5(int swimmingDisciplineID);
     
     //-----------------------//
     // CompetitionTimeMapper //

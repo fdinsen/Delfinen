@@ -1,7 +1,6 @@
 
 package Controllers;
 import datasource.DataSource;
-import enums.SwimmingDiscipline;
 import java.util.ArrayList;
 import model.*;
 /**
@@ -66,8 +65,8 @@ public class TrainerController extends Controller {
         return (ArrayList) datasource.getMemberTimes(memberID);
     }
     
-    public ArrayList<TrainingTime> getTop5(SwimmingDiscipline sd) {
-        return (ArrayList) datasource.getTop5(sd);
+    public ArrayList<TrainingTime> getTop5(int swimmingDisciplineID) {
+        return (ArrayList) datasource.getTop5(swimmingDisciplineID);
     }
     
     //-----------------------//

@@ -8,7 +8,6 @@ package datasource;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import enums.SwimmingDiscipline;
 import model.TrainingTime;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -30,7 +29,7 @@ public class TrainingTimeMapperTest extends TestDataSetup{
     public void testAddTime() {
         LocalDate ld = LocalDate.of(2018,11,05);
         TrainingTimeMapper instanceOfTTMapper = new TrainingTimeMapper();
-        TrainingTime trainingTime = new TrainingTime(1, ld, 75000 , SwimmingDiscipline.CRAWL);
+        TrainingTime trainingTime = new TrainingTime(1, ld, 75000 , 1);
         int exsectlength = 4;
         instanceOfTTMapper.addTime(trainingTime);
         
@@ -44,11 +43,11 @@ public class TrainingTimeMapperTest extends TestDataSetup{
         ArrayList<TrainingTime> liste = new ArrayList<>();
         TrainingTimeMapper instanceOfTTMapper = new TrainingTimeMapper();
         int expsectedMs = 60000;
-        SwimmingDiscipline exspectedSD = SwimmingDiscipline.CRAWL;
+        int exspectedSD = 1;
         liste = (ArrayList<TrainingTime>) instanceOfTTMapper.getMemberTimes(1);
         
         int actualMs = liste.get(0).getTimeInMS();
-        SwimmingDiscipline actualSd = liste.get(0).getSwimmingDiscipline();
+        int actualSd = liste.get(0).getSwimmingDiscipline();
         
         assertEquals(expsectedMs, actualMs);
         assertEquals(exspectedSD, actualSd);
@@ -59,7 +58,7 @@ public class TrainingTimeMapperTest extends TestDataSetup{
         TrainingTimeMapper instanceOfTTMapper = new TrainingTimeMapper();
         int expsected = 5;
         
-        ArrayList<TrainingTime> liste = (ArrayList<TrainingTime>) instanceOfTTMapper.getTop5(SwimmingDiscipline.CRAWL);
+        ArrayList<TrainingTime> liste = (ArrayList<TrainingTime>) instanceOfTTMapper.getTop5(1);
         int actual = liste.size();
         
         assertEquals(expsected, actual);

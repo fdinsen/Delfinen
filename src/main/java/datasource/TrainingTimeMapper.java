@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import enums.SwimmingDiscipline;
 import model.TrainingTime;
 
 public class TrainingTimeMapper {
@@ -71,7 +70,7 @@ public class TrainingTimeMapper {
         return trainningTimes;
     }
 
-    public List<TrainingTime> getTop5(SwimmingDiscipline sd) {
+    public List<TrainingTime> getTop5(int swimmingDisciplineID) {
         ArrayList<TrainingTime> trainningTimes = new ArrayList<>(); 
         String SQL = "SELECT * FROM delfinen.training_times "
                 + "where discipline_id = ? "
@@ -82,7 +81,7 @@ public class TrainingTimeMapper {
         try {
             PreparedStatement ps = con.prepareStatement(SQL);
             
-            ps.setString(1, sd.toString());
+            ps.setInt(1, swimmingDisciplineID);
             
             ResultSet result = ps.executeQuery();
             

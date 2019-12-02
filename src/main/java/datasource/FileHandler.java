@@ -8,7 +8,6 @@ import model.Tournament;
 import model.Times;
 import model.TrainingTime;
 import model.CompetitionTime;
-import enums.SwimmingDiscipline;
 import model.Member;
 /**
  *
@@ -149,7 +148,7 @@ public class FileHandler implements DataSource {
     }
 
     @Override
-    public List<TrainingTime> getTop5(SwimmingDiscipline sd) {
+    public List<TrainingTime> getTop5(int swimmingDisciplineID) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

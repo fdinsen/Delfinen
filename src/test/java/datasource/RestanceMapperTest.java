@@ -133,7 +133,7 @@ public class RestanceMapperTest extends TestDataSetup {
         instance.markAsPaid(1);
         instance.markAsPaid(2);
         instance.markAsPaid(4);
-        int expectedSize = 6;
+        int expectedSize = 10;
         int actualSize;
         
         //Act

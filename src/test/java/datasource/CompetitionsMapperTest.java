@@ -1,9 +1,7 @@
 package datasource;
 
 import model.Competition;
-import enums.SwimmingDiscipline;
 import org.junit.Test;
-
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -26,25 +24,25 @@ public class CompetitionsMapperTest extends TestDataSetup{
 
         int expectedCID1 = 1;
         int expectedTID1 = 1;
-        SwimmingDiscipline expectedSwimingDiscipline1 = SwimmingDiscipline.CRAWL;
+        int expectedSwimingDisciplineId1 = 1;
         int expectedCID2 = 2;
         int expectedTID2 = 1;
-        SwimmingDiscipline expectedSwimingDiscipline2 = SwimmingDiscipline.BUTTERFLY;
+        int expectedSwimingDisciplineId2 = 4;
         int expectedCID3 = 3;
         int expectedTID3 = 1;
-        SwimmingDiscipline expectedSwimingDiscipline3 = SwimmingDiscipline.BREASTSTROKE;
+        int expectedSwimingDisciplineId3 = 3;
 
         int expectedSize = 3;
 
         assertEquals(expectedCID1, actual.get(0).getCompetitionsId());
         assertEquals(expectedTID1, actual.get(0).getTournamentID());
-        assertEquals(expectedSwimingDiscipline1, actual.get(0).getSwimmingDiscipline());
+        assertEquals(expectedSwimingDisciplineId1, actual.get(0).getSwimmingDiscipline());
         assertEquals(expectedCID2, actual.get(1).getCompetitionsId());
         assertEquals(expectedTID2, actual.get(1).getTournamentID());
-        assertEquals(expectedSwimingDiscipline2, actual.get(1).getSwimmingDiscipline());
+        assertEquals(expectedSwimingDisciplineId2, actual.get(1).getSwimmingDiscipline());
         assertEquals(expectedCID3, actual.get(2).getCompetitionsId());
         assertEquals(expectedTID3, actual.get(2).getTournamentID());
-        assertEquals(expectedSwimingDiscipline3, actual.get(2).getSwimmingDiscipline());
+        assertEquals(expectedSwimingDisciplineId3, actual.get(2).getSwimmingDiscipline());
 
         assertEquals(expectedSize,actual.size());
     }
@@ -57,13 +55,13 @@ public class CompetitionsMapperTest extends TestDataSetup{
 
         int expectedCID1 = 4;
         int expectedTID1 = 2;
-        SwimmingDiscipline expectedSwimingDiscipline1 = SwimmingDiscipline.BREASTSTROKE;
+        int expectedSwimingDiscipline1 = 3;
         int expectedCID2 = 5;
         int expectedTID2 = 2;
-        SwimmingDiscipline expectedSwimingDiscipline2 = SwimmingDiscipline.BUTTERFLY;
+        int expectedSwimingDiscipline2 = 4;
         int expectedCID3 = 6;
         int expectedTID3 = 2;
-        SwimmingDiscipline expectedSwimingDiscipline3 = SwimmingDiscipline.BACKCRAWL;
+        int expectedSwimingDiscipline3 = 2;
 
         int expectedSize = 3;
 
@@ -85,7 +83,7 @@ public class CompetitionsMapperTest extends TestDataSetup{
         ArrayList<Competition> actual;
         int expectedCID = 7;
         int expectedTID = 3;
-        SwimmingDiscipline expectedSwimingDiscipline = SwimmingDiscipline.BREASTSTROKE;
+        int expectedSwimingDiscipline = 3;
 
         CompetitionMapper instanceCompetitionMapper = new CompetitionMapper();
         Competition tournamentToBeAdded = new Competition(expectedCID,expectedTID,expectedSwimingDiscipline);
@@ -102,9 +100,9 @@ public class CompetitionsMapperTest extends TestDataSetup{
         ArrayList<Competition> actual;
         int expectedCID1 = 7;
         int expectedTID = 3;
-        SwimmingDiscipline expectedSwimingDiscipline1 = SwimmingDiscipline.BREASTSTROKE;
+        int expectedSwimingDiscipline1 = 3;
         int expectedCID2 = 8;
-        SwimmingDiscipline expectedSwimingDiscipline2 = SwimmingDiscipline.BREASTSTROKE;
+        int expectedSwimingDiscipline2 = 3;
 
 
         Competition tournamentToBeAdded1 = new Competition(expectedCID1,expectedTID,expectedSwimingDiscipline1);
@@ -129,7 +127,7 @@ public class CompetitionsMapperTest extends TestDataSetup{
         ArrayList<Competition> actual;
         int expectedCID = 1;
         int expectedTID = 1;
-        SwimmingDiscipline expectedSwimingDiscipline1 = SwimmingDiscipline.BUTTERFLY;
+        int expectedSwimingDiscipline1 = 4;
 
         CompetitionMapper instanceCompetitionMapper = new CompetitionMapper();
         Competition CompetitionToBeUpdated = new Competition(expectedCID,expectedTID,expectedSwimingDiscipline1);

@@ -2,7 +2,6 @@ package datasource;
 
 import model.Competition;
 import model.CompetitionTime;
-import enums.SwimmingDiscipline;
 import model.TrainingTime;
 
 import java.sql.Connection;

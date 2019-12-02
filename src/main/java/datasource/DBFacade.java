@@ -7,7 +7,6 @@ import model.Competition;
 import model.Tournament;
 import model.TrainingTime;
 import model.CompetitionTime;
-import enums.SwimmingDiscipline;
 import model.Member;
 /**
  *
@@ -150,8 +149,8 @@ public class DBFacade implements DataSource {
     }
 
     @Override
-    public List<TrainingTime> getTop5(SwimmingDiscipline sd) {
-        return new TrainingTimeMapper().getTop5(sd);
+    public List<TrainingTime> getTop5(int swimmingDisciplineID) {
+        return new TrainingTimeMapper().getTop5(swimmingDisciplineID);
     }
 
     //-----------------------//

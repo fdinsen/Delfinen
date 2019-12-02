@@ -1,8 +1,6 @@
 package datasource;
 
 import model.Competition;
-import enums.SwimmingDiscipline;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

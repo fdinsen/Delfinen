@@ -1,7 +1,6 @@
 
 package model;
 
-import enums.SwimmingDiscipline;
 import java.time.LocalDate;
 
 /**
