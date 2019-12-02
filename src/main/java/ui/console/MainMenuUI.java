@@ -2,15 +2,18 @@
 package ui.console;
 
 import Controllers.Controller;
+import java.util.ArrayList;
 
 /**
  *
  * @author <Frederik Keis Dinsen>
  */
 public class MainMenuUI extends UI {
-    private Controller controller;
-    protected MainMenuUI(Controller controller) {
+    private int[] posibleOptionsInMenu = new int[]{2,6,9,14,4};
+    
+    public MainMenuUI(Controller controller) {
         this.controller = controller;
+        
     }
     
     public void printMainMenu(){
@@ -18,7 +21,8 @@ public class MainMenuUI extends UI {
         int counter = 0;
         String StringMenu = "";
         do {
-            if(controller.getUserPrivileges()[2]){
+            
+            if(visibleOptionsInMenu){
                 counter++;
                 StringMenu += counter + ". Medlemmer\n";
             }
@@ -43,9 +47,16 @@ public class MainMenuUI extends UI {
                 StringMenu += counter + ". Tilføj/Ret Træner\n";
             }
             printExit();
+            
+            switch(getInput()){
+                
+            }
         } while (!exit);
         
     }
+
+    
+    
     
     private void printExit(){
         print("0. Exit");
