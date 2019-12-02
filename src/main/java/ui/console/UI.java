@@ -105,5 +105,8 @@ public abstract class UI {
             }
         }
     }
-    
+
+    void printExit(){
+        print("0. Exit");
+    }
 }

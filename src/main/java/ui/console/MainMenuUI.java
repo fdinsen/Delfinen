@@ -72,11 +72,4 @@ public class MainMenuUI extends UI {
         } while (!exit);
         
     }
-
-    
-    
-    
-    private void printExit(){
-        print("0. Exit");
-    }
 }
