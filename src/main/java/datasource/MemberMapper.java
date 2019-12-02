@@ -190,4 +190,31 @@ public class MemberMapper {
         }
         return members;
     }
+    public int[] getMemberSwimingDiscipline(int memberID){
+        
+        int[] disciplines = new int[4];
+        String SQL = "SELECT discipline_id FROM delfinen.member_swiming_discipline where member_id = ?;";
+        int count = 0;
+        
+        try {
+            con= DBConnector.getConnection();
+            PreparedStatement ps = con.prepareStatement(SQL);
+            
+            ps.setInt(1, memberID);
+            
+            ResultSet rsMemberSD = ps.executeQuery();
+            
+            while(rsMemberSD.next()){
+                int swimmingID = rsMemberSD.getInt("discipline_id");
+                disciplines[count] = swimmingID;
+                count++;
+            }
+            
+        } catch (SQLException ex) {
+            System.out.println(ex + "problem med get member swiming discipline");
+        }
+            
+        
+        return disciplines;
+    }
 }
