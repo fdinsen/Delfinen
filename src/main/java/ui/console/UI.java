@@ -1,5 +1,7 @@
 package ui.console;
 
+import Controllers.Controller;
+import java.util.ArrayList;
 import java.util.regex.*;
 import java.util.Scanner;
 
@@ -8,7 +10,17 @@ import java.util.Scanner;
  * @author <Frederik Keis Dinsen>
  */
 public abstract class UI {
-
+    protected Controller controller;
+    protected ArrayList<Integer> visibleOptionsInMenu;
+    
+    protected UI(boolean[] privileges, int[] optionsForThisMenu) {
+        for (int menuOption : optionsForThisMenu) {
+            if (privileges[menuOption] ) {
+                visibleOptionsInMenu.add(menuOption);
+            }
+        }
+    }
+    
     public void print(String messageToPrint) {
         System.out.println(messageToPrint);
     }
