@@ -210,4 +210,24 @@ public class MemberMapperTest extends TestDataSetup {
 
         assertEquals(exspected, actual);
     }
+    @Test
+    public void getMemberSwimingDiscipline(){
+        
+        MemberMapper instanceMemberMapper = new MemberMapper();
+        int[] liste = instanceMemberMapper.getMemberSwimingDiscipline(1);
+        int exspectedFirst = 4;
+        int exspectedSecond= 2;
+        int exspectedThird= 3;
+        int exspectedFourth= 0;
+        
+        int actualFirst = liste[0];
+        int actualSecond = liste[1];
+        int actualThird = liste[2];
+        int actualFourth = liste[3];
+        
+        assertEquals(exspectedFirst, actualFirst);
+        assertEquals(exspectedSecond, actualSecond);
+        assertEquals(exspectedThird, actualThird);
+        assertEquals(exspectedFourth, actualFourth);
+    }
 }
