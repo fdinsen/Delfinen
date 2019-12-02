@@ -1,7 +1,14 @@
--- Members
-
 DROP TABLE IF EXISTS `members`;
+DROP TABLE IF EXISTS `restance`;
+DROP TABLE IF EXISTS `competitions`;
+DROP TABLE IF EXISTS `tournaments`;
+DROP TABLE IF EXISTS `competition_times`;
+DROP TABLE IF EXISTS `training_times`;
+DROP TABLE IF EXISTS `trainers`;
+DROP TABLE IF EXISTS `member_swiming_discipline`;
+DROP TABLE IF exists `user_privileges`;
 
+-- Members
 CREATE TABLE `members` (
 	`member_id` int(11) NOT null auto_increment,
     `member_name` varchar(45) NOT null,
@@ -16,19 +23,13 @@ CREATE TABLE `members` (
 );
 
 -- restance
-
-DROP TABLE IF EXISTS `restance`;
-
 CREATE TABLE `restance` (
 	`restance_id` int(11) NOT null auto_increment,
 	`member_id` int(11) NOT null,
     PRIMARY KEY (`restance_id`)
 );
 
--- events
-
-DROP TABLE IF EXISTS `tournaments`;
-
+-- tournaments
 CREATE TABLE `tournaments` (
 	`t_id` int(11) NOT null auto_increment,
 	`t_name` varchar(45),
@@ -38,20 +39,14 @@ CREATE TABLE `tournaments` (
 );
 
 -- competition
-
-DROP TABLE IF EXISTS `competitions`;
-
 CREATE TABLE `competitions` (
 	`competitions_id` int(11) NOT null auto_increment,
 	`t_id` int(11) NOT null,
-    `swimming_discipline` enum ('CRAWL','BACKCRAWL','BREASTSTROKE','BUTTERFLY') NOT null,
+    `discipline_id` int(11) NOT null,
     PRIMARY KEY (`competitions_id`)
 );
 
 -- competition times
-
-DROP TABLE IF EXISTS `competition_times`;
-
 CREATE TABLE `competition_times` (
 	`c_time_id` int(11) NOT null auto_increment,
 	`competitions_id` int(11) NOT null,
@@ -61,22 +56,16 @@ CREATE TABLE `competition_times` (
 );
 
 -- training times
-
-DROP TABLE IF EXISTS `training_times`;
-
 CREATE TABLE `training_times` (
 	`t_time_id` int(11) NOT null auto_increment,
 	`t_date` date NOT null,
     `member_id` int(11) NOT null,
     `t_time_ms` int(11) NOT null,
-    `swimming_discipline` enum ('CRAWL','BACKCRAWL','BREASTSTROKE','BUTTERFLY') NOT null,
+    `discipline_id` int(11) NOT null,
     PRIMARY KEY (`t_time_id`)
 );
 
 -- trainers
-
-DROP TABLE IF EXISTS `trainers`;
-
 CREATE TABLE `trainers` (
 	`trainer_id` int(11) NOT null auto_increment,
 	`trainer_name` varchar(45) NOT null,
@@ -84,18 +73,14 @@ CREATE TABLE `trainers` (
 );
 
 -- member swiming discipline
-
-DROP TABLE IF EXISTS `member_swiming_discipline`;
-
 CREATE TABLE `member_swiming_discipline` (
 	`msd_id` int(11) NOT null auto_increment,
 	`member_id` int(11) NOT null,
-    `discipline_name` enum ('CRAWL','BACKCRAWL','BREASTSTROKE','BUTTERFLY') NOT null,
+    `discipline_id` int(11) NOT null,
     PRIMARY KEY (`msd_id`)
 );
 
-DROP TABLE IF exists `user_privileges`;
-
+-- user_privileges
 CREATE TABLE `user_privileges`(
 	`user_piv_id` int(11) NOT NULL auto_increment,
     `create_member` tinyInt default 0,
@@ -115,4 +100,11 @@ CREATE TABLE `user_privileges`(
     `edit_competition` tinyInt default 0,
     `edit_tournament` tinyInt default 0,
 	PRIMARY KEY (`user_piv_id`)
+);
+
+-- Discipline
+CREATE TABLE `disciplines` (
+	`discipline_id` int(11) not null auto_increment,
+	`discipline_name` enum ('CRAWL','BACKCRAWL','BREASTSTROKE','BUTTERFLY') NOT null,
+    PRIMARY KEY (`discipline_id`)
 );
