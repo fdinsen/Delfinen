@@ -5,6 +5,7 @@
  */
 package datasource;
 
+import java.io.IOException;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -14,7 +15,7 @@ import static org.junit.Assert.*;
  */
 public class PrivilegeMapperTest extends TestDataSetup {
     
-    public PrivilegeMapperTest() {
+    public PrivilegeMapperTest() throws IOException{
     }
 
     /**
@@ -22,8 +23,17 @@ public class PrivilegeMapperTest extends TestDataSetup {
      */
     @Test
     public void testGetPrivileges() {
+        //Arrange
         PrivilegeMapper instance = new PrivilegeMapper();
+        boolean[] expected = {false, true, true, false, false,
+        false,false, true, true, true, true, true, true, true, true, true};
+        boolean[] actual;
         
+        //Act
+        actual = instance.getPrivileges(2);
+        
+        //Assert
+        assertArrayEquals(expected, actual);
     }
     
 }

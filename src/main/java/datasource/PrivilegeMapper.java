@@ -26,7 +26,11 @@ public class PrivilegeMapper {
             int count = 0;
             while(rs.next()) {
                 for(int i = 0; i < privileges.length ; i++) {
-                    privileges[i] = rs.getBoolean(i + 1);
+                    //Der lægges 2 til af to grunde:
+                    //+1 fordi SQL tæller kolonner fra 1
+                    //+1 mere fordi den første kolonne er 
+                    // bruger-id'et og derfor skal skippes
+                    privileges[i] = rs.getBoolean(i + 2);
                 }
             }
             

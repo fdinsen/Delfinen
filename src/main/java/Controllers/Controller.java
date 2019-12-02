@@ -9,13 +9,13 @@ import model.*;
  */
 public abstract class Controller {
     DataSource datasource;
-    private int[] user_Privileges;
+    private boolean[] userPrivileges;
     //-------------//
     // CONSTRUCTOR //
     //-------------//
-    public Controller(DataSource datasource, int profileId) {
+    public Controller(DataSource datasource, int profileID) {
         this.datasource = datasource;
-        this.user_Privileges = datasource.getUser_Privileges();
+        this.userPrivileges = datasource.getPrivileges(profileID);
     }
     
     //--------------//
@@ -34,16 +34,12 @@ public abstract class Controller {
         return (ArrayList) datasource.getMemberByName(name);
     }
 
-    public int[] getUser_Privileges() {
-        return user_Privileges;
+    public boolean[] getUserPrivileges() {
+        return userPrivileges;
     }
     
     //-----------------//
     // PrivilegeMapper //
     //-----------------//
-    
-    public boolean[] getPrivileges(int ID) {
-        return datasource.getPrivileges(ID);
-    }
     
 }
