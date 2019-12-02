@@ -1,0 +1,15 @@
+set foreign_key_checks=0;
+TRUNCATE table persons;
+INSERT INTO persons (lastname,firstname,age) VALUES ("Hansen","Ola",30);
+INSERT INTO persons (lastname,firstname,age) VALUES ("Svendson","Tove",23);
+INSERT INTO persons (lastname,firstname,age) VALUES ("Pettersen","Peter",12);
+INSERT INTO persons (lastname,firstname,age) VALUES ("Hansen","Jens",85);
+INSERT INTO persons (lastname,firstname,age) VALUES ("Pederson","Per",99);
+TRUNCATE table orders;
+INSERT INTO orders (orderNumber,PersonID) VALUES (77895,3);
+INSERT INTO orders (orderNumber,PersonID) VALUES (44678,3);
+INSERT INTO orders (orderNumber,PersonID) VALUES (22456,2);
+INSERT INTO orders (orderNumber,PersonID) VALUES (24562,1);
+INSERT INTO orders (orderNumber,PersonID) VALUES (89023,4);
+INSERT INTO orders (orderNumber,PersonID) VALUES (48611,5);
+set foreign_key_checks=1;
