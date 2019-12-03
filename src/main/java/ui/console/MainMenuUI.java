@@ -21,13 +21,14 @@ public class MainMenuUI extends UI {
         int counter;
         int input;
         do {
+            printHeader();
             counter = 0;
             for (int option: visibleOptionsInMenu){
                 counter++;
                 print(counter + allMenuOptions[option]);
             }
             printExit();
-            input = getInput();
+            input = getMenuInput();
 
             if(input < 0 || input > visibleOptionsInMenu.size()){
                 System.out.println(input + " Er ikke en mulighed i denne menu");
@@ -39,31 +40,31 @@ public class MainMenuUI extends UI {
                 switch (userOptions.get(input-1)){
                     case 1:
                         //See member
-                        System.out.println("Se medlem");
+                        MemberCUI memberCUI = new MemberCUI(controller);
                         break;
                     case 5:
                         //Se restance
-                        System.out.println("Se restance");
+                        print("Se restance");
                         break;
                     case 4:
                         //edit trainer
-                        System.out.println("Rediger træner");
+                        print("Rediger træner");
                         break;
                     case 8:
                         //see tournament
-                        System.out.println("Se stævne");
+                        print("Se stævne");
                         break;
                     case 13:
                         //show top 5
-                        System.out.println("Vis top 5");
+                        print("Vis top 5");
                         break;
                     case 3:
                         //create trainer
-                        System.out.println("Lav træner");
+                        print("Lav træner");
                         break;
 
                     default:
-                        System.out.println("Der er sket en fejl, prøv igen");
+                        print("Der er sket en fejl, prøv igen");
                 }
             }
 

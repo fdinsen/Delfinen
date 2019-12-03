@@ -40,7 +40,7 @@ public abstract class UI {
         System.out.println(messageToPrint);
     }
 
-    public int getInput() {
+    public int getMenuInput() {
         System.out.print(">");
         Scanner scan = new Scanner(System.in);
         String input = scan.next();
@@ -52,6 +52,14 @@ public abstract class UI {
             System.out.println("Prøv igen");
         }
         return userSelection;
+    }
+
+    public String getStringInput() {
+        System.out.print(">");
+        Scanner scan = new Scanner(System.in);
+        String input = scan.next();
+        //TODO make logic
+        return input;
     }
 
     public int checkInputType(String input) {
@@ -99,7 +107,6 @@ public abstract class UI {
         for (int menuOption : posibleOptionsInMenu) {
             //Minus 1 as the database "starts" at one
             if (controller.getUserPrivileges()[menuOption] ) {
-                System.out.println(menuOption);
                 userOptions.add(menuOption);
                 visibleOptionsInMenu.add(menuOption);
             }
@@ -108,5 +115,8 @@ public abstract class UI {
 
     void printExit(){
         print("0. Exit");
+    }
+    void printHeader(){
+        print("------- Delfinen Svømmeklub ------");
     }
 }
