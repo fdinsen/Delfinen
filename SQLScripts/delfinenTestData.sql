@@ -28,6 +28,14 @@ INSERT INTO members (member_name,phone_number,address,email,birthday,trainer_id,
 INSERT INTO members (member_name,phone_number,address,email,birthday,trainer_id, membership_status, membership_type) VALUES  ("Thomas","89012345","Vejen 2","Thomas@gmail.com",'1988-10-22',3,'ACTIVE','COMPETITIVE');
 INSERT INTO members (member_name,phone_number,address,email,birthday,trainer_id, membership_status, membership_type) VALUES  ("Henrik","90123456","Vejen 3","Henrik@gmail.com",'1987-10-22',3,'ACTIVE','COMPETITIVE');
 INSERT INTO members (member_name,phone_number,address,email,birthday,trainer_id, membership_status, membership_type) VALUES  ("Bjørn","99001122","Vejen 4","Bjørn@gmail.com",'1988-10-22',3,'ACTIVE','COMPETITIVE');
+INSERT INTO members (member_name,phone_number,address,email,birthday,trainer_id, membership_status, membership_type) VALUES ("Trevor","12345678","N vej 1","Trevor@gmail.com",'1994-08-22',0,'ACTIVE','CASUAL');
+INSERT INTO members (member_name,phone_number,address,email,birthday,trainer_id, membership_status, membership_type) VALUES ("Marcus","12345678","N vej 2","Marcus@gmail.com",'1983-04-22',0,'ACTIVE','CASUAL');
+INSERT INTO members (member_name,phone_number,address,email,birthday,trainer_id, membership_status, membership_type) VALUES ("Louise","12345678","N vej 3","Louise@gmail.com",'1983-04-22',0,'ACTIVE','CASUAL');
+INSERT INTO members (member_name,phone_number,address,email,birthday,trainer_id, membership_status, membership_type) VALUES ("Benjamin","12131415","N vej 4","mor@gmail.com",'2012-04-22',0,'ACTIVE','CASUAL');
+INSERT INTO members (member_name,phone_number,address,email,birthday,trainer_id, membership_status, membership_type) VALUES ("Annemette","13141516","N vej 4","mor@gmail.com",'2013-04-22',0,'ACTIVE','CASUAL');
+INSERT INTO members (member_name,phone_number,address,email,birthday,trainer_id, membership_status, membership_type) VALUES ("Bertram","15161718","N vej 4","mor@gmail.com",'2014-04-22',0,'ACTIVE','CASUAL');
+INSERT INTO members (member_name,phone_number,address,email,birthday,trainer_id, membership_status, membership_type) VALUES ("Bertram","17181920","N vej 5","Bertram2@gmail.com",'2014-04-22',0,'ACTIVE','CASUAL');
+INSERT INTO members (member_name,phone_number,address,email,birthday,trainer_id, membership_status, membership_type) VALUES ("Bertram","18192021","N vej 6","Bertram3@gmail.com",'2014-04-22',0,'ACTIVE','CASUAL');
 TRUNCATE TABLE trainers;
 INSERT INTO trainers (trainer_name) VALUES ("TrainerJohn"), ("TrainerJoe"), ("TrainerMagrette");
 TRUNCATE TABLE restance;
