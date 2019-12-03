@@ -8,6 +8,7 @@ package model;
 public class CompetitionTime extends Times {
     private int competitionTimeID;
     private int competitionID;
+    
     public CompetitionTime(int competitionsTimeID,int competitionsID, int memberID, int timeInMs) {
         super(timeInMs, memberID);
         this.competitionTimeID = competitionsTimeID;
