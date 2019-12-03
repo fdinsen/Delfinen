@@ -1,3 +1,4 @@
+set foreign_key_checks=0;
 TRUNCATE TABLE competition_times;
 INSERT INTO `delfinen`.`competition_times` (`c_time_id`, `competitions_id`, `member_id`, `c_time_ms`) VALUES ('1', '1', '12', '1234');
 INSERT INTO `delfinen`.`competition_times` (`c_time_id`, `competitions_id`, `member_id`, `c_time_ms`) VALUES ('2', '1', '2', '4321');
@@ -75,3 +76,4 @@ INSERT INTO member_swiming_discipline (member_id, discipline_id) values (1,3);
 INSERT INTO member_swiming_discipline (member_id, discipline_id) values (2,3);
 INSERT INTO member_swiming_discipline (member_id, discipline_id) values (2,1);
 INSERT INTO member_swiming_discipline (member_id, discipline_id) values (3,3);
+set foreign_key_checks=1;

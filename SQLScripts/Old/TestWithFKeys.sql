@@ -12,12 +12,24 @@ CREATE TABLE Persons(
 
 CREATE TABLE Orders (
     OrderID int(11) NOT NULL auto_increment,
-    OrderNumber int NOT NULL,
-    PersonID int,
+    OrderNumber int(11) NOT NULL,
+    PersonID int(11),
     PRIMARY KEY (OrderID),
-    CONSTRAINT fk_name
+    CONSTRAINT order_fkey
     FOREIGN KEY (PersonID) 
     REFERENCES Persons(PersonID)
     ON DELETE CASCADE
 ); 
+
+CREATE TABLE dogs(
+	DogId int(11) NOT NULL auto_increment,
+    DogName varchar(45) not null,
+    PersonID int(11) not null,
+    PRIMARY KEY (DogId),
+	CONSTRAINT dogs_fkey
+    FOREIGN KEY (PersonID) 
+    REFERENCES Persons(PersonID)
+    ON DELETE CASCADE
+);
+
 
