@@ -30,7 +30,7 @@ public class TrainingTimeMapperTest extends TestDataSetup{
         LocalDate ld = LocalDate.of(2018,11,05);
         TrainingTimeMapper instanceOfTTMapper = new TrainingTimeMapper();
         TrainingTime trainingTime = new TrainingTime(1, ld, 75000 , 1);
-        int exsectlength = 4;
+        int exsectlength = 7;
         instanceOfTTMapper.addTime(trainingTime);
         
         ArrayList<TrainingTime> liste = (ArrayList<TrainingTime>) instanceOfTTMapper.getMemberTimes(1);

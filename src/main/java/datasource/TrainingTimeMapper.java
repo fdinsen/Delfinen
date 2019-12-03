@@ -72,9 +72,9 @@ public class TrainingTimeMapper {
 
     public List<TrainingTime> getTop5(int swimmingDisciplineID) {
         ArrayList<TrainingTime> trainningTimes = new ArrayList<>(); 
-        String SQL = "SELECT min(t_time_ms), member_id,t_date,discipline_id "
+        String SQL = "SELECT min(t_time_ms), member_id, t_date, discipline_id "
                 + "FROM delfinen.training_times "
-                + "where discipline_id = 1 "
+                + "where discipline_id = ? "
                 + "group by member_id order by t_time_ms limit 5";
         
         con = DBConnector.getConnection();
@@ -94,8 +94,9 @@ public class TrainingTimeMapper {
                 
                 int timeInMs = result.getInt("min(t_time_ms)");
                 int sDiscipline = result.getInt("discipline_id");
-                
-                trainningTimes.add(new TrainingTime(memberID, ld , timeInMs, sDiscipline));
+                TrainingTime tt = new TrainingTime(memberID, ld , timeInMs, sDiscipline);
+                System.out.println(tt);
+                trainningTimes.add(tt);
                 
             }
             
