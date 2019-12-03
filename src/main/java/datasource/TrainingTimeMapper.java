@@ -95,7 +95,6 @@ public class TrainingTimeMapper {
                 int timeInMs = result.getInt("min(t_time_ms)");
                 int sDiscipline = result.getInt("discipline_id");
                 TrainingTime tt = new TrainingTime(memberID, ld , timeInMs, sDiscipline);
-                System.out.println(tt);
                 trainningTimes.add(tt);
                 
             }
