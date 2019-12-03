@@ -24,6 +24,8 @@ public class MemberCUI extends UI {
         Member member = null;
         boolean exit = false;
         String input = "";
+        ArrayList<Member> members = new ArrayList<>();
+        
         do {
             printHeader();
             print("Indtast tlf. nr., email eller navn på en bruger");
@@ -36,22 +38,26 @@ public class MemberCUI extends UI {
                 switch (checkInputType(input)) {
                     case 0:
                         //Email
-                        member = chooseUser(controller.getMemberByEmail(input));
-                        exit = true;
+                        members = controller.getMemberByEmail(input);
                         break;
                     case 1:
                         //Phonenumber
-                        member = chooseUser(controller.getMemberByPhone(input));
-                        exit = true;
+                        members = controller.getMemberByPhone(input);
                         break;
                     case 2:
                         //name
-                        member = chooseUser(controller.getMemberByName(input));
-                        exit = true;
+                        members = controller.getMemberByName(input);
                         break;
                     default:
                         print("Prøv igen, dit input ser ud til at være forkert");
                         break;
+                }
+                if(members.isEmpty()){
+                    //No member found
+                    print("Der kunne ikke findes en bruger på " + input);
+                }else{
+                    member = chooseUser(members);
+                    exit = true;
                 }
             }
         } while (!exit);
@@ -60,15 +66,18 @@ public class MemberCUI extends UI {
 
     private void printMember(Member member) {
         printHeader();
+        String trainer = controller.getTrainerName(member.getTrainerId);
         print("Navn: " + member.getName());
         print("Telefon nr: " + member.getPhone());
         print("Adresse: " + member.getAddress());
         print("Email: " + member.getEmail());
         print("Fødselsdag: " + member.getBirthday());
-        print("Træner: NOT IMPLEMENTED");
-
-        for (Integer swimInt : controller.getMemberSwimmingDisciplines(member.getMemberId())) {
-
+        if(!(member.getTrainerId() == 1));{
+        print("Træner: " + trainer);
+        }
+        print("Svømmediscipliner");
+        for (String discString: member.getMemberDisciplines()) {
+                print("\t" + discString);
         }
         print("Medlemskab: " + member.getMembershipStatus());
         print("Medlemstype: " + member.getMembershipType());
@@ -153,8 +162,13 @@ public class MemberCUI extends UI {
                     case 1:
                         //see member
                         Member member = findMember();
+                        if(member == null){
+                            //User has "exited" from findmember
+                        }else{
                         printMember(member);
                         printUserMenu(true);
+                        }
+                        
                         exit = true;
                         break;
                     default:

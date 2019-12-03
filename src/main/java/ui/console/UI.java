@@ -58,10 +58,20 @@ public abstract class UI {
         System.out.print(">");
         Scanner scan = new Scanner(System.in);
         String input = scan.next();
+
         //TODO make logic
         
         /* [^\s\@]+[@]{0,1}[^\s\@]+ */ 
         
+
+        try {
+            if(1==1){
+                throw new Exception("Fejl");
+            };
+        } catch (Exception e) {
+            input = "fejl";
+        }
+
         return input;
     }
 
