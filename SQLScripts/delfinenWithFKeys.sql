@@ -2,6 +2,8 @@ DROP DATABASE IF EXISTS `delfinen`;
 CREATE SCHEMA `delfinen`;
 USE delfinen;
 
+SET SQL_MODE =  'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION';
+
 -- Members
 CREATE TABLE `members` (
 	`member_id` int(11) NOT null auto_increment,
