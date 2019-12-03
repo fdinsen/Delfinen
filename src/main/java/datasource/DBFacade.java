@@ -1,6 +1,7 @@
 
 package datasource;
 
+import java.util.ArrayList;
 import java.util.List;
 import model.Trainer;
 import model.Competition;
@@ -28,7 +29,7 @@ public class DBFacade implements DataSource {
     }
     
     @Override
-    public int[] getMemberSwimmingDiscipline(int memberID) {
+    public ArrayList<String> getMemberSwimmingDiscipline(int memberID) {
         return new MemberMapper().getMemberSwimmingDiscipline(memberID);
     }
 

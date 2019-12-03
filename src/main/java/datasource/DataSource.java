@@ -1,6 +1,7 @@
 
 package datasource;
 
+import java.util.ArrayList;
 import java.util.List;
 import model.Trainer;
 import model.Competition;
@@ -26,7 +27,7 @@ public interface DataSource {
     public List<Member> getMemberByPhone(String phonenumber);
     public List<Member> getMemberByEmail(String email);
     public List<Member> getMemberByName(String name);
-    public int[] getMemberSwimmingDiscipline(int memberID);
+    public ArrayList<String> getMemberSwimmingDiscipline(int memberID);
     
     
     //----------------//

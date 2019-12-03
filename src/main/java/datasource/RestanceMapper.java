@@ -46,10 +46,12 @@ public class RestanceMapper {
                         = MembershipStatus.valueOf(rs.getString("membership_status"));
                 MembershipType membershipType
                         = MembershipType.valueOf(rs.getString("membership_type"));
+                ArrayList<String> disciplines 
+                        = new MemberMapper().getMemberSwimmingDiscipline(memberId);
                 membersWithRestance.add(
                         new Member(memberId, memberName, phoneNumber, address,
                                 email, birthday, trainerId,
-                                membershipStatus, membershipType));
+                                membershipStatus, membershipType, disciplines));
             }
             rs.close();
         } catch (SQLException ex) {

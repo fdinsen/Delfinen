@@ -10,7 +10,8 @@ import model.*;
  */
 public class Controller {
 
-    DataSource datasource;
+    private DataSource datasource;
+    private int profileID;
     private boolean[] userPrivileges;
 
     //-------------//
@@ -19,8 +20,20 @@ public class Controller {
     public Controller(DataSource datasource, int profileID) {
         this.datasource = datasource;
         this.userPrivileges = datasource.getPrivileges(profileID);
+        this.profileID = profileID;
     }
-
+    //---------//
+    // METHODS //
+    //---------//
+    
+    public int getProfileID() {
+        return profileID;
+    }
+    
+    public boolean[] getUserPrivileges() {
+        return userPrivileges;
+    }
+    
     //--------------//
     // MemberMapper //
     //--------------//
@@ -44,15 +57,8 @@ public class Controller {
         datasource.createMember(member);
     }
     
-    public int[] getMemberSwimmingDisciplines(int memberID) {
+    public ArrayList<String> getMemberSwimmingDisciplines(int memberID) {
         return datasource.getMemberSwimmingDiscipline(memberID);
-    }
-
-    //-----------------//
-    // PrivilegeMapper //
-    //-----------------//
-    public boolean[] getUserPrivileges() {
-        return userPrivileges;
     }
 
     //----------------//

@@ -5,6 +5,7 @@ import enums.MembershipStatus;
 import enums.MembershipType;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 
 public class Member {
     private final double PASSIVE_SUBSCRIPTION = 500.0;
@@ -22,8 +23,12 @@ public class Member {
     private MembershipType membershipType;
     private double subscription;
     private TeamType teamType;
+    private ArrayList<String> disciplines;
 
-    public Member(int memberID, String memberName, String phoneNumber, String adresse, String email, LocalDate birthDate, int trainerId, MembershipStatus membershipStatus, MembershipType membershipType) {
+    public Member(int memberID, String memberName, String phoneNumber, 
+            String adresse, String email, LocalDate birthDate, int trainerId, 
+            MembershipStatus membershipStatus, MembershipType membershipType,
+            ArrayList<String> disciplines) {
         this.memberID = memberID;
         this.memberName = memberName;
         this.phoneNumber = phoneNumber;
@@ -33,6 +38,7 @@ public class Member {
         this.trainerId = trainerId;
         this.membershipStatus = membershipStatus;
         this.membershipType = membershipType;
+        this.disciplines = disciplines;
         
         if(calculateAge() < 18){
             this.teamType = teamType.JUNIOR;
@@ -43,7 +49,10 @@ public class Member {
         calculateSubscription();
     }
     
-    public Member(String memberName, String phoneNumber, String adresse, String email, LocalDate birthDate, int trainerId, MembershipStatus membershipStatus, MembershipType membershipType) {
+    public Member(String memberName, String phoneNumber, String adresse, 
+            String email, LocalDate birthDate, int trainerId, 
+            MembershipStatus membershipStatus, MembershipType membershipType,
+            ArrayList<String> disciplines) {
         this.memberName = memberName;
         this.phoneNumber = phoneNumber;
         this.adresse = adresse;
@@ -52,6 +61,7 @@ public class Member {
         this.trainerId = trainerId;
         this.membershipStatus = membershipStatus;
         this.membershipType = membershipType;
+        this.disciplines = disciplines;
         
         if(calculateAge() < 18){
             this.teamType = teamType.JUNIOR;
@@ -85,6 +95,10 @@ public class Member {
         }
     }
 
+    public ArrayList<String> getMemberDisciplines() {
+        return disciplines;
+    }
+    
     public double getSubscription() {
         return subscription;
     }

@@ -26,7 +26,12 @@ public class MemberMapperTest extends TestDataSetup {
     @Test
     public void testCreateMember() {
         LocalDate dato = LocalDate.now();
-        Member member = new Member("navn", "555111", "addresse", "email@email.com", dato, 0, MembershipStatus.PASSIVE, MembershipType.COMPETITIVE);
+        ArrayList<String> member1Disciplines = new ArrayList();
+        member1Disciplines.add("CRAWL");
+        member1Disciplines.add("BUTTERFLY");
+        Member member = new Member("navn", "555111", "addresse", 
+                "email@email.com", dato, 0, MembershipStatus.PASSIVE, 
+                MembershipType.COMPETITIVE, member1Disciplines);
         MemberMapper instanceMemberMapper = new MemberMapper();
         instanceMemberMapper.createMember(member);
         ArrayList<Member> actual = instanceMemberMapper.getMemberByPhone("555111");
@@ -43,9 +48,19 @@ public class MemberMapperTest extends TestDataSetup {
     @Test
     public void testCreateTwoMember() {
         LocalDate dato = LocalDate.now();
-        Member member1 = new Member("navn", "555111", "addresse", "email@email.com", dato, 0, MembershipStatus.PASSIVE, MembershipType.COMPETITIVE);
+        ArrayList<String> member1Disciplines = new ArrayList();
+        ArrayList<String> member2Disciplines = new ArrayList();
+        member1Disciplines.add("CRAWL");
+        member1Disciplines.add("BUTTERFLY");
+        member2Disciplines.add("CRAWL");
+        member2Disciplines.add("BREASTSTROKE");
+        Member member1 = new Member("navn", "555111", "addresse", 
+                "email@email.com", dato, 0, MembershipStatus.PASSIVE, 
+                MembershipType.COMPETITIVE, member1Disciplines);
 
-        Member member2 = new Member("navnet", "55511155", "addresseJA", "email@email.com.com", dato, 1, MembershipStatus.ACTIVE, MembershipType.CASUAL);
+        Member member2 = new Member("navnet", "55511155", "addresseJA", 
+                "email@email.com.com", dato, 1, MembershipStatus.ACTIVE, 
+                MembershipType.CASUAL, member2Disciplines);
 
         MemberMapper instanceMemberMapper = new MemberMapper();
         instanceMemberMapper.createMember(member1);
@@ -76,9 +91,19 @@ public class MemberMapperTest extends TestDataSetup {
     @Test
     public void testCreateAndGetTwoMembersWithSamePhoneNumber() {
         LocalDate dato = LocalDate.now();
-        Member member1 = new Member("navn", "555111", "addresse", "email@email.com", dato, 0, MembershipStatus.PASSIVE, MembershipType.COMPETITIVE);
+        ArrayList<String> member1Disciplines = new ArrayList();
+        ArrayList<String> member2Disciplines = new ArrayList();
+        member1Disciplines.add("CRAWL");
+        member1Disciplines.add("BUTTERFLY");
+        member2Disciplines.add("CRAWL");
+        member2Disciplines.add("BREASTSTROKE");
+        Member member1 = new Member("navn", "555111", "addresse", 
+                "email@email.com", dato, 0, MembershipStatus.PASSIVE, 
+                MembershipType.COMPETITIVE, member1Disciplines);
 
-        Member member2 = new Member("navnet", "555111", "addresseJA", "email@email.com.com", dato, 1, MembershipStatus.ACTIVE, MembershipType.CASUAL);
+        Member member2 = new Member("navnet", "555111", "addresseJA", 
+                "email@email.com.com", dato, 1, MembershipStatus.ACTIVE, 
+                MembershipType.CASUAL, member2Disciplines);
 
         MemberMapper instanceMemberMapper = new MemberMapper();
         instanceMemberMapper.createMember(member1);
@@ -212,22 +237,21 @@ public class MemberMapperTest extends TestDataSetup {
     }
     @Test
     public void getMemberSwimingDiscipline(){
-        
+        //Arrange
         MemberMapper instanceMemberMapper = new MemberMapper();
-        int[] liste = instanceMemberMapper.getMemberSwimmingDiscipline(1);
-        int exspectedFirst = 4;
-        int exspectedSecond= 2;
-        int exspectedThird= 3;
-        int exspectedFourth= 0;
+        ArrayList<String> liste = instanceMemberMapper.getMemberSwimmingDiscipline(1);
+        String exspectedFirst = "BUTTERFLY";
+        String exspectedSecond = "BACKCRAWL";
+        String exspectedThird= "BREASTSTROKE";
         
-        int actualFirst = liste[0];
-        int actualSecond = liste[1];
-        int actualThird = liste[2];
-        int actualFourth = liste[3];
+        //Act
+        String actualFirst = liste.get(0);
+        String actualSecond = liste.get(1);
+        String actualThird = liste.get(2);
         
+        //Assert
         assertEquals(exspectedFirst, actualFirst);
         assertEquals(exspectedSecond, actualSecond);
         assertEquals(exspectedThird, actualThird);
-        assertEquals(exspectedFourth, actualFourth);
     }
 }

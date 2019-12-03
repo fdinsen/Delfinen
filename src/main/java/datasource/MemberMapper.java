@@ -112,7 +112,11 @@ public class MemberMapper {
                 MembershipStatus membershipStatus = MembershipStatus.valueOf(rsMember.getString("membership_status"));
                 MembershipType membershipType = MembershipType.valueOf(rsMember.getString("membership_type"));
 
-                Member member = new Member(memberId, memberName, phone, address, email, birthday, trainerId, membershipStatus, membershipType);
+                ArrayList<String> disciplines 
+                        = getMemberSwimmingDiscipline(memberId);
+                Member member = new Member(memberId, memberName, phone, 
+                        address, email, birthday, trainerId, membershipStatus, 
+                        membershipType, disciplines);
                 members.add(member);
             }
             rsMember.close();
@@ -132,7 +136,8 @@ public class MemberMapper {
 
         try {
             con = DBConnector.getConnection();
-            PreparedStatement stmt = con.prepareStatement("SELECT * FROM members WHERE member_name = ?");
+            PreparedStatement stmt 
+                    = con.prepareStatement("SELECT * FROM members WHERE member_name = ?");
             stmt.setString(1, name);
             ResultSet rsMember = stmt.executeQuery();
             while (rsMember.next()) {
@@ -141,11 +146,18 @@ public class MemberMapper {
                 String address = rsMember.getString("address");
                 String email = rsMember.getString("email");
                 Calendar cet = Calendar.getInstance(TimeZone.getTimeZone("GMT+1"));
-                LocalDate birthday = rsMember.getDate("birthday", cet).toLocalDate();
+                LocalDate birthday 
+                        = rsMember.getDate("birthday", cet).toLocalDate();
                 int trainerId = rsMember.getInt("trainer_id");
-                MembershipStatus membershipStatus = MembershipStatus.valueOf(rsMember.getString("membership_status"));
-                MembershipType membershipType = MembershipType.valueOf(rsMember.getString("membership_type"));
-                Member member = new Member(memberId, name, memberPhone, address, email, birthday, trainerId, membershipStatus, membershipType);
+                MembershipStatus membershipStatus 
+                        = MembershipStatus.valueOf(rsMember.getString("membership_status"));
+                MembershipType membershipType 
+                        = MembershipType.valueOf(rsMember.getString("membership_type"));
+                ArrayList<String> disciplines 
+                        = getMemberSwimmingDiscipline(memberId);
+                Member member = new Member(memberId, name, memberPhone, 
+                        address, email, birthday, trainerId, membershipStatus, 
+                        membershipType, disciplines);
                 members.add(member);
             }
             rsMember.close();
@@ -164,7 +176,8 @@ public class MemberMapper {
 
         try {
             con = DBConnector.getConnection();
-            PreparedStatement stmt = con.prepareStatement("SELECT * FROM members WHERE email = ?");
+            PreparedStatement stmt 
+                    = con.prepareStatement("SELECT * FROM members WHERE email = ?");
             stmt.setString(1, email);
             ResultSet rsMember = stmt.executeQuery();
             while (rsMember.next()) {
@@ -172,12 +185,20 @@ public class MemberMapper {
                 String memberName = rsMember.getString("member_name");
                 String memberPhone = rsMember.getString("phone_number");
                 String address = rsMember.getString("address");
-                Calendar cet = Calendar.getInstance(TimeZone.getTimeZone("GMT+1"));
-                LocalDate birthday = rsMember.getDate("birthday", cet).toLocalDate();
+                Calendar cet 
+                        = Calendar.getInstance(TimeZone.getTimeZone("GMT+1"));
+                LocalDate birthday 
+                        = rsMember.getDate("birthday", cet).toLocalDate();
                 int trainerId = rsMember.getInt("trainer_id");
-                MembershipStatus membershipStatus = MembershipStatus.valueOf(rsMember.getString("membership_status"));
-                MembershipType membershipType = MembershipType.valueOf(rsMember.getString("membership_type"));
-                Member member = new Member(memberId, memberName, memberPhone, address, email, birthday, trainerId, membershipStatus, membershipType);
+                MembershipStatus membershipStatus 
+                        = MembershipStatus.valueOf(rsMember.getString("membership_status"));
+                MembershipType membershipType 
+                        = MembershipType.valueOf(rsMember.getString("membership_type"));
+                ArrayList<String> disciplines 
+                        = getMemberSwimmingDiscipline(memberId);
+                Member member = new Member(memberId, memberName, memberPhone, 
+                        address, email, birthday, trainerId, membershipStatus, 
+                        membershipType, disciplines);
                 members.add(member);
             }
             rsMember.close();
@@ -190,11 +211,13 @@ public class MemberMapper {
         }
         return members;
     }
-    public int[] getMemberSwimmingDiscipline(int memberID){
+    public ArrayList<String> getMemberSwimmingDiscipline(int memberID){
         
-        int[] disciplines = new int[4];
-        String SQL = "SELECT discipline_id FROM delfinen.member_swiming_discipline where member_id = ?;";
-        int count = 0;
+        //int[] disciplines = new int[4];
+        ArrayList<String> disciplines = new ArrayList();
+        String SQL = "SELECT discipline_name FROM "
+                + "delfinen.member_swiming_discipline NATURAL JOIN disciplines "
+                + "WHERE member_id = ?;";
         
         try {
             con= DBConnector.getConnection();
@@ -205,9 +228,8 @@ public class MemberMapper {
             ResultSet rsMemberSD = ps.executeQuery();
             
             while(rsMemberSD.next()){
-                int swimmingID = rsMemberSD.getInt("discipline_id");
-                disciplines[count] = swimmingID;
-                count++;
+                String swimmingName = rsMemberSD.getString("discipline_name");
+                disciplines.add(swimmingName);
             }
             
         } catch (SQLException ex) {

@@ -1,6 +1,7 @@
 
 package datasource;
 
+import java.util.ArrayList;
 import java.util.List;
 import model.Trainer;
 import model.Competition;
@@ -48,7 +49,7 @@ public class FileHandler implements DataSource {
     }
     
     @Override
-    public int[] getMemberSwimmingDiscipline(int memberID) {
+    public ArrayList<String> getMemberSwimmingDiscipline(int memberID) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
