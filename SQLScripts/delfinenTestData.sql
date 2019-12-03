@@ -13,7 +13,7 @@ INSERT INTO `delfinen`.`competitions` (`competitions_id`, `t_id`, `discipline_id
 INSERT INTO `delfinen`.`competitions` (`competitions_id`, `t_id`, `discipline_id`) VALUES ('5', '2', '4');
 INSERT INTO `delfinen`.`competitions` (`competitions_id`, `t_id`, `discipline_id`) VALUES ('6', '2', '2');
 TRUNCATE TABLE tournaments;
-INSERT INTO `delfinen`.`tournaments` (`t_id`, `t_name`, `t_date`, `t_location`) VALUES ('1', 'JuleCup', '2019-02-18', 'Espergærde');
+INSERT INTO `delfinen`.`tournaments` (`t_id`, `t_name`, `t_date`, `t_location`) VALUES ('1', 'JuleCup', '2019-02-18', 'Espergaerde');
 INSERT INTO `delfinen`.`tournaments` (`t_id`, `t_name`, `t_date`, `t_location`) VALUES ('2', 'SommerCup', '2019-07-28', 'Oslo');
 INSERT INTO `delfinen`.`tournaments` (`t_id`, `t_name`, `t_date`, `t_location`) VALUES ('3', 'VinterCup', '2019-12-31', 'Kbh');
 INSERT INTO `delfinen`.`tournaments` (`t_id`, `t_name`, `t_date`, `t_location`) VALUES ('4', 'FerieCup', '2018-08-19', 'Roskilde');
