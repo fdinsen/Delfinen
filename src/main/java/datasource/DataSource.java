@@ -70,6 +70,7 @@ public interface DataSource {
     public void addTime(TrainingTime trainingTime);
     public List<TrainingTime> getMemberTimes(int memberID);
     public List<TrainingTime> getTop5(int swimmingDisciplineID);
+    public String getTrainerName(int trainerID);
     
     //-----------------------//
     // CompetitionTimeMapper //
@@ -83,5 +84,4 @@ public interface DataSource {
     //-----------------//
     
     public boolean[] getPrivileges(int id);
-    
 }

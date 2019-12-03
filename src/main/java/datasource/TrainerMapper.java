@@ -70,4 +70,9 @@ public class TrainerMapper {
         }
         return trainer;
     }
+
+    public String getTrainerName(int trainerID) {
+        
+        return getTrainer(trainerID).getTrainerName();        
+    }
 }

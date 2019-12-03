@@ -151,8 +151,11 @@ public class Controller {
         datasource.deleteTrainer(trainerID);
     }
 
-    public void getTrainer(int trainerID) {
-        datasource.getTrainer(trainerID);
+    public Trainer getTrainer(int trainerID) {
+        return datasource.getTrainer(trainerID);
+    }
+    public String getTrainerName(int trainerID){
+        return datasource.getTrainerName(trainerID);
     }
 
 }

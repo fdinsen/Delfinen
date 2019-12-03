@@ -59,6 +59,9 @@ public abstract class UI {
         Scanner scan = new Scanner(System.in);
         String input = scan.next();
         //TODO make logic
+        
+        /* [^\s\@]+[@]{0,1}[^\s\@]+ */ 
+        
         return input;
     }
 

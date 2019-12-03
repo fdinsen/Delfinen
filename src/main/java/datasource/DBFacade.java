@@ -158,6 +158,10 @@ public class DBFacade implements DataSource {
     public List<TrainingTime> getTop5(int swimmingDisciplineID) {
         return new TrainingTimeMapper().getTop5(swimmingDisciplineID);
     }
+    @Override
+    public String getTrainerName(int trainerID) {
+        return new TrainerMapper().getTrainerName(trainerID);
+    }
 
     //-----------------------//
     // CompetitionTimeMapper //
