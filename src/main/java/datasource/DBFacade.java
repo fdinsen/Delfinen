@@ -26,6 +26,11 @@ public class DBFacade implements DataSource {
     public void updateMember(Member member) {
         new MemberMapper().updateMember(member);
     }
+    
+    @Override
+    public int[] getMemberSwimmingDiscipline(int memberID) {
+        return new MemberMapper().getMemberSwimmingDiscipline(memberID);
+    }
 
     @Override
     public void deleteMember(int memberID) {

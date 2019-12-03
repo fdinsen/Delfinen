@@ -214,7 +214,7 @@ public class MemberMapperTest extends TestDataSetup {
     public void getMemberSwimingDiscipline(){
         
         MemberMapper instanceMemberMapper = new MemberMapper();
-        int[] liste = instanceMemberMapper.getMemberSwimingDiscipline(1);
+        int[] liste = instanceMemberMapper.getMemberSwimmingDiscipline(1);
         int exspectedFirst = 4;
         int exspectedSecond= 2;
         int exspectedThird= 3;

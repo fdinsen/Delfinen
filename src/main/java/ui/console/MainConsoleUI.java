@@ -32,17 +32,10 @@ public class MainConsoleUI extends UI {
             int input = getMenuInput();
             
             if (input != -1) {
-                switch(input) {
-                    case 1:
-                        return new BookkeeperController(datasource, input);
-                    case 2:
-                        return new TrainerController(datasource, input);
-                    case 3:
-                        return new ChairmanController(datasource, input);
-                    default:
-                        print("error");
-                }
+                return new Controller(datasource, input);
             }
+            print("\n-------------------------");
+            print("Fejl, prøv igen.");
         } 
         //Should never be reached.
         //If it does, something has gone horribly wrong
