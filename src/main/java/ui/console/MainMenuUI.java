@@ -25,7 +25,12 @@ public class MainMenuUI extends UI {
             counter = 0;
             for (int option: visibleOptionsInMenu){
                 counter++;
-                print(counter + allMenuOptions[option]);
+                if(option == 1){
+                    print(counter + ". Medlemer");
+                }else{
+                    print(counter + allMenuOptions[option]);
+                }
+                
             }
             printExit();
             input = getMenuInput();

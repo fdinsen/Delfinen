@@ -5,8 +5,9 @@ import model.Member;
 
 import java.util.ArrayList;
 
-public class MemberCUI extends UI{
-    private int[] posibleOptionsInMenu = new int[]{1,0,2};
+public class MemberCUI extends UI {
+
+    private int[] posibleOptionsInMenu = new int[]{1, 0, 2};
 
     public MemberCUI(Controller controller) {
         this.controller = controller;
@@ -14,8 +15,8 @@ public class MemberCUI extends UI{
         userDialog();
     }
 
-    public void userDialog(){
-        printUserMenu();
+    public void userDialog() {
+        printUserMenu(false);
         printExit();
     }
 
@@ -29,9 +30,9 @@ public class MemberCUI extends UI{
             printExit();
             input = getStringInput();
 
-            if(input.equals("0")){
+            if (input.equals("0")) {
                 exit = true;
-            }else{
+            } else {
                 switch (checkInputType(input)) {
                     case 0:
                         //Email
@@ -53,81 +54,113 @@ public class MemberCUI extends UI{
                         break;
                 }
             }
-        }while (!exit);
+        } while (!exit);
         return member;
     }
 
     private void printMember(Member member) {
-            printHeader();
-            print("Navn: " + member.getName());
-            print("Telefon nr: " + member.getPhone());
-            print("Adresse: " + member.getAddress());
-            print("Email: " + member.getEmail());
-            print("Fødselsdag: " + member.getBirthday());
-            print("Træner: NOT IMPLEMENTED");
-            print("Medlemskab: " + member.getMembershipStatus());
-            print("Medlemstype: " + member.getMembershipType());
-            print("Restance: NOT IMPLEMENTED");
-            print("");
+        printHeader();
+        print("Navn: " + member.getName());
+        print("Telefon nr: " + member.getPhone());
+        print("Adresse: " + member.getAddress());
+        print("Email: " + member.getEmail());
+        print("Fødselsdag: " + member.getBirthday());
+        print("Træner: NOT IMPLEMENTED");
+
+        for (Integer swimInt : controller.getMemberSwimmingDisciplines(member.getMemberId())) {
+
+        }
+        print("Medlemskab: " + member.getMembershipStatus());
+        print("Medlemstype: " + member.getMembershipType());
+        print("Restance: " + member.getSubscription());
+        print("");
 
     }
 
     //So user can select which member he wishes to see, if the member search returns more than one
     private Member chooseUser(ArrayList<Member> members) {
-        if(members.size() == 1){
+        if (members.size() == 1) {
             //Only one member
             return members.get(0);
-        }else{
+        } else {
             //Multiple members, let the user decide
-            //TODO
+            int counter;
+            boolean exit = false;
+            int input;
+            do {
+                counter = 0;
+                print("Vælg en bruger");
+                printHeader();
+                for (Member member : members) {
+                    counter++;
+                    print(counter + ". " + member.getName() + " - " + member.getPhone());
+                }
+                printExit();
+                
+                //gets user input and if correct choice, returns the member
+                input = getMenuInput();
+                if (input == 0) {
+                    exit = true;
+                } else if (input < 0 || input > members.size()) {
+                    print("Er ikke en bruger");
+                    print("Prøv igen");
+                } else {
+                    return members.get(input - 1);
+                }
+            } while (!exit);
+
             return members.get(0);
         }
     }
 
-
-    public void printUserMenu(){
-            boolean exit = false;
-            int counter;
-            int input;
-            do {
-                printHeader();
-                counter = 0;
-                for (int option: visibleOptionsInMenu){
-                    counter++;
+    //memberPrint should be true if the member have just been printed out to the user
+    public void printUserMenu(boolean memberPrint) {
+        boolean exit = false;
+        int counter;
+        int input;
+        do {
+            printHeader();
+            counter = 0;
+            for (int option : visibleOptionsInMenu) {
+                counter++;
+                if (option == 1 && memberPrint) {
+                    print(counter + ". Se andet medlem");
+                } else {
                     print(counter + allMenuOptions[option]);
                 }
-                printExit();
-                input = getMenuInput();
+            }
+            printExit();
+            input = getMenuInput();
 
-                if(input < 0 || input > visibleOptionsInMenu.size()){
-                    print(input + " Er ikke en mulighed i denne menu");
-                }else if(input == 0){
-                    //exit
-                    exit = true;
-                }else{
-                    //Have to make the user input correspond, to the actual value of the method we need to call
-                    switch (userOptions.get(input-1)){
-                        case 2:
-                            //Edit member
-                            print("Ret medlem");
-                            exit = true;
-                            break;
-                        case 0:
-                            //Create member
-                            print("Tilføj medlem");
-                            exit = true;
-                            break;
-                        case 1:
-                            //see member
-                            Member member = findMember();
-                            printMember(member);
-                            exit = true;
-                            break;
-                        default:
-                            print("Der er sket en fejl, prøv igen");
-                    }
+            if (input < 0 || input > visibleOptionsInMenu.size()) {
+                print(input + " Er ikke en mulighed i denne menu");
+            } else if (input == 0) {
+                //exit
+                exit = true;
+            } else {
+                //Have to make the user input correspond, to the actual value of the method we need to call
+                switch (userOptions.get(input - 1)) {
+                    case 2:
+                        //Edit member
+                        print("Ret medlem");
+                        exit = true;
+                        break;
+                    case 0:
+                        //Create member
+                        CreateMemberCUI createMemberCUI = new CreateMemberCUI(controller);
+                        exit = true;
+                        break;
+                    case 1:
+                        //see member
+                        Member member = findMember();
+                        printMember(member);
+                        printUserMenu(true);
+                        exit = true;
+                        break;
+                    default:
+                        print("Der er sket en fejl, prøv igen");
                 }
-            } while (!exit);
-
-        }
+            }
+        } while (!exit);
+    }
 }
