@@ -66,7 +66,7 @@ public class MemberCUI extends UI {
 
     private void printMember(Member member) {
         printHeader();
-        String trainer = controller.getTrainerName(member.getTrainerId);
+        String trainer = controller.getTrainerName(member.getTrainerId());
         print("Navn: " + member.getName());
         print("Telefon nr: " + member.getPhone());
         print("Adresse: " + member.getAddress());
