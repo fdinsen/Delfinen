@@ -61,17 +61,7 @@ public abstract class UI {
 
         //TODO make logic
         
-        /* [^\s\@]+[@]{0,1}[^\s\@]+ */ 
-        
-
-        try {
-            if(1==1){
-                throw new Exception("Fejl");
-            };
-        } catch (Exception e) {
-            input = "fejl";
-        }
-
+        /* [^\s\@]+[@]{0,1}[^\s\@]+ */
         return input;
     }
 
