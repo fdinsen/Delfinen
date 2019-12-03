@@ -190,7 +190,7 @@ public class MemberMapper {
         }
         return members;
     }
-    public int[] getMemberSwimingDiscipline(int memberID){
+    public int[] getMemberSwimmingDiscipline(int memberID){
         
         int[] disciplines = new int[4];
         String SQL = "SELECT discipline_id FROM delfinen.member_swiming_discipline where member_id = ?;";

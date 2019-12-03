@@ -46,6 +46,11 @@ public class FileHandler implements DataSource {
     public List<Member> getMemberByName(String name) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
+    @Override
+    public int[] getMemberSwimmingDiscipline(int memberID) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
     //----------------//
     // RestanceMapper //
@@ -174,5 +179,7 @@ public class FileHandler implements DataSource {
     public boolean[] getPrivileges(int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    
 
 }
