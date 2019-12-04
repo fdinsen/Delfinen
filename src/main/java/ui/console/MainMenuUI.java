@@ -8,7 +8,7 @@ import Controllers.Controller;
  * @author <Frederik Keis Dinsen>
  */
 public class MainMenuUI extends UI {
-    private int[] posibleOptionsInMenu = new int[]{1,4,5,8,13,3};
+    private int[] posibleOptionsInMenu = new int[]{1,3,4,5,8,13};
     
     public MainMenuUI(Controller controller) {
         this.controller = controller;
@@ -32,7 +32,7 @@ public class MainMenuUI extends UI {
                 }
                 
             }
-            printExit();
+            print("0. Afslut");
             input = getMenuInput();
 
             if(input < 0 || input > visibleOptionsInMenu.size()){

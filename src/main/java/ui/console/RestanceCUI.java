@@ -79,7 +79,7 @@ public class RestanceCUI extends UI {
         if(controller.getAllRestance().size() != 0){
             for(Member member: controller.getAllRestance()){
                 counter++;
-                print(counter + ". " + member.getSubscription());
+                print(counter + ". " + member.getName() + " - " + member.getPhone() + " -  Skylder: " + member.getSubscription() + " kr.");
             }
         }else{
             print("Ingen medlemmer i restance");

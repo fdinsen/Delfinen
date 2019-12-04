@@ -7,7 +7,6 @@ import model.TrainingTime;
 class Top5CUI extends UI {
     Top5CUI(Controller controller) {
         this.controller = controller;
-        printTop5(1);
         printTop5Dialog();
     }
 
@@ -16,7 +15,6 @@ class Top5CUI extends UI {
         int counter;
         int input;
         do {
-            printHeader();
             counter = 0;
             print("Vælg en svømmedisciplin");
             for (String discipline: controller.getAllDisciplines()){
@@ -33,7 +31,7 @@ class Top5CUI extends UI {
                 exit = true;
             }else{
                 //Show top 5
-                printTop5(input-1);
+                printTop5(input);
             }
 
         } while (!exit);
@@ -44,7 +42,8 @@ class Top5CUI extends UI {
         int counter = 0;
         Member member;
         do {
-            printHeader("Top 5 " + controller.getAllDisciplines()[id]);
+            printHeader("Top 5 " + controller.getAllDisciplines()[id-1]);
+            print(" ---- Format: Min:Sek:Ms");
             for (TrainingTime trainingTime : controller.getTop5(id)) {
                 counter++;
                 member = controller.getMemberByID(trainingTime.getMemberID());
