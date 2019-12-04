@@ -11,7 +11,7 @@ public class FullDateComponent implements ValidationComponent {
         try {
             LocalDate.parse(date, formatter);
         }catch (Exception e){
-            System.err.println(date + ", accepteres ikke som fødselsdag");
+            System.err.println(date + ", accepteres ikke som dato");
             return false;
         }
 

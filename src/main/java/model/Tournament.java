@@ -17,6 +17,12 @@ public class Tournament {
         this.Location = tLocation;
     }
 
+    public Tournament(String tName, LocalDate tDate, String tLocation) {
+        this.tName = tName;
+        this.tDate = tDate;
+        this.Location = tLocation;
+    }
+
     public int getId() {
         return tId;
     }

@@ -31,6 +31,8 @@ public class MainMenuUI extends UI {
                     print(counter + ". Medlemer");
                 }else if(option == 3){
                     print(counter + ". Trænere");
+                }else if(option == 8){
+                    print(counter + ". Stævner");
                 } else{
                     print(counter + allMenuOptions[option]);
                 }

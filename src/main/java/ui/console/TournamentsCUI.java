@@ -1,30 +1,27 @@
 package ui.console;
 
-import ComponentValidation.FullDateComponent;
-import ComponentValidation.ValidationComponent;
-import ComponentValidation.YearComponent;
+import ComponentValidation.*;
 import Controllers.Controller;
 import model.Tournament;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 public class TournamentsCUI extends UI {
-    int[] posibleOptionsInMenu = new int[]{9,15};
+    int[] posibleOptionsInMenu = new int[]{10,8,9,15};
 
     TournamentsCUI(Controller controller) {
         this.controller = controller;
         setVisibleOptionsInMenu(posibleOptionsInMenu);
-        chooseTournamentDialog();
+        TournamentsMenu();
     }
 
-    private void chooseTournamentDialog() {
+    private void chooseTournamentYearDialog() {
         boolean exit = false;
-        int counter;
         String input;
         ValidationComponent validator = new YearComponent();
         do {
-            counter = 0;
             print("Vælg et år (eks. '2017')");
             printExit();
             input = getStringInput();
@@ -38,7 +35,7 @@ public class TournamentsCUI extends UI {
                     //No tournaments
                     print("Ingen stævner fundet");
                 }else{
-                    seeTournamentsDialog(input);
+                    printTournaments(input);
                 }
 
             }
@@ -46,16 +43,62 @@ public class TournamentsCUI extends UI {
         } while (!exit);
     }
 
-    private void seeTournamentsDialog(String year) {
+    private void chooseTournamentForCompetition() {
+        boolean exit = false;
+        String input;
+        int inputInt;
+        ArrayList<Tournament> tournaments;
+        ValidationComponent validator = new YearComponent();
+        do {
+            print("Vælg et år (eks. '2017')");
+            printExit();
+            input = getStringInput();
+            int tournamentID;
+
+            if(input.equals("0")){
+                exit = true;
+            }else if(!validator.checkComponent(input)){
+                System.out.println(input + " er ikke et korrekt årstal");
+            }else{
+                tournaments = controller.getAllTournaments(Integer.parseInt(input));
+                if(tournaments.size() == 0){
+                    //No tournaments
+                    print("Ingen stævner fundet");
+                }else{
+                    //Get user to pick which tournament
+                    do{
+                        printTournaments(input);
+                        print("Vælg hvilket stævne du vil se konkurrencer for:");
+                        printExit();
+                        inputInt = getMenuInput();
+                        if(inputInt == 0){
+                            exit = true;
+                        }else if(inputInt < 1 || inputInt > tournaments.size()){
+                            //Wrong input
+                            print("Ikke et tilladt input");
+                        }else{
+                            //Correct
+                            tournamentID = tournaments.get(inputInt).getId();
+                            CompetitionCUI competitionCUI = new CompetitionCUI(controller, tournamentID);
+                            exit = true;
+                        }
+                    }while(!exit);
+                }
+
+            }
+
+        } while (!exit);
+    }
+
+    private void TournamentsMenu() {
         boolean exit = false;
         int counter;
         int input;
         do {
-            printTournaments(year);
             counter = 0;
             for (int option : visibleOptionsInMenu) {
-                counter++;
-                print(counter + allMenuOptions[option]);
+                    counter++;
+                    print(counter + allMenuOptions[option]);
             }
             printExit();
             input = getMenuInput();
@@ -68,7 +111,15 @@ public class TournamentsCUI extends UI {
             } else {
                 //Have to make the user input correspond, to the actual value of the method we need to call
                 switch (userOptions.get(input - 1)) {
+                    case 10:
+                        //See Competition
+                        chooseTournamentForCompetition();
+                        break;
                     case 8:
+                        //Choose year
+                        chooseTournamentYearDialog();
+                        break;
+                    case 9:
                         //Create Tournament
                         printAddTournamentDialog();
                         break;
@@ -91,22 +142,67 @@ public class TournamentsCUI extends UI {
         boolean exit = false;
         ValidationComponent validator;
         String input;
-        LocalDate date;
+        LocalDate date = null;
+        String name = "";
+        String location;
 
         //Date
         do{
             printHeader("Tilføj stævne");
             print("Indtast dato for stævne (02/10/2019)");
+            printExit();
             input = getStringInput();
             validator = new FullDateComponent();
             if(input.equals("0")){
                 exit = true;
-            }else if(!validator.checkComponent(input)){
-                //Correct date
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
-                date = LocalDate.parse(input, formatter);
+                break;
             }
-        }while(!exit);
+        }while(!validator.checkComponent(input));
+        if(!exit){
+            //Correct date
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
+            date = LocalDate.parse(input, formatter);
+        }
+
+        //Name
+            if(!exit) {
+                do {
+                    printHeader("Tilføj stævne");
+                    print("Indtast navn på stævnet");
+                    input = getStringInput();
+                    validator = new NameComponent();
+                    if(input.equals("0")){
+                        exit = true;
+                        break;
+                    }
+                } while (!validator.checkComponent(input));
+                if(!exit){
+                    //Correct name
+                    name = input;
+                }
+            }
+
+            //Location
+            if(!exit){
+                do {
+                    printHeader("Tilføj stævne");
+                    print("Indtast adressen på stævnet (Billeshavevej 75 Korup 5210)");
+                    input = getStringInput();
+                    validator = new AddressComponent();
+                    if(input.equals("0")){
+                        exit = true;
+                        break;
+                    }
+                } while (!validator.checkComponent(input));
+                if(!exit){
+                    //Correct address
+                    location = input;
+                    Tournament tournament = new Tournament(name,date,location);
+                    controller.addTournament(tournament);
+                }
+
+            }
+
     }
 
     private void printTournaments(String year) {
