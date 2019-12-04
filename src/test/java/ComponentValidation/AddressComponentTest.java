@@ -52,5 +52,13 @@ public class AddressComponentTest {
         boolean result = instance.checkComponent(address);
         assertEquals(expResult, result);
     }
+    @Test
+    public void testAddressCiyAndPostal() {
+        String address = "Buddingevej 260 soborg 2860";
+        AddressComponent instance = new AddressComponent();
+        boolean expResult = true;
+        boolean result = instance.checkComponent(address);
+        assertEquals(expResult, result);
+    }
     
 }

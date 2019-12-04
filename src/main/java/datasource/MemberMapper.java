@@ -31,7 +31,6 @@ public class MemberMapper {
                 + "(member_id, discipline_id) VALUES";
         String values = " (?,?)";
         try {
-
             PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, member.getName());
             ps.setString(2, member.getPhone());
@@ -49,7 +48,7 @@ public class MemberMapper {
             ArrayList<String> memberDisciplines = member.getMemberDisciplines();
 
             if (!memberDisciplines.isEmpty() && memberIdSet.next()) {
-                ArrayList<String> disciplineNames 
+                ArrayList<String> disciplineNames
                         = new ArrayList(Arrays.asList(new DisciplineMapper().getAllDisciplines()));
                 int memberId = memberIdSet.getInt(1);
 
@@ -58,30 +57,32 @@ public class MemberMapper {
                 //The amount of disciplines vary from 0-4, so to avoid making 
                 //multiple runs, the SQL script is appended with the correct
                 //amount of (?,?) needed.
-                for(int i = 0; i < memberDisciplines.size() ; i++) {
-                    if(i != 0) {
+                for (int i = 0; i < memberDisciplines.size(); i++) {
+                    if (i != 0) {
                         SQLDisciplines += ",";
                     }
                     SQLDisciplines += values;
                 }
                 System.out.println(SQLDisciplines);
                 PreparedStatement psb = con.prepareStatement(SQLDisciplines);
-                
+
                 //Then the values have to be set on the script. Since there are
                 //two values for each row, this loop is run through twice for 
                 //each discipline a member is practicing.
                 int count = 0;
-                for(int i = 1; i <= memberDisciplines.size() * 2 ; i++) {
+                for (int i = 1; i <= memberDisciplines.size() * 2; i++) {
                     //the uneven times, the memberId is added
-                    if(i % 2 != 0) {
+                    if (i % 2 != 0) {
                         psb.setInt(i, memberId);
-                    //the even times the id for the discipline is added
+                        //the even times the id for the discipline is added
                     } else {
                         psb.setInt(i, disciplineNames.indexOf(
                                 memberDisciplines.get(count)) + 1);
                         count++;
                     }
+
                 }
+
                 psb.execute();
                 psb.close();
                 //Old version, made multiple calls to database, heavyload
@@ -98,6 +99,7 @@ public class MemberMapper {
         } catch (SQLException ex) {
             Logger.getLogger(MemberMapper.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println("Kunne ikke oprette ny bruger, prøv igen");
+
         }
     }
 
@@ -141,7 +143,8 @@ public class MemberMapper {
             ps.close();
 
         } catch (SQLException ex) {
-            Logger.getLogger(MemberMapper.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MemberMapper.class
+                    .getName()).log(Level.SEVERE, null, ex);
             System.out.println("Kunne ikke opdatere medlemet, prøv igen");
         }
     }
@@ -179,7 +182,9 @@ public class MemberMapper {
 
         } catch (SQLException ex) {
             System.out.println("Problem med at finde bruger via telefon nr., prøv igen");
-            Logger.getLogger(MemberMapper.class.getName()).log(Level.SEVERE, null, ex);
+            Logger
+                    .getLogger(MemberMapper.class
+                            .getName()).log(Level.SEVERE, null, ex);
         }
         return members;
     }
@@ -219,7 +224,9 @@ public class MemberMapper {
             con.close();
         } catch (SQLException ex) {
             System.out.println("Problem med at finde bruger via navnet., prøv igen");
-            Logger.getLogger(MemberMapper.class.getName()).log(Level.SEVERE, null, ex);
+            Logger
+                    .getLogger(MemberMapper.class
+                            .getName()).log(Level.SEVERE, null, ex);
         }
         return members;
     }
@@ -261,7 +268,9 @@ public class MemberMapper {
 
         } catch (SQLException ex) {
             System.out.println("Problem med at finde bruger via email., prøv igen");
-            Logger.getLogger(MemberMapper.class.getName()).log(Level.SEVERE, null, ex);
+            Logger
+                    .getLogger(MemberMapper.class
+                            .getName()).log(Level.SEVERE, null, ex);
         }
         return members;
     }
@@ -297,7 +306,9 @@ public class MemberMapper {
             }
         } catch (SQLException ex) {
             System.out.println("Problem med at finde bruger via ID., prøv igen");
-            Logger.getLogger(MemberMapper.class.getName()).log(Level.SEVERE, null, ex);
+            Logger
+                    .getLogger(MemberMapper.class
+                            .getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }

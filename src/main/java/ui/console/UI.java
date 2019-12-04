@@ -25,7 +25,7 @@ public abstract class UI {
         ". Se Restance",
         ". Marker som betalt",
         ". Tilføj ny træningstid",
-        ". Se stævner",
+        ". Se Stævner",
         ". Tilføj stævne",
         ". Se konkurrence",
         ". Tilføj ny konkurrence",
@@ -65,7 +65,7 @@ public abstract class UI {
 
 
         System.out.print(">");
-        input = scan.next();
+        input = scan.nextLine();
 
         return input;
     }

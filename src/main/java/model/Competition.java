@@ -12,6 +12,11 @@ public class Competition {
         this.tournamentID = tournamentID;
         this.swimmingDisciplineID = swimmingDisciplineID;
     }
+    
+    public Competition(int tournamentID, int swimmingDisciplineId) {
+        this.swimmingDisciplineID = swimmingDisciplineId;
+        this.tournamentID = tournamentID;
+    }
 
     public int getCompetitionsId() {
         return competitionsId;

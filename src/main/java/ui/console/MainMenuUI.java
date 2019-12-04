@@ -2,13 +2,15 @@
 package ui.console;
 
 import Controllers.Controller;
+import model.Tournament;
+import model.Trainer;
 
 /**
  *
  * @author <Frederik Keis Dinsen>
  */
 public class MainMenuUI extends UI {
-    private int[] posibleOptionsInMenu = new int[]{1,3,4,5,8,13};
+    private int[] posibleOptionsInMenu = new int[]{1,3,5,8,13};
     
     public MainMenuUI(Controller controller) {
         this.controller = controller;
@@ -27,7 +29,11 @@ public class MainMenuUI extends UI {
                 counter++;
                 if(option == 1){
                     print(counter + ". Medlemer");
-                }else{
+                }else if(option == 3){
+                    print(counter + ". Trænere");
+                }else if(option == 8){
+                    print(counter + ". Stævner");
+                } else{
                     print(counter + allMenuOptions[option]);
                 }
                 
@@ -51,21 +57,17 @@ public class MainMenuUI extends UI {
                         //Se restance
                         RestanceCUI restanceCUI = new RestanceCUI(controller);
                         break;
-                    case 4:
+                    case 3:
                         //edit trainer
-                        print("Rediger træner");
+                        TrainersCUI trainer = new TrainersCUI(controller);
                         break;
                     case 8:
                         //see tournament
-                        print("Se stævne");
+                        TournamentsCUI tournament = new TournamentsCUI(controller);
                         break;
                     case 13:
                         //show top 5
                         Top5CUI top5 = new Top5CUI(controller);
-                        break;
-                    case 3:
-                        //create trainer
-                        print("Lav træner");
                         break;
 
                     default:

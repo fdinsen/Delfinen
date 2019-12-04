@@ -23,6 +23,7 @@ public class Trainer {
         name = trainerName;
         this.id = id;
     }
+
     //---------//
     // GETTERS //
     //---------//

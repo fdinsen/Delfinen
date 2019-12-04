@@ -5,7 +5,11 @@
  */
 package ui.console;
 
+import ComponentValidation.TimeComponent;
+import ComponentValidation.ValidationComponent;
 import Controllers.Controller;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import model.Competition;
 import model.CompetitionTime;
@@ -15,23 +19,25 @@ import model.Member;
  *
  * @author gamma
  */
-public class CompetitionCUI extends UI{
-    
-    private int[] possibleOptionsInMenu = new int[] {10, 11, 12, 14};
+public class CompetitionCUI extends UI {
+
+    private int[] possibleOptionsInMenu = new int[]{10, 11, 12};
     private int tournamentId;
     String[] disciplines;
-    
+
     public CompetitionCUI(Controller controller, int tournamentId) {
         this.controller = controller;
         this.tournamentId = tournamentId;
         setVisibleOptionsInMenu(possibleOptionsInMenu);
+        disciplines = controller.getAllDisciplines();
         printCompetitionMenu();
     }
-    
+
     private void printCompetitionMenu() {
         boolean exit = false;
         int counter;
         int input;
+        Competition comp = null;
         do {
             counter = 0;
             printHeader();
@@ -41,71 +47,236 @@ public class CompetitionCUI extends UI{
             }
             printExit();
             input = getMenuInput();
-            
+
             if (input < 0 || input > visibleOptionsInMenu.size()) {
                 print(input + " Er ikke en mulighed i denne menu");
-            } else if (input == 0){
+            } else if (input == 0) {
                 exit = true;
             } else {
                 switch (userOptions.get(input - 1)) {
-                    case 10: 
+                    case 10:
                         //Se konkurrence
-                        
+                        comp = seeCompetition();
+                        if (comp == null) {
+                            //User has exited without selecting
+                        } else {
+                            printCompetition(comp);
+                            printCompetitionMenu();
+                        }
+                        exit = true;
+                        break;
+                    case 11:
+                        //Tilføj ny konkurrence
+                        addNewCompMenu();
+                        break;
+                    case 12:
+                        //Tilføj medlem til konkurrence
+                        addMemberToCompMenu(comp);
+                        break;
                 }
             }
-        }while(!exit); 
-        
-        
+        } while (!exit);
+
     }
-    
-    private void seeCompetition() {
+
+    private Competition seeCompetition() {
         Competition comp = null;
         boolean exit = false;
         int input;
-        disciplines = controller.getAllDisciplines();
         ArrayList<Competition> competitions = controller.getAllCompetitions(tournamentId);
-        
+
         do {
             printHeader();
             printAllCompetitionsInTournament(competitions);
-            
+            printExit();
             input = getMenuInput();
-            if(input == 0) {
+            if (input == 0) {
+                exit = true;
+            } else if (input < competitions.size()){
+                comp = competitions.get(input - 1);
                 exit = true;
             } else {
-                printCompetition(competitions.get(input - 1));
+                print(input + " er ikke en gyldig mulighed her.");
             }
-            
-        }while(!exit);
+
+        } while (!exit);
+        return comp;
     }
-    
+
     private void printAllCompetitionsInTournament(ArrayList<Competition> comps) {
-        printHeader();
         int counter = 1;
         String line;
-        
-        for(Competition comp : comps) {
+        print("Konkurrencer:");
+        for (Competition comp : comps) {
             line = "";
             line += counter + " ";
-            line += disciplines[comp.getSwimmingDiscipline() + 1];
-            
+            line += disciplines[comp.getSwimmingDiscipline() - 1];
+            print("\t" + line);
             counter++;
         }
-        
+
     }
 
     private void printCompetition(Competition competition) {
         printHeader();
-        
+
         Member member;
-        String discipline = disciplines[competition.getSwimmingDiscipline() + 1];
-        ArrayList<CompetitionTime> times 
+        String discipline = disciplines[competition.getSwimmingDiscipline() - 1];
+        ArrayList<CompetitionTime> times
                 = controller.getAllTimes(competition.getCompetitionsId());
         for (CompetitionTime time : times) {
             member = controller.getMemberByID(time.getMemberID());
             print(member.getName() + ": " + time.getTimeInMinutes());
         }
         print("");
+
+    }
+
+    private void addMemberToCompMenu(Competition comp) {
+        if (comp == null) {
+            comp = seeCompetition();
+        }
+        Member member = findMember();
+        printHeader();
+        boolean exit = false;
+        ValidationComponent timeInput = new TimeComponent();
+        do {
+            print("Hvad var " + member.getName() + "s tid?");
+            print("(mm:ss:mss)");
+            printExit();
+            String input = getStringInput();
+            if (input != "0" && timeInput.checkComponent(input)) {
+                String[] times = input.split(":");
+                int timeInMS = 0;
+                timeInMS += Integer.parseInt(times[0]) *60 * 1000;
+                timeInMS += Integer.parseInt(times[1]) *1000;
+                timeInMS += Integer.parseInt(times[2]);
+                CompetitionTime ctime = new CompetitionTime(
+                        comp.getCompetitionsId(), member.getMemberId(), timeInMS);
+                controller.addTime(ctime);
+                comp = null;
+                exit = true;
+                print(member.getName() + "s tid er blevet tilføjet");
+            } else if (input == "0") {
+                exit = true;
+            } else {
+
+            }
+
+        } while (!exit);
+    }
+
+    private void addNewCompMenu() {
+        Competition comp;
+        boolean exit = false;
+        int swimmingDisciplineId;
+        int counter;
         
+        printHeader();
+        do {
+            counter = 1;
+            for(String discipline : disciplines) {
+                print(counter + " " + discipline);
+                counter++;
+            }
+            print("Hvilken disciplin?");
+            printExit();
+            int input = getMenuInput();
+            if (input == 0) {
+                exit = true;
+            } else if (input > disciplines.length) {
+                print("Ugyldigt input");
+            } else {
+                swimmingDisciplineId = input - 1;
+                comp = new Competition(tournamentId, swimmingDisciplineId);
+                controller.addCompetition(comp);
+                exit = true;
+            }
+        }while(!exit);
+        
+    }
+    
+    
+    //De næste to metoder er kopieret fra MemberCUI
+    //Det er ikke en pæn løsning at gentage koden, det ved jeg godt,
+    //men det er for sent til at jeg kan komme på en anden løsning
+    //lad os diskutere andre muligheder i morgen, torsdag.
+    private Member findMember() {
+        Member member = null;
+        boolean exit = false;
+        String input = "";
+        ArrayList<Member> members = new ArrayList<>();
+        
+        do {
+            printHeader();
+            print("Indtast tlf. nr., email eller navn på en bruger");
+            printExit();
+            input = getStringInput();
+
+            if (input.equals("0")) {
+                exit = true;
+            } else {
+                switch (checkInputType(input)) {
+                    case 0:
+                        //Email
+                        members = controller.getMemberByEmail(input);
+                        break;
+                    case 1:
+                        //Phonenumber
+                        members = controller.getMemberByPhone(input);
+                        break;
+                    case 2:
+                        //name
+                        members = controller.getMemberByName(input);
+                        break;
+                    default:
+                        print("Prøv igen, dit input ser ud til at være forkert");
+                        break;
+                }
+                if(members.isEmpty()){
+                    //No member found
+                    print("Der kunne ikke findes en bruger på " + input);
+                }else{
+                    member = chooseUser(members);
+                    exit = true;
+                }
+            }
+        } while (!exit);
+        return member;
+    }
+    
+    private Member chooseUser(ArrayList<Member> members) {
+        if (members.size() == 1) {
+            //Only one member
+            return members.get(0);
+        } else {
+            //Multiple members, let the user decide
+            int counter;
+            boolean exit = false;
+            int input;
+            do {
+                counter = 0;
+                print("Vælg en bruger");
+                printHeader();
+                for (Member member : members) {
+                    counter++;
+                    print(counter + ". " + member.getName() + " - " + member.getPhone());
+                }
+                printExit();
+                
+                //gets user input and if correct choice, returns the member
+                input = getMenuInput();
+                if (input == 0) {
+                    exit = true;
+                } else if (input < 0 || input > members.size()) {
+                    print("Er ikke en bruger");
+                    print("Prøv igen");
+                } else {
+                    return members.get(input - 1);
+                }
+            } while (!exit);
+
+            return members.get(0);
+        }
     }
 }

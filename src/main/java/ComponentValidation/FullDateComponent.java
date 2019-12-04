@@ -3,15 +3,15 @@ package ComponentValidation;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class BirthdayComponent implements ValidationComponent {
+public class FullDateComponent implements ValidationComponent {
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
 
     @Override
-    public boolean checkComponent(String birthday) {
+    public boolean checkComponent(String date) {
         try {
-            LocalDate.parse(birthday, formatter);
+            LocalDate.parse(date, formatter);
         }catch (Exception e){
-            System.err.println(birthday + ", accepteres ikke som fødselsdag");
+            System.err.println(date + ", accepteres ikke som dato");
             return false;
         }
 

@@ -15,6 +15,12 @@ public class CompetitionTime extends Times {
         this.competitionID = competitionsID;
 
     }
+    
+    public CompetitionTime(int competitionID, int memberID, int timeInMs) {
+        super(timeInMs, memberID);
+        this.competitionID = competitionID;
+    }
+    
     public int getCompetitionTimeID(){
         return competitionTimeID;
     }
