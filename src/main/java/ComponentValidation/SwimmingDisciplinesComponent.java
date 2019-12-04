@@ -11,6 +11,7 @@ public class SwimmingDisciplinesComponent implements ValidationComponent {
             String[] splitted = ids.split(",");
             for (String str: splitted){
                Integer.parseInt(str);
+                System.out.println(str);
             }
             return true;
         }catch (Exception ex){
