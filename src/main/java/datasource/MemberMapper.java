@@ -54,7 +54,7 @@ public class MemberMapper {
                 for (String discipline : member.getMemberDisciplines()) {
                     PreparedStatement psb = con.prepareStatement(SQLDisciplines);
                     psb.setInt(1, memberId);
-                    psb.setInt(2, disciplineNames.indexOf(discipline) + 1);
+                    psb.setInt(2, Integer.parseInt(discipline));
                     psb.execute();
                     psb.close();
                 }
