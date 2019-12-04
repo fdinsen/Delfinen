@@ -171,9 +171,4 @@ public class Controller {
         System.out.println("getAllDisciplines NOT IMPLEMENTED");
         return null;
     }
-
-    public Member getMemberByID(int memberID) {
-        System.out.println("getMemberByID NOT IMPLEMENTED");
-        return null;
-    }
 }
