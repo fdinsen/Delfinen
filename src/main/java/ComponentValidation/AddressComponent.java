@@ -3,7 +3,7 @@ package ComponentValidation;
 public class AddressComponent implements ValidationComponent {
     @Override
     public boolean checkComponent(String address) {
-        if(true){
+        if(address.matches("^(.+) (\\d{1,3}[a-z]?) (\\d{1,2}|st|kl)? ?(\\d{1,2}|tv|mf|th)?.*(\\d{4})$")){
             //correct name
             return true;
         }
