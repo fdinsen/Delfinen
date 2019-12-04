@@ -61,7 +61,7 @@ public class MainMenuUI extends UI {
                         break;
                     case 13:
                         //show top 5
-                        print("Vis top 5");
+                        Top5CUI top5 = new Top5CUI(controller);
                         break;
                     case 3:
                         //create trainer
