@@ -48,6 +48,10 @@ public class Controller {
     public ArrayList<Member> getMemberByName(String name) {
         return (ArrayList) datasource.getMemberByName(name);
     }
+    
+    public Member getMemberByID(int memberID) {
+        return datasource.getMemberByID(memberID);
+    }
 
     public void updateMember(Member member) {
         datasource.updateMember(member);

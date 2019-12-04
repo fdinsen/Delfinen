@@ -53,6 +53,11 @@ public class DBFacade implements DataSource {
     public List<Member> getMemberByName(String name) {
         return new MemberMapper().getMemberByName(name);
     }
+    
+        @Override
+    public Member getMemberByID(int memberID) {
+        return new MemberMapper().getMemberByID(memberID);
+    }
 
     //----------------//
     // RestanceMapper //

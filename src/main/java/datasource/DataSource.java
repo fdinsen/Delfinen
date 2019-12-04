@@ -27,6 +27,7 @@ public interface DataSource {
     public List<Member> getMemberByPhone(String phonenumber);
     public List<Member> getMemberByEmail(String email);
     public List<Member> getMemberByName(String name);
+    public Member getMemberByID(int memberID);
     public ArrayList<String> getMemberSwimmingDiscipline(int memberID);
     
     

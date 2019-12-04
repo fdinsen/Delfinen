@@ -9,7 +9,7 @@
 			"_parent": {
 				"$ref": "AAAAAAFF+h6SjaM2Hec="
 			},
-			"name": "Model",
+			"name": "ClassDiagram",
 			"ownedElements": [
 				{
 					"_type": "UMLClassDiagram",
@@ -13982,7 +13982,7 @@
 			"_parent": {
 				"$ref": "AAAAAAFF+h6SjaM2Hec="
 			},
-			"name": "Model1",
+			"name": "DomainModel",
 			"ownedElements": [
 				{
 					"_type": "UMLClassDiagram",
@@ -17882,7 +17882,7 @@
 			"_parent": {
 				"$ref": "AAAAAAFF+h6SjaM2Hec="
 			},
-			"name": "Model2",
+			"name": "UseCaseDiagram",
 			"ownedElements": [
 				{
 					"_type": "UMLUseCaseDiagram",
@@ -27634,7 +27634,7 @@
 			"_parent": {
 				"$ref": "AAAAAAFF+h6SjaM2Hec="
 			},
-			"name": "Data Model1",
+			"name": "ERDiagram",
 			"ownedElements": [
 				{
 					"_type": "ERDDiagram",
