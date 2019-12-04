@@ -70,7 +70,7 @@ public class CreateMemberCUI extends UI {
             personComponent = new AddressComponent();
             do{
                 printHeader();
-                print("Indtast vej navn og nr på medlem: ");
+                print("Indtast adresse informationer på medlemet (Billeshavevej 75 Korup 5210): ");
                 printExit();
                 input = getStringInput();
 
@@ -167,11 +167,15 @@ public class CreateMemberCUI extends UI {
                             exit = true;
                             break;
                         }
-                    }while (!personComponent.checkComponent(input));
+                    }while (!personComponent.checkComponent(input +1));
                     if(!exit) {
-                        trainerID = Integer.parseInt(input);
+                        //Plus 1, as the default trainer has ID 1
+                        trainerID = Integer.parseInt(input+1);
                     }
                 }
+            }else{
+                //default trainer
+                trainerID = 1;
             }
         }
 
@@ -196,7 +200,11 @@ public class CreateMemberCUI extends UI {
                 }
             }while (!personComponent.checkComponent(input));
             if(!exit) {
-                disciplines = null;
+                //Splits the user answer and adds to the array
+                String[] splitted = input.split(",");
+                for(String diciplin: splitted){
+                    disciplines.add(diciplin);
+                }
             }
         }
 

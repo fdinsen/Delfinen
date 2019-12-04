@@ -49,7 +49,7 @@ public class MainMenuUI extends UI {
                         break;
                     case 5:
                         //Se restance
-                        print("Se restance");
+                        RestanceCUI restanceCUI = new RestanceCUI(controller);
                         break;
                     case 4:
                         //edit trainer

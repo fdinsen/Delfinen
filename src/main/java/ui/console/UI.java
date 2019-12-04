@@ -63,11 +63,9 @@ public abstract class UI {
         ValidationComponent stringCo = new StringComponent();
         Scanner scan = new Scanner(System.in);
 
-        do{
+
         System.out.print(">");
         input = scan.next();
-        //Keeps going until user enters correct string
-        }while (!stringCo.checkComponent(input));
 
         return input;
     }
@@ -127,9 +125,9 @@ public abstract class UI {
         print("0. Exit");
     }
     void printHeader(){
-        print("------- Delfinen Svømmeklub ------");
+        print("------- Delfinen Svømmeklub -------");
     }
     void printHeader(String extra){
-        print("------- Delfinen Svømmeklub - " + extra + " ------");
+        print("------- Delfinen Svømmeklub - " + extra + " -------");
     }
 }
