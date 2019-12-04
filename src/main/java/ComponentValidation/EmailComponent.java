@@ -2,7 +2,7 @@ package ComponentValidation;
 
 import java.util.regex.Pattern;
 
-public class EmailComponent implements PersonComponent {
+public class EmailComponent implements ValidationComponent {
     @Override
     public boolean checkComponent(String email) {
         String regexEmail = "(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\."

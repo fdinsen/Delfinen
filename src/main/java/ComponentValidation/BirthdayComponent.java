@@ -3,7 +3,7 @@ package ComponentValidation;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class BirthdayComponent implements PersonComponent {
+public class BirthdayComponent implements ValidationComponent {
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
 
     @Override

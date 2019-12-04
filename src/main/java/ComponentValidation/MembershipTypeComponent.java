@@ -2,7 +2,7 @@ package ComponentValidation;
 
 import enums.MembershipType;
 
-public class MembershipTypeComponent implements PersonComponent {
+public class MembershipTypeComponent implements ValidationComponent {
     @Override
     public boolean checkComponent(String idOfType) {
         int id;

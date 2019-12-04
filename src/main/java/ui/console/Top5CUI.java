@@ -4,8 +4,8 @@ import Controllers.Controller;
 import model.Member;
 import model.TrainingTime;
 
-public class Top5CUI extends UI {
-    public Top5CUI(Controller controller) {
+class Top5CUI extends UI {
+    Top5CUI(Controller controller) {
         this.controller = controller;
         printTop5(1);
         printTop5Dialog();
@@ -32,42 +32,29 @@ public class Top5CUI extends UI {
                 //exit
                 exit = true;
             }else{
-                //Have to make the user input correspond, to the actual value of the method we need to call
-                switch (userOptions.get(input-1)){
-                    case 1:
-                        //Crawl
-                        printTop5(input-1);
-                        break;
-                    case 2:
-                        //Backcrawl
-                        print("Se restance");
-                        break;
-                    case 3:
-                        //Breaststroke
-                        print("Rediger træner");
-                        break;
-                    case 4:
-                        //Butterfly
-                        print("Se stævne");
-                        break;
-                    default:
-                        print("Der er sket en fejl, prøv igen");
-                }
+                //Show top 5
+                printTop5(input-1);
             }
-
-
 
         } while (!exit);
     }
 
     private void printTop5(int id) {
+        boolean exit = false;
         int counter = 0;
         Member member;
-        for(TrainingTime trainingTime : controller.getTop5(id)){
-            counter++;
-            member = controller.getMemberByID(trainingTime.getMemberID());
-            print(counter + ". " + member.getName() + " - " + trainingTime.g)
-        }
+        do {
+            printHeader("Top 5 " + controller.getAllDisciplines()[id]);
+            for (TrainingTime trainingTime : controller.getTop5(id)) {
+                counter++;
+                member = controller.getMemberByID(trainingTime.getMemberID());
+                print(counter + ". " + member.getName() + " - " + trainingTime.getTimeInMinutes());
+            }
+            printExit();
+            if(getMenuInput() == 0){
+                exit = true;
+            }
+        }while(!exit);
     }
 
 

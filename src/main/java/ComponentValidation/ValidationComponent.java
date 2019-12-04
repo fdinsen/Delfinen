@@ -4,6 +4,6 @@ package ComponentValidation;
  *
  * @author olvvang
  */
-public interface PersonComponent {
+public interface ValidationComponent {
     public boolean checkComponent(String component);
 }

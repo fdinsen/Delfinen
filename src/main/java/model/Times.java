@@ -23,7 +23,11 @@ public abstract class Times {
         this.memberID = memberID;
     }
 
-    public int getTimeInMinutes();
+    public String getTimeInMinutes(){
+        int minutes = (timeInMS / 1000) / 60;
+        int seconds = (timeInMS / 1000) % 60;
+        return minutes + ":" + seconds;
+    }
 
 
 }

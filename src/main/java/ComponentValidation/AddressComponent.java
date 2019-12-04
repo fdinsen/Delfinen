@@ -1,6 +1,6 @@
 package ComponentValidation;
 
-public class AddressComponent implements PersonComponent {
+public class AddressComponent implements ValidationComponent {
     @Override
     public boolean checkComponent(String address) {
         if(true){

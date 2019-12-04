@@ -1,5 +1,8 @@
 package ui.console;
 
+import ComponentValidation.IntInputComponent;
+import ComponentValidation.ValidationComponent;
+import ComponentValidation.StringComponent;
 import Controllers.Controller;
 import java.util.ArrayList;
 import java.util.regex.*;
@@ -41,27 +44,31 @@ public abstract class UI {
     }
 
     public int getMenuInput() {
-        System.out.print(">");
         Scanner scan = new Scanner(System.in);
-        String input = scan.next();
-        int userSelection = -1;
-        try {
-            userSelection = Integer.parseInt(input);
-        } catch (NumberFormatException ne) {
-            System.err.println("Ugyldigt input!");
-            System.out.println("Prøv igen");
-        }
-        return userSelection;
+        ValidationComponent intInput = new IntInputComponent();
+        String input;
+
+        do{
+        System.out.print(">");
+        input = scan.next();
+        //Keeps going until user enters correct int
+        }while (!intInput.checkComponent(input));
+
+        return Integer.parseInt(input);
     }
 
     public String getStringInput() {
-        System.out.print(">");
+        boolean exit =  false;
+        String input;
+        ValidationComponent stringCo = new StringComponent();
         Scanner scan = new Scanner(System.in);
-        String input = scan.next();
 
-        //TODO make logic
-        
-        /* [^\s\@]+[@]{0,1}[^\s\@]+ */
+        do{
+        System.out.print(">");
+        input = scan.next();
+        //Keeps going until user enters correct string
+        }while (!stringCo.checkComponent(input));
+
         return input;
     }
 
@@ -121,5 +128,8 @@ public abstract class UI {
     }
     void printHeader(){
         print("------- Delfinen Svømmeklub ------");
+    }
+    void printHeader(String extra){
+        print("------- Delfinen Svømmeklub - " + extra + " ------");
     }
 }

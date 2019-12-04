@@ -31,7 +31,7 @@ public class CreateMemberCUI extends UI {
         String input;
 
         //Name
-        PersonComponent personComponent = new NameComponent();
+        ValidationComponent personComponent = new NameComponent();
         do {
             printHeader();
             print("Indtast fornavn på medlem: ");

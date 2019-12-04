@@ -1,9 +1,8 @@
 package ComponentValidation;
 
 import enums.MembershipStatus;
-import enums.MembershipType;
 
-public class MembershipStatusComponent implements PersonComponent {
+public class MembershipStatusComponent implements ValidationComponent {
     @Override
     public boolean checkComponent(String idOfStatus) {
         int id;
