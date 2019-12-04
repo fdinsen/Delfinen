@@ -23,5 +23,7 @@ public abstract class Times {
         this.memberID = memberID;
     }
 
+    public int getTimeInMinutes();
+
 
 }

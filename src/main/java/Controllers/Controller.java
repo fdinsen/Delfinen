@@ -162,4 +162,18 @@ public class Controller {
         return datasource.getTrainerName(trainerID);
     }
 
+    public String[] getAllTrainers() {
+        System.out.println("getAllTrainers NOT IMPLEMENTED");
+        return null;
+    }
+
+    public String[] getAllDisciplines() {
+        System.out.println("getAllDisciplines NOT IMPLEMENTED");
+        return null;
+    }
+
+    public Member getMemberByID(int memberID) {
+        System.out.println("getMemberByID NOT IMPLEMENTED");
+        return null;
+    }
 }
