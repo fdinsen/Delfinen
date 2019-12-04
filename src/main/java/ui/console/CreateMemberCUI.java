@@ -9,6 +9,7 @@ import model.Member;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class CreateMemberCUI extends UI {
 
@@ -232,9 +233,7 @@ public class CreateMemberCUI extends UI {
                 if(!exit) {
                     //Splits the user answer and adds to the array
                     String[] splitted = input.split(",");
-                    for(String diciplin: splitted){
-                        disciplines.add(diciplin);
-                    }
+                    disciplines.addAll(Arrays.asList(splitted));
                 }
             }
         }
