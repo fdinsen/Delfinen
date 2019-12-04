@@ -23,7 +23,7 @@ public class BirthdayComponentTest {
     @Test
     public void testBirhtdayComponent() {
         String birthday = "05/06/1996";
-        BirthdayComponent instance = new BirthdayComponent();
+        FullDateComponent instance = new FullDateComponent();
         boolean expResult = true;
         boolean result = instance.checkComponent(birthday);
         assertEquals(expResult, result);
@@ -31,7 +31,7 @@ public class BirthdayComponentTest {
     @Test
     public void testBirhtdayOffDay() {
         String birthday = "5/06/1996";
-        BirthdayComponent instance = new BirthdayComponent();
+        FullDateComponent instance = new FullDateComponent();
         boolean expResult = true;
         boolean result = instance.checkComponent(birthday);
         assertEquals(expResult, result);
@@ -39,7 +39,7 @@ public class BirthdayComponentTest {
     @Test
     public void testBirhtdayLongOff() {
         String birthday = "5/06/96";
-        BirthdayComponent instance = new BirthdayComponent();
+        FullDateComponent instance = new FullDateComponent();
         boolean expResult = false;
         boolean result = instance.checkComponent(birthday);
         assertEquals(expResult, result);

@@ -87,7 +87,7 @@ public class CreateMemberCUI extends UI {
 
         //Birthday
         if (!exit){
-            personComponent = new BirthdayComponent();
+            personComponent = new FullDateComponent();
             do{
                 printHeader();
                 print("Indtast fødselsdag, som følgende format: '05/02/1990' ");

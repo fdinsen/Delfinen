@@ -2,6 +2,7 @@
 package ui.console;
 
 import Controllers.Controller;
+import model.Tournament;
 import model.Trainer;
 
 /**
@@ -60,7 +61,7 @@ public class MainMenuUI extends UI {
                         break;
                     case 8:
                         //see tournament
-                        print("Se stævne");
+                        TournamentsCUI tournament = new TournamentsCUI(controller);
                         break;
                     case 13:
                         //show top 5
