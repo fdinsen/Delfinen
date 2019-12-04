@@ -1,5 +1,7 @@
 package ComponentValidation;
 
+import Controllers.Controller;
+
 import java.util.ArrayList;
 
 public class SwimmingDisciplinesComponent implements ValidationComponent {
@@ -8,7 +10,7 @@ public class SwimmingDisciplinesComponent implements ValidationComponent {
         try{
             String[] splitted = ids.split(",");
             for (String str: splitted){
-                Integer.parseInt(str);
+               Integer.parseInt(str);
             }
             return true;
         }catch (Exception ex){

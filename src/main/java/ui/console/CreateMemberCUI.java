@@ -5,6 +5,7 @@ import Controllers.Controller;
 import enums.MembershipStatus;
 import enums.MembershipType;
 import model.Member;
+import model.Trainer;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -152,12 +153,14 @@ public class CreateMemberCUI extends UI {
             if(membershipType != null && membershipType.equals(MembershipType.COMPETITIVE)){
                 //Trainer
                 if (!exit){
+                    boolean correct = false;
                     personComponent = new TrainerComponent();
+                    String[] trainers = controller.getAllTrainers();
                     do{
                         counter = 0;
                         printHeader();
                         print("Vælg hvilken træner medlemet skal have");
-                        for(String trainer: controller.getAllTrainers()){
+                        for(String trainer: trainers){
                             counter++;
                             print(counter + ". " + trainer);
                         }
@@ -167,8 +170,21 @@ public class CreateMemberCUI extends UI {
                         if(input.equals("0")){
                             exit = true;
                             break;
+                        }else if(personComponent.checkComponent(input)){
+                            //If correct input, check if correct option
+                                if(Integer.parseInt(input) < 1 || Integer.parseInt(input) > trainers.length ){
+                                    //Wrong input
+                                    print("Forkert input, prøv igen");
+                                }else{
+                                    //Correct input
+                                    correct = true;
+                                    break;
+                                }
+                            }else{
+                            //Wrong input
+                            print("Forkert input, prøv igen");
                         }
-                    }while (!personComponent.checkComponent(input));
+                    }while (!correct);
                     if(!exit) {
                         //Plus 1, as the default trainer has ID 1
                         trainerID = Integer.parseInt(input)+1;
@@ -182,11 +198,15 @@ public class CreateMemberCUI extends UI {
             //Disciplines
             if (!exit){
                 personComponent = new SwimmingDisciplinesComponent();
+                IntInputComponent intValidation = new IntInputComponent();
+                String[] diciplines = controller.getAllDisciplines();
+                boolean correct = false;
+
                 do{
                     counter = 0;
                     printHeader();
                     print("Vælg svømmediscipliner (eks. 1,2,4): ");
-                    for(String discipline: controller.getAllDisciplines()){
+                    for(String discipline: diciplines){
                         counter++;
                         print(counter + ". " + discipline);
                     }
@@ -196,8 +216,25 @@ public class CreateMemberCUI extends UI {
                     if(input.equals("0")){
                         exit = true;
                         break;
+                    }else if(personComponent.checkComponent(input)){
+                        //If correct input, check if all are correct options
+                        String[] splitted = input.split(",");
+                        for(String diciplinID: splitted){
+                            if(Integer.parseInt(diciplinID) < 1 || Integer.parseInt(diciplinID) > diciplines.length ){
+                                //Wrong input
+                                print("Forkert input, prøv igen");
+                                break;
+                            }else{
+                                //Correct input
+                                correct = true;
+                                break;
+                            }
+                        }
+                    }else{
+                        //Wrong input
+                        print("Forkert input, prøv igen");
                     }
-                }while (!personComponent.checkComponent(input));
+                }while (!correct);
                 if(!exit) {
                     //Splits the user answer and adds to the array
                     String[] splitted = input.split(",");
