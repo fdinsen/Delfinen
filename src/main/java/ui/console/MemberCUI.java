@@ -75,10 +75,16 @@ public class MemberCUI extends UI {
         if(!(member.getTrainerId() == 1));{
         print("Træner: " + trainer);
         }
-        print("Svømmediscipliner");
-        for (String discString: member.getMemberDisciplines()) {
+
+        if(member.getMemberDisciplines().size() > 0){
+            print("Svømmediscipliner");
+            for (String discString: member.getMemberDisciplines()) {
                 print("\t" + discString);
+            }
+        }else{
+            print("Svømmediscipliner: INGEN");
         }
+
         print("Medlemskab: " + member.getMembershipStatus());
         print("Medlemstype: " + member.getMembershipType());
         print("Restance: " + member.getSubscription());

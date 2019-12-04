@@ -4,16 +4,15 @@ import java.util.ArrayList;
 
 public class SwimmingDisciplinesComponent implements ValidationComponent {
     @Override
-    public boolean checkComponent(String component) {
-        return false;
-    }
-
-    public ArrayList<String> setSwimmingDisciplines(String ids){
-            try{
-
-            }catch (Exception ex){
-
+    public boolean checkComponent(String ids) {
+        try{
+            String[] splitted = ids.split(",");
+            for (String str: splitted){
+                Integer.parseInt(str);
             }
-            return null;
+            return true;
+        }catch (Exception ex){
+            return false;
+        }
     }
 }

@@ -26,7 +26,8 @@ public abstract class Times {
     public String getTimeInMinutes(){
         int minutes = (timeInMS / 1000) / 60;
         int seconds = (timeInMS / 1000) % 60;
-        return minutes + ":" + seconds;
+        int ms = (timeInMS / 1000) % 60 % 100;
+        return minutes + ":" + seconds + ":" + ms;
     }
 
 

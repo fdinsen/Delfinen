@@ -122,7 +122,7 @@ public abstract class UI {
     }
 
     void printExit(){
-        print("0. Exit");
+        print("0. Tilbage");
     }
     void printHeader(){
         print("------- Delfinen Svømmeklub -------");

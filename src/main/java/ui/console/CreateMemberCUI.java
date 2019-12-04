@@ -26,7 +26,7 @@ public class CreateMemberCUI extends UI {
         int trainerID = 1;
         MembershipStatus membershipStatus = null;
         MembershipType membershipType = null;
-        ArrayList<String> disciplines = null;
+        ArrayList<String> disciplines = new ArrayList<>();
         boolean exit = false;
         String input;
 
@@ -67,7 +67,8 @@ public class CreateMemberCUI extends UI {
     }
         //Address
         if (!exit){
-            personComponent = new AddressComponent();
+            personComponent = new NameComponent();
+            //personComponent = new AddressComponent();
             do{
                 printHeader();
                 print("Indtast adresse informationer på medlemet (Billeshavevej 75 Korup 5210): ");
@@ -147,7 +148,7 @@ public class CreateMemberCUI extends UI {
             if(!exit) {
                 membershipType = MembershipType.values()[Integer.parseInt(input)-1];
             }
-            //chose trainer if membership type competitive
+            //chose trainer and disciplines if membership type is competitive
             if(membershipType != null && membershipType.equals(MembershipType.COMPETITIVE)){
                 //Trainer
                 if (!exit){
@@ -167,43 +168,42 @@ public class CreateMemberCUI extends UI {
                             exit = true;
                             break;
                         }
-                    }while (!personComponent.checkComponent(input +1));
+                    }while (!personComponent.checkComponent(input));
                     if(!exit) {
                         //Plus 1, as the default trainer has ID 1
-                        trainerID = Integer.parseInt(input+1);
+                        trainerID = Integer.parseInt(input)+1;
                     }
                 }
             }else{
                 //default trainer
                 trainerID = 1;
             }
-        }
 
-        //Disciplines
-        if (!exit){
-            int counter;
-            personComponent = new SwimmingDisciplinesComponent();
-            do{
-                counter = 0;
-                printHeader();
-                print("Vælg svømmediscipliner (eks. 1,2,4): ");
-                for(String discipline: controller.getAllDisciplines()){
-                    counter++;
-                    print(counter + ". " + discipline);
-                }
-                printExit();
-                input = getStringInput();
+            //Disciplines
+            if (!exit){
+                personComponent = new SwimmingDisciplinesComponent();
+                do{
+                    counter = 0;
+                    printHeader();
+                    print("Vælg svømmediscipliner (eks. 1,2,4): ");
+                    for(String discipline: controller.getAllDisciplines()){
+                        counter++;
+                        print(counter + ". " + discipline);
+                    }
+                    printExit();
+                    input = getStringInput();
 
-                if(input.equals("0")){
-                    exit = true;
-                    break;
-                }
-            }while (!personComponent.checkComponent(input));
-            if(!exit) {
-                //Splits the user answer and adds to the array
-                String[] splitted = input.split(",");
-                for(String diciplin: splitted){
-                    disciplines.add(diciplin);
+                    if(input.equals("0")){
+                        exit = true;
+                        break;
+                    }
+                }while (!personComponent.checkComponent(input));
+                if(!exit) {
+                    //Splits the user answer and adds to the array
+                    String[] splitted = input.split(",");
+                    for(String diciplin: splitted){
+                        disciplines.add(diciplin);
+                    }
                 }
             }
         }
@@ -231,7 +231,7 @@ public class CreateMemberCUI extends UI {
             if (!exit) {
                 membershipStatus = MembershipStatus.values()[Integer.parseInt(input) - 1];
                 Member member = new Member(name,phoneNumber,address,email,birthday,trainerID,membershipStatus,membershipType,disciplines);
-                //controller.createMember(member);
+                controller.createMember(member);
             }
         }
 
