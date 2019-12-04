@@ -5,7 +5,6 @@ import Controllers.Controller;
 import enums.MembershipStatus;
 import enums.MembershipType;
 import model.Member;
-import model.Trainer;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -68,8 +67,7 @@ public class CreateMemberCUI extends UI {
     }
         //Address
         if (!exit){
-            personComponent = new NameComponent();
-            //personComponent = new AddressComponent();
+            personComponent = new AddressComponent();
             do{
                 printHeader();
                 print("Indtast adresse informationer på medlemet (Billeshavevej 75 Korup 5210): ");
@@ -122,7 +120,6 @@ public class CreateMemberCUI extends UI {
             }while (!personComponent.checkComponent(input));
             if(!exit) {
                 email = input;
-                input = "";
             }
         }
 
@@ -190,9 +187,6 @@ public class CreateMemberCUI extends UI {
                         trainerID = Integer.parseInt(input)+1;
                     }
                 }
-            }else{
-                //default trainer
-                trainerID = 1;
             }
 
             //Disciplines
@@ -223,11 +217,11 @@ public class CreateMemberCUI extends UI {
                             if(Integer.parseInt(diciplinID) < 1 || Integer.parseInt(diciplinID) > diciplines.length ){
                                 //Wrong input
                                 print("Forkert input, prøv igen");
+                                correct = false;
                                 break;
                             }else{
                                 //Correct input
                                 correct = true;
-                                break;
                             }
                         }
                     }else{
