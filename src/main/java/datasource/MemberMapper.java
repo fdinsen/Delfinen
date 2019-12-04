@@ -28,7 +28,8 @@ public class MemberMapper {
                 + "email, birthday, trainer_id, membership_status, membership_type) "
                 + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         String SQLDisciplines = "INSERT INTO member_swiming_discipline "
-                + "(member_id, discipline_id) VALUES (?,?)";
+                + "(member_id, discipline_id) VALUES";
+        String values = " (?,?)";
         try {
 
             PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
@@ -45,19 +46,52 @@ public class MemberMapper {
 
             ps.execute();
             ResultSet memberIdSet = ps.getGeneratedKeys();
-            
+            ArrayList<String> memberDisciplines = member.getMemberDisciplines();
 
-            if (!member.getMemberDisciplines().isEmpty() && memberIdSet.next()) {
+            if (!memberDisciplines.isEmpty() && memberIdSet.next()) {
                 ArrayList<String> disciplineNames 
                         = new ArrayList(Arrays.asList(new DisciplineMapper().getAllDisciplines()));
                 int memberId = memberIdSet.getInt(1);
-                for (String discipline : member.getMemberDisciplines()) {
-                    PreparedStatement psb = con.prepareStatement(SQLDisciplines);
-                    psb.setInt(1, memberId);
-                    psb.setInt(2, disciplineNames.indexOf(discipline) + 1);
-                    psb.execute();
-                    psb.close();
+
+                //This might not be the best way to do this, but it was
+                //what I could come up with at the time
+                //The amount of disciplines vary from 0-4, so to avoid making 
+                //multiple runs, the SQL script is appended with the correct
+                //amount of (?,?) needed.
+                for(int i = 0; i < memberDisciplines.size() ; i++) {
+                    if(i != 0) {
+                        SQLDisciplines += ",";
+                    }
+                    SQLDisciplines += values;
                 }
+                System.out.println(SQLDisciplines);
+                PreparedStatement psb = con.prepareStatement(SQLDisciplines);
+                
+                //Then the values have to be set on the script. Since there are
+                //two values for each row, this loop is run through twice for 
+                //each discipline a member is practicing.
+                int count = 0;
+                for(int i = 1; i <= memberDisciplines.size() * 2 ; i++) {
+                    //the uneven times, the memberId is added
+                    if(i % 2 != 0) {
+                        psb.setInt(i, memberId);
+                    //the even times the id for the discipline is added
+                    } else {
+                        psb.setInt(i, disciplineNames.indexOf(
+                                memberDisciplines.get(count)) + 1);
+                        count++;
+                    }
+                }
+                psb.execute();
+                psb.close();
+                //Old version, made multiple calls to database, heavyload
+//                for (String discipline : member.getMemberDisciplines()) {
+//                    PreparedStatement psb = con.prepareStatement(SQLDisciplines);
+//                    psb.setInt(1, memberId);
+//                    psb.setInt(2, disciplineNames.indexOf(discipline) + 1);
+//                    psb.execute();
+//                    psb.close();
+//                }
             }
             ps.close();
 
