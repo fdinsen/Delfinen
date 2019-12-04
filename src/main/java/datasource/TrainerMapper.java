@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Trainer;
@@ -74,5 +76,31 @@ public class TrainerMapper {
     public String getTrainerName(int trainerID) {
         
         return getTrainer(trainerID).getTrainerName();        
+    }
+    
+    public String[] getAllTrainers() {
+        ArrayList<String> allTrainers = new ArrayList();
+        con = DBConnector.getConnection();
+        String sql = "SELECT * FROM trainers";
+        try(Statement stmt = con.createStatement()) {
+            ResultSet rs = stmt.executeQuery(sql);
+            
+            while(rs.next()) {
+                int trainerID = rs.getInt("trainer_id");
+                String trainerName = rs.getString("trainer_name");
+                if(trainerID != 1) {
+                    allTrainers.add(trainerName);
+                }
+            }
+        }catch (SQLException ex) {
+            Logger.getLogger(RestanceMapper.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        String[] allTrainerNames = new String[allTrainers.size()];
+        int count = 0;
+        for (String trainer : allTrainers) {
+            allTrainerNames[count] = trainer;
+            count++;
+        }
+        return allTrainerNames;
     }
 }

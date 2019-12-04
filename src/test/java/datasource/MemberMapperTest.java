@@ -29,8 +29,8 @@ public class MemberMapperTest extends TestDataSetup {
         ArrayList<String> member1Disciplines = new ArrayList();
         member1Disciplines.add("CRAWL");
         member1Disciplines.add("BUTTERFLY");
-        Member member = new Member("navn", "555111", "addresse", 
-                "email@email.com", dato, 0, MembershipStatus.PASSIVE, 
+        Member member = new Member("navn", "555111", "addresse",
+                "email@email.com", dato, 0, MembershipStatus.PASSIVE,
                 MembershipType.COMPETITIVE, member1Disciplines);
         MemberMapper instanceMemberMapper = new MemberMapper();
         instanceMemberMapper.createMember(member);
@@ -54,12 +54,12 @@ public class MemberMapperTest extends TestDataSetup {
         member1Disciplines.add("BUTTERFLY");
         member2Disciplines.add("CRAWL");
         member2Disciplines.add("BREASTSTROKE");
-        Member member1 = new Member("navn", "555111", "addresse", 
-                "email@email.com", dato, 0, MembershipStatus.PASSIVE, 
+        Member member1 = new Member("navn", "555111", "addresse",
+                "email@email.com", dato, 0, MembershipStatus.PASSIVE,
                 MembershipType.COMPETITIVE, member1Disciplines);
 
-        Member member2 = new Member("navnet", "55511155", "addresseJA", 
-                "email@email.com.com", dato, 1, MembershipStatus.ACTIVE, 
+        Member member2 = new Member("navnet", "55511155", "addresseJA",
+                "email@email.com.com", dato, 1, MembershipStatus.ACTIVE,
                 MembershipType.CASUAL, member2Disciplines);
 
         MemberMapper instanceMemberMapper = new MemberMapper();
@@ -97,12 +97,12 @@ public class MemberMapperTest extends TestDataSetup {
         member1Disciplines.add("BUTTERFLY");
         member2Disciplines.add("CRAWL");
         member2Disciplines.add("BREASTSTROKE");
-        Member member1 = new Member("navn", "555111", "addresse", 
-                "email@email.com", dato, 0, MembershipStatus.PASSIVE, 
+        Member member1 = new Member("navn", "555111", "addresse",
+                "email@email.com", dato, 0, MembershipStatus.PASSIVE,
                 MembershipType.COMPETITIVE, member1Disciplines);
 
-        Member member2 = new Member("navnet", "555111", "addresseJA", 
-                "email@email.com.com", dato, 1, MembershipStatus.ACTIVE, 
+        Member member2 = new Member("navnet", "555111", "addresseJA",
+                "email@email.com.com", dato, 1, MembershipStatus.ACTIVE,
                 MembershipType.CASUAL, member2Disciplines);
 
         MemberMapper instanceMemberMapper = new MemberMapper();
@@ -235,23 +235,56 @@ public class MemberMapperTest extends TestDataSetup {
 
         assertEquals(exspected, actual);
     }
+
     @Test
-    public void getMemberSwimingDiscipline(){
+    public void testGetMemberSwimingDiscipline() {
         //Arrange
         MemberMapper instanceMemberMapper = new MemberMapper();
         ArrayList<String> liste = instanceMemberMapper.getMemberSwimmingDiscipline(1);
         String exspectedFirst = "BUTTERFLY";
         String exspectedSecond = "BACKCRAWL";
-        String exspectedThird= "BREASTSTROKE";
-        
+        String exspectedThird = "BREASTSTROKE";
+
         //Act
         String actualFirst = liste.get(0);
         String actualSecond = liste.get(1);
         String actualThird = liste.get(2);
-        
+
         //Assert
         assertEquals(exspectedFirst, actualFirst);
         assertEquals(exspectedSecond, actualSecond);
         assertEquals(exspectedThird, actualThird);
+    }
+
+    @Test
+    public void testGetMemberByID() {
+        //Arrange
+        MemberMapper instance = new MemberMapper();
+        int Id = 3;
+        String expectedName = "Suzan";
+        String expectedPhone = "34567890";
+        String expectedAddress = "Veeeej 1";
+        String expectedEmail = "SUzan@gmail.com";
+        LocalDate expectedBirthday = LocalDate.parse("1940-05-06");
+        int expectedTrainerId = 3;
+        MembershipStatus expectedMemstat = MembershipStatus.ACTIVE;
+        MembershipType expectedMemtype = MembershipType.COMPETITIVE;
+        ArrayList<String> expectedDisciplines = new ArrayList();
+        expectedDisciplines.add("BREASTSTROKE");
+        Member actualMember;
+        
+        //Act
+        actualMember = instance.getMemberByID(Id);
+        
+        //Assert
+        assertEquals(expectedName, actualMember.getName());
+        assertEquals(expectedPhone, actualMember.getPhone());
+        assertEquals(expectedAddress, actualMember.getAddress());
+        assertEquals(expectedEmail, actualMember.getEmail());
+        assertEquals(expectedBirthday, actualMember.getBirthday());
+        assertEquals(expectedTrainerId, actualMember.getTrainerId());
+        assertEquals(expectedMemstat, actualMember.getMembershipStatus());
+        assertEquals(expectedMemtype, actualMember.getMembershipType());
+        assertEquals(expectedDisciplines.get(0), actualMember.getMemberDisciplines().get(0));
     }
 }

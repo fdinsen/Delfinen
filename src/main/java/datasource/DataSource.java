@@ -47,6 +47,7 @@ public interface DataSource {
     public void updtateTrainer(Trainer trainer);
     public void deleteTrainer(int trainerID);
     public Trainer getTrainer(int trainerID);
+    public String[] getAllTrainers();
 
     //------------------//
     // TournamentMapper //
@@ -85,4 +86,10 @@ public interface DataSource {
     //-----------------//
     
     public boolean[] getPrivileges(int id);
+    
+    //------------------//
+    // DisciplineMapper //
+    //------------------//
+    
+    public String[] getAllDisciplines();
 }

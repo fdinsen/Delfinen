@@ -106,6 +106,11 @@ public class DBFacade implements DataSource {
     public Trainer getTrainer(int trainerID) {
         return new TrainerMapper().getTrainer(trainerID);
     }
+    
+    @Override
+    public String[] getAllTrainers() {
+        return new TrainerMapper().getAllTrainers();
+    }
 
     //------------------//
     // TournamentMapper //
@@ -189,6 +194,16 @@ public class DBFacade implements DataSource {
     @Override
     public boolean[] getPrivileges(int id) {
         return new PrivilegeMapper().getPrivileges(id);
+    }
+
+    
+    //------------------//
+    // DisciplineMapper //
+    //------------------//
+    
+    @Override
+    public String[] getAllDisciplines() {
+        return new DisciplineMapper().getAllDisciplines();
     }
 
 }

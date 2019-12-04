@@ -29,7 +29,7 @@ public class TournamentMapperTest extends TestDataSetup{
         String str = "2019-02-18";
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate expectedDate = LocalDate.parse(str, formatter);
-        String expectedLocation = "Espergærde";
+        String expectedLocation = "Espergaerde";
         int expectedSize = 3;
 
         assertEquals(expectedID1, actual.get(0).getId());

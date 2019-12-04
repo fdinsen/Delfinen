@@ -1,4 +1,3 @@
-
 package datasource;
 
 import java.util.ArrayList;
@@ -10,11 +9,13 @@ import model.Times;
 import model.TrainingTime;
 import model.CompetitionTime;
 import model.Member;
+
 /**
  *
  * @author <Frederik Keis Dinsen>
  */
 public class FileHandler implements DataSource {
+
     //--------------//
     // MemberMapper //
     //--------------//
@@ -47,12 +48,12 @@ public class FileHandler implements DataSource {
     public List<Member> getMemberByName(String name) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
     @Override
     public ArrayList<String> getMemberSwimmingDiscipline(int memberID) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
     @Override
     public Member getMemberByID(int memberID) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -61,7 +62,6 @@ public class FileHandler implements DataSource {
     //----------------//
     // RestanceMapper //
     //----------------//
-    
     @Override
     public List<Member> getAllRestance() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -81,11 +81,10 @@ public class FileHandler implements DataSource {
     public boolean makeNewSeason() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
     //---------------//
     // TrainerMapper //
     //---------------//
-
     @Override
     public void createTrainer(Trainer trainer) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -106,10 +105,19 @@ public class FileHandler implements DataSource {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    @Override
+    public String[] getAllTrainers() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String getTrainerName(int trainerID) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     //------------------//
     // TournamentMapper //
     //------------------//
-    
     @Override
     public List<Tournament> getAllTournaments(int year) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -128,7 +136,6 @@ public class FileHandler implements DataSource {
     //-------------------//
     // CompetitionMapper //
     //-------------------//
-    
     @Override
     public List<Competition> getAllCompetitions(int tournamentID) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -147,7 +154,6 @@ public class FileHandler implements DataSource {
     //--------------------//
     // TrainingTimeMapper //
     //--------------------//
-    
     @Override
     public void addTime(TrainingTime trainingTime) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -166,28 +172,29 @@ public class FileHandler implements DataSource {
     //-----------------------//
     // CompetitionTimeMapper //
     //-----------------------//
-    
     @Override
     public void addTime(CompetitionTime competitionTime) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
     @Override
     public List<CompetitionTime> getAllTimes(int competitionID) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
     //-----------------//
     // PrivilegeMapper //
     //-----------------//
-
     @Override
     public boolean[] getPrivileges(int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    //------------------//
+    // DisciplineMapper //
+    //------------------//
     @Override
-    public String getTrainerName(int trainerID) {
+    public String[] getAllDisciplines() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

@@ -27,7 +27,7 @@ public class TrainerMapperTest extends TestDataSetup {
     public void testGetTrainer() {
         //Arrange
         TrainerMapper instance = new TrainerMapper();
-        String expTrainerName = "TrainerJoe";
+        String expTrainerName = "TrainerJohn";
         String actualTrainerName;
         
         //Act
@@ -62,7 +62,7 @@ public class TrainerMapperTest extends TestDataSetup {
         
         //Act
         instance.createTrainer(newTrainer);
-        actualName = instance.getTrainer(4).getTrainerName();
+        actualName = instance.getTrainer(5).getTrainerName();
         
         //Assert
         assertEquals(expectedName, actualName);
@@ -77,11 +77,11 @@ public class TrainerMapperTest extends TestDataSetup {
         TrainerMapper instance = new TrainerMapper();
         String expectedName = "Peter";
         String actualName;
-        Trainer trainerToUpdate = new Trainer(expectedName, 1);
+        Trainer trainerToUpdate = new Trainer(expectedName, 2);
         
         //Act
         instance.updateTrainer(trainerToUpdate);
-        actualName = instance.getTrainer(1).getTrainerName();
+        actualName = instance.getTrainer(2).getTrainerName();
         
         //Assert
         assertEquals(expectedName, actualName);
@@ -96,7 +96,7 @@ public class TrainerMapperTest extends TestDataSetup {
         //Arrange
         TrainerMapper instance = new TrainerMapper();
         String nameOfTrainerToDelete = "TrainerJohn";
-        int idOfTrainerToDelete = 1;
+        int idOfTrainerToDelete = 2;
         
         
         //Act
@@ -109,6 +109,20 @@ public class TrainerMapperTest extends TestDataSetup {
         assertEquals(null, deletedTrainer);
     }
 
+    @Test
+    public void testGetAllTrainersByContent() {
+        //Arrange
+        TrainerMapper instance = new TrainerMapper();
+        String[] expectedTrainers = {"TrainerJohn", "TrainerJoe", "TrainerMagrette"};
+        String[] actualTrainers;
+
+        //Act
+        actualTrainers = instance.getAllTrainers();
+        
+        //Assert
+        assertArrayEquals(expectedTrainers, actualTrainers);
+        
+    }
     
     
 }

@@ -163,12 +163,10 @@ public class Controller {
     }
 
     public String[] getAllTrainers() {
-        System.out.println("getAllTrainers NOT IMPLEMENTED");
-        return null;
+        return datasource.getAllTrainers();
     }
 
     public String[] getAllDisciplines() {
-        System.out.println("getAllDisciplines NOT IMPLEMENTED");
-        return null;
+        return datasource.getAllDisciplines();
     }
 }
