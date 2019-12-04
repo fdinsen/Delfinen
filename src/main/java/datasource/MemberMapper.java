@@ -14,6 +14,8 @@ import java.util.logging.Logger;
 import model.Member;
 import enums.MembershipStatus;
 import enums.MembershipType;
+import java.sql.Statement;
+import java.util.Arrays;
 
 public class MemberMapper {
 
@@ -22,11 +24,14 @@ public class MemberMapper {
     public void createMember(Member member) {
         TimeZone.setDefault(TimeZone.getTimeZone("GMT+1"));
         con = DBConnector.getConnection();
-        String SQL = "INSERT INTO members (member_name, phone_number, address, email, birthday, trainer_id, membership_status, membership_type) "
+        String SQL = "INSERT INTO members (member_name, phone_number, address, "
+                + "email, birthday, trainer_id, membership_status, membership_type) "
                 + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        String SQLDisciplines = "INSERT INTO member_swiming_discipline "
+                + "(member_id, discipline_id) VALUES (?,?)";
         try {
 
-            PreparedStatement ps = con.prepareStatement(SQL);
+            PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, member.getName());
             ps.setString(2, member.getPhone());
             ps.setString(3, member.getAddress());
@@ -39,6 +44,21 @@ public class MemberMapper {
             ps.setString(8, member.getMembershipType().toString());
 
             ps.execute();
+            ResultSet memberIdSet = ps.getGeneratedKeys();
+            
+
+            if (!member.getMemberDisciplines().isEmpty() && memberIdSet.next()) {
+                ArrayList<String> disciplineNames 
+                        = new ArrayList(Arrays.asList(new DisciplineMapper().getAllDisciplines()));
+                int memberId = memberIdSet.getInt(1);
+                for (String discipline : member.getMemberDisciplines()) {
+                    PreparedStatement psb = con.prepareStatement(SQLDisciplines);
+                    psb.setInt(1, memberId);
+                    psb.setInt(2, disciplineNames.indexOf(discipline) + 1);
+                    psb.execute();
+                    psb.close();
+                }
+            }
             ps.close();
 
         } catch (SQLException ex) {
@@ -220,7 +240,7 @@ public class MemberMapper {
         try (PreparedStatement ps = con.prepareStatement(sql)) {
             ps.setInt(1, memberID);
             ResultSet rs = ps.executeQuery();
-            while(rs.next()) {
+            while (rs.next()) {
                 String email = rs.getString("email");
                 String memberName = rs.getString("member_name");
                 String memberPhone = rs.getString("phone_number");

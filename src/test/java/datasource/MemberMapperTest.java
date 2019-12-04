@@ -287,4 +287,28 @@ public class MemberMapperTest extends TestDataSetup {
         assertEquals(expectedMemtype, actualMember.getMembershipType());
         assertEquals(expectedDisciplines.get(0), actualMember.getMemberDisciplines().get(0));
     }
+    
+    @Test
+    public void testCreateMemberWithDisciplines() {
+        //Arrange
+        LocalDate dato = LocalDate.now();
+        ArrayList<String> member1Disciplines = new ArrayList();
+        member1Disciplines.add("CRAWL");
+        member1Disciplines.add("BUTTERFLY");
+        Member member = new Member("navn", "555111", "addresse",
+                "email@email.com", dato, 0, MembershipStatus.PASSIVE,
+                MembershipType.COMPETITIVE, member1Disciplines);
+        MemberMapper instanceMemberMapper = new MemberMapper();
+        ArrayList<String> actualDisciplines;
+        
+        //Act
+        instanceMemberMapper.createMember(member);
+        ArrayList<Member> actual = instanceMemberMapper.getMemberByPhone("555111");
+        actualDisciplines = actual.get(0).getMemberDisciplines();
+        
+        //Assert
+        assertEquals(member1Disciplines.get(0), actualDisciplines.get(0));
+        assertEquals(member1Disciplines.get(1), actualDisciplines.get(1));
+        
+    }
 }
