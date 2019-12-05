@@ -29,11 +29,11 @@ public class TrainingTimeMapperTest extends TestDataSetup{
     public void testAddTime() {
         LocalDate ld = LocalDate.of(2018,11,05);
         TrainingTimeMapper instanceOfTTMapper = new TrainingTimeMapper();
-        TrainingTime trainingTime = new TrainingTime(1, ld, 75000 , 1);
-        int exsectlength = 7;
+        TrainingTime trainingTime = new TrainingTime(10, ld, 400 , 1);
+        int exsectlength = 5;
         instanceOfTTMapper.addTime(trainingTime);
         
-        ArrayList<TrainingTime> liste = (ArrayList<TrainingTime>) instanceOfTTMapper.getMemberTimes(1);
+        ArrayList<TrainingTime> liste = (ArrayList<TrainingTime>) instanceOfTTMapper.getMemberTimes(10);
         
         int actualMs = liste.size();
         assertEquals(exsectlength, actualMs);
@@ -42,23 +42,32 @@ public class TrainingTimeMapperTest extends TestDataSetup{
     public void testGetMemberTime(){
         ArrayList<TrainingTime> liste = new ArrayList<>();
         TrainingTimeMapper instanceOfTTMapper = new TrainingTimeMapper();
-        int expsectedMs = 60000;
-        int exspectedSD = 1;
+        int expsectedSize = 5;
         liste = (ArrayList<TrainingTime>) instanceOfTTMapper.getMemberTimes(1);
         
-        int actualMs = liste.get(0).getTimeInMS();
-        int actualSd = liste.get(0).getSwimmingDiscipline();
+        int actualSize = liste.size();
         
-        assertEquals(expsectedMs, actualMs);
-        assertEquals(exspectedSD, actualSd);
+        assertEquals(expsectedSize, actualSize);
     }
     @Test
-    public void testGetTop5(){
+    public void testGetTop5Senior(){
         
         TrainingTimeMapper instanceOfTTMapper = new TrainingTimeMapper();
         int expsected = 5;
         
         ArrayList<TrainingTime> liste = (ArrayList<TrainingTime>) instanceOfTTMapper.getTop5Senior(1);
+        int actual = liste.size();
+        
+        assertEquals(expsected, actual);
+        
+    }
+    @Test
+    public void testGetTop5Junior(){
+        
+        TrainingTimeMapper instanceOfTTMapper = new TrainingTimeMapper();
+        int expsected = 1;
+        
+        ArrayList<TrainingTime> liste = (ArrayList<TrainingTime>) instanceOfTTMapper.getTop5Junior(1);
         int actual = liste.size();
         
         assertEquals(expsected, actual);
