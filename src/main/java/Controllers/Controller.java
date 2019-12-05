@@ -1,8 +1,9 @@
 package Controllers;
 
 import datasource.DataSource;
-import java.util.ArrayList;
 import model.*;
+
+import java.util.ArrayList;
 
 /**
  *
@@ -132,6 +133,10 @@ public class Controller {
         return (ArrayList) datasource.getTop5Junior(swimmingDisciplineID);
     }
 
+    public void updateTrainingTime(TrainingTime trainingTime) {
+        datasource.updateTrainingTime(trainingTime);
+    }
+
     //-----------------------//
     // CompetitionTimeMapper //
     //-----------------------//
@@ -172,4 +177,5 @@ public class Controller {
     public String[] getAllDisciplines() {
         return datasource.getAllDisciplines();
     }
+
 }

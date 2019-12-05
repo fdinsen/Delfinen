@@ -1,14 +1,9 @@
 package datasource;
 
+import model.*;
+
 import java.util.ArrayList;
 import java.util.List;
-import model.Trainer;
-import model.Competition;
-import model.Tournament;
-import model.Times;
-import model.TrainingTime;
-import model.CompetitionTime;
-import model.Member;
 
 /**
  *
@@ -112,6 +107,11 @@ public class FileHandler implements DataSource {
 
     @Override
     public String getTrainerName(int trainerID) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void updateTrainingTime(TrainingTime trainingTime) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

@@ -103,9 +103,11 @@ public class MemberCUI extends UI {
     private void printTrainingTimes(int memberID){
                 ArrayList<TrainingTime> trainingTimes = controller.getMemberTimes(memberID);
         if (trainingTimes != null && trainingTimes.size() != 0) {
+            int counter = 0;
             print("\t\t format: mm:ss:ms");
             for (TrainingTime trainingTime : trainingTimes) {
-                print("\t" + swimmingDisciplines[trainingTime.getSwimmingDiscipline() - 1] + " - Tid: " + trainingTime.getTimeInMinutes()
+                counter++;
+                print("\t" + counter + ". " + swimmingDisciplines[trainingTime.getSwimmingDiscipline() - 1] + " - Tid: " + trainingTime.getTimeInMinutes()
                         + " - Dato: " + trainingTime.getDate());
             }
         }else{
@@ -193,9 +195,10 @@ public class MemberCUI extends UI {
                         break;
 
                     case 7:
-                        //Add training time to member
-                        addTrainingTimeToMember(memberID);
-                        printMember(controller.getMemberByID(memberID));
+                        //Training time
+                        trainingTimeDialog(controller.getMemberByID(memberID));
+                        //So it prints the correct user menu again
+                        memberID = 0;
                         //exit = true;
                         break;
                     case 1:
@@ -237,6 +240,130 @@ public class MemberCUI extends UI {
 
     }
 
+    private void trainingTimeDialog(Member member) {
+        ArrayList<TrainingTime> trainingTimes = controller.getMemberTimes(member.getMemberId());
+        boolean exit = false;
+        int input;
+        do {
+            printHeader(member.getName() + "- Træningstider");
+            printTrainingTimes(member.getMemberId());
+            //TODO Make prev in db and print from there
+            print("1. Tilføj Ny Træningstid");
+            if (trainingTimes != null && trainingTimes.size() != 0) {
+                print("2. Rediger Træningstid");
+            }
+            printExit();
+            input = getMenuInput();
+            if (input == 0) {
+                break;
+            } else if (input > 0 && input < 3) {
+                //Correct choice
+                if (input == 1) {
+                    addTrainingTimeToMember(member.getMemberId());
+                } else if (trainingTimes != null && trainingTimes.size() != 0)
+                    editTrainingTimeOnMember(member, trainingTimes);
+            } else {
+                //Wrong input
+                print(input + "Er ikke en mulighed i denne menu");
+            }
+        } while (!exit);
+    }
+
+    private void editTrainingTimeOnMember(Member member, ArrayList<TrainingTime> trainingTimes) {
+        boolean exit = false;
+        int input;
+        do {
+            printHeader(member.getName() + "- Rediger en træningstid");
+            if (trainingTimes.size() == 1) {
+                //Only one training time
+                input = 1;
+            } else {
+                printTrainingTimes(member.getMemberId());
+                print("Vælg en træningstid at redigere");
+                printExit();
+                input = getMenuInput();
+            }
+            if (input == 0) {
+                break;
+            } else if (input > 0 && input <= trainingTimes.size()) {
+                //Correct choice
+                boolean exitInner = false;
+                int inputInner;
+                input--;
+                do {
+                    printTrainingTime(trainingTimes.get(input));
+                    printExit();
+                    print("Vælg en information du vil redigere");
+                    inputInner = getMenuInput();
+                    if (inputInner == 0) {
+                        exitInner = true;
+                        if (trainingTimes.size() == 1) {
+                            exit = true;
+                        }
+                        break;
+                    } else if (inputInner > 0 && inputInner <= 3) {
+                        boolean correctAnswer = false;
+                        int trainingTimeID = trainingTimes.get(input).getTrainingTimeID();
+                        LocalDate date = trainingTimes.get(input).getDate();
+                        int timeInMs = trainingTimes.get(input).getTimeInMS();
+                        int disciplineID = trainingTimes.get(input).getSwimmingDiscipline();
+                        //Correct choice
+                        switch (inputInner) {
+                            case 1:
+                                //Date
+                                date = getDateInput();
+                                if (date != null) {
+                                    correctAnswer = true;
+                                    exitInner = true;
+                                    exit = true;
+                                }
+
+                                break;
+                            case 2:
+                                //Time
+                                timeInMs = getTimeInput();
+                                if (timeInMs != 0) {
+                                    correctAnswer = true;
+                                    exitInner = true;
+                                    exit = true;
+                                }
+                                break;
+                            case 3:
+                                //Discipline
+                                disciplineID = getDisciplineIDInput();
+                                //If not 0, correct number
+                                if (!(disciplineID == 0)) {
+                                    correctAnswer = true;
+                                    exitInner = true;
+                                    exit = true;
+                                }
+                                break;
+                        }
+                        if (correctAnswer) {
+                            TrainingTime trainingTime = new TrainingTime(trainingTimeID, member.getMemberId(), date, timeInMs, disciplineID);
+                            trainingTimes.add(trainingTime);
+                            controller.updateTrainingTime(trainingTime);
+                        }
+                    } else {
+                        //Wrong input
+                        print(inputInner + " Er ikke en mulighed i denne menu");
+                    }
+                } while (!exitInner);
+            } else {
+                //Wrong input
+                print(input + " Er ikke en mulighed i denne menu");
+            }
+        } while (!exit);
+
+    }
+
+    private void printTrainingTime(TrainingTime trainingTime) {
+        controller.getAllDisciplines();
+        print("1. Dato: " + trainingTime.getDate());
+        print("2. Tid: " + trainingTime.getTimeInMinutes());
+        print("3. Disciplin: " + controller.getAllDisciplines()[trainingTime.getSwimmingDiscipline() - 1]);
+    }
+
     private void addTrainingTimeToMember(int memberID) {
         boolean exit = false;
         LocalDate date;
@@ -269,6 +396,7 @@ public class MemberCUI extends UI {
             if (!(disciplineID == 0)) {    
                 TrainingTime trainingTime = new TrainingTime(memberID, date, TimeInMs, disciplineID);
                 controller.addTime(trainingTime);
+                exit = true;
             }
 
         }
@@ -305,7 +433,6 @@ public class MemberCUI extends UI {
                 return 0;
             } else {
                 int temp = Times.convertToMS(input);
-                print("" + temp);
                 if (temp != -1) {
                     //Correct date
                     return temp;
@@ -324,8 +451,8 @@ public class MemberCUI extends UI {
                 counter++;
                 print(counter + ". " + str);
             }
-            print("Vælg svømmeDisciplin");
             printExit();
+            print("Vælg svømmeDisciplin");
             inputInt = getMenuInput();
 
             if (inputInt == 0) {

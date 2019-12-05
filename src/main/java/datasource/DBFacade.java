@@ -1,14 +1,10 @@
 
 package datasource;
 
+import model.*;
+
 import java.util.ArrayList;
 import java.util.List;
-import model.Trainer;
-import model.Competition;
-import model.Tournament;
-import model.TrainingTime;
-import model.CompetitionTime;
-import model.Member;
 /**
  *
  * @author <Frederik Keis Dinsen>
@@ -111,6 +107,13 @@ public class DBFacade implements DataSource {
     public String[] getAllTrainers() {
         return new TrainerMapper().getAllTrainers();
     }
+
+    @Override
+    public void updateTrainingTime(TrainingTime trainingTime) {
+        new TrainingTimeMapper().updateTrainingTime(trainingTime);
+    }
+
+    ;
 
     //------------------//
     // TournamentMapper //
