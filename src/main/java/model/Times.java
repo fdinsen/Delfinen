@@ -36,13 +36,12 @@ public abstract class Times {
         ValidationComponent timeInput = new TimeComponent();
 
         if (timeInput.checkComponent(time)) {
-            int timeMS = 0;
             String[] times = time.split(":");
             int timeInMS = 0;
             timeInMS += Integer.parseInt(times[0]) * 60 * 1000;
             timeInMS += Integer.parseInt(times[1]) * 1000;
             timeInMS += Integer.parseInt(times[2]);
-            return timeMS;
+            return timeInMS;
         }
 
         return -1;
