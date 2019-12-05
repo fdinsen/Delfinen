@@ -8,14 +8,9 @@ package ui.console;
 import ComponentValidation.TimeComponent;
 import ComponentValidation.ValidationComponent;
 import Controllers.Controller;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
+import model.*;
+
 import java.util.ArrayList;
-import model.Competition;
-import model.CompetitionTime;
-import model.Member;
-import model.Times;
-import model.Tournament;
 
 /**
  *
@@ -25,7 +20,7 @@ public class CompetitionCUI extends UI {
 
     private int[] possibleOptionsInMenu = new int[]{10, 11, 12};
     private Tournament tournament;
-    String[] disciplines;
+    private String[] disciplines;
 
     public CompetitionCUI(Controller controller, Tournament tournament) {
         this.controller = controller;
@@ -140,7 +135,6 @@ public class CompetitionCUI extends UI {
         printHeader();
 
         Member member;
-        String discipline = disciplines[competition.getSwimmingDiscipline() - 1];
         ArrayList<CompetitionTime> times
                 = controller.getAllTimes(competition.getCompetitionsId());
         if (times.size() != 0) {
@@ -232,8 +226,8 @@ public class CompetitionCUI extends UI {
     private Member findMember() {
         Member member = null;
         boolean exit = false;
-        String input = "";
-        ArrayList<Member> members = new ArrayList<>();
+        String input;
+        ArrayList members = new ArrayList<>();
 
         do {
             printHeader();

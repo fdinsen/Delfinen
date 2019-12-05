@@ -13,23 +13,21 @@ import java.util.logging.Logger;
  * @author <Frederik Keis Dinsen>
  */
 public class PrivilegeMapper {
-    private Connection con = null;
-    
+
     public boolean[] getPrivileges(int userID) {
         boolean[] privileges = new boolean[16];
-        con = DBConnector.getConnection();
+        Connection con = DBConnector.getConnection();
         
         String sql = "SELECT * FROM user_privileges WHERE user_piv_id = ?";
         try (PreparedStatement ps = con.prepareStatement(sql)) {
             ps.setInt(1, userID);
             ResultSet rs = ps.executeQuery();
-            int count = 0;
             while(rs.next()) {
                 for(int i = 0; i < privileges.length ; i++) {
-                    //Der lægges 2 til af to grunde:
-                    //+1 fordi SQL tæller kolonner fra 1
-                    //+1 mere fordi den første kolonne er 
-                    // bruger-id'et og derfor skal skippes
+                    // 2 are added for two reasons:
+                    // + 1 because SQL counts columns from 1
+                    // + 1 more because the first column is
+                    // the user ID and therefore must be skipped
                     privileges[i] = rs.getBoolean(i + 2);
                 }
             }

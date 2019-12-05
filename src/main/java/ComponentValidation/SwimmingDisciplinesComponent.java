@@ -1,9 +1,5 @@
 package ComponentValidation;
 
-import Controllers.Controller;
-
-import java.util.ArrayList;
-
 public class SwimmingDisciplinesComponent implements ValidationComponent {
     @Override
     public boolean checkComponent(String ids) {

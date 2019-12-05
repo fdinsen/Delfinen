@@ -1,15 +1,14 @@
 package ui.console;
 
 import ComponentValidation.FullDateComponent;
-import ComponentValidation.TimeComponent;
 import Controllers.Controller;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import model.Member;
-
-import java.util.ArrayList;
 import model.Times;
 import model.TrainingTime;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 public class MemberCUI extends UI {
 
@@ -31,8 +30,8 @@ public class MemberCUI extends UI {
     private Member findMember() {
         Member member = null;
         boolean exit = false;
-        String input = "";
-        ArrayList<Member> members = new ArrayList<>();
+        String input;
+        ArrayList members = new ArrayList<>();
 
         do {
             print("Indtast tlf. nr., email eller navn på en bruger");
@@ -79,6 +78,7 @@ public class MemberCUI extends UI {
         print("Adresse: " + member.getAddress());
         print("Email: " + member.getEmail());
         print("Fødselsdag: " + member.getBirthday());
+        print("Hold: " + member.getTeamType());
         if (!(member.getTrainerId() == 1));
         {
             print("Træner: " + trainer);
@@ -101,7 +101,7 @@ public class MemberCUI extends UI {
 
     }
     
-    public void printTrainingTimes(int memberID){
+    private void printTrainingTimes(int memberID){
                 ArrayList<TrainingTime> trainingTimes = controller.getMemberTimes(memberID);
         if (trainingTimes != null && trainingTimes.size() != 0) {
             print("\t\t format: mm:ss:ms");
@@ -137,7 +137,6 @@ public class MemberCUI extends UI {
                 //gets user input and if correct choice, returns the member
                 input = getMenuInput();
                 if (input == 0) {
-                    exit = true;
                     return null;
                 } else if (input < 0 || input > members.size()) {
                     print("Er ikke en bruger");
@@ -153,9 +152,9 @@ public class MemberCUI extends UI {
 
     //memberID should be set to member id if the member have just been printed out to the user, else 0
     //So we know which options to show to the user
-    public void printUserMenu(int memberID) {
+    private void printUserMenu(int memberID) {
         boolean exit = false;
-        int counter = 0;
+        int counter;
         int input;
         do {
             printHeader();
@@ -241,10 +240,9 @@ public class MemberCUI extends UI {
 
     private void addTrainingTimeToMember(int memberID) {
         boolean exit = false;
-        String input;
-        LocalDate date = null;
+        LocalDate date;
         int TimeInMs = 0;
-        int disciplineID = 0;
+        int disciplineID ;
 
         //Training Time
         printHeader("Tilføj Trænings Tid - Dato");
@@ -278,7 +276,7 @@ public class MemberCUI extends UI {
 
     }
 
-    public LocalDate getDateInput() {
+    private LocalDate getDateInput() {
         FullDateComponent dateValidator = new FullDateComponent();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
         String input;
@@ -297,9 +295,8 @@ public class MemberCUI extends UI {
 
     }
 
-    public int getTimeInput() {
+    private int getTimeInput() {
         String input;
-        TimeComponent tc = new TimeComponent();
         do {
             print("Indtast tid (mm:ss:mss)");
             printExit();
@@ -319,7 +316,7 @@ public class MemberCUI extends UI {
 
     }
 
-    public int getDisciplineIDInput() {
+    private int getDisciplineIDInput() {
         int inputInt;
         int counter;
         do {

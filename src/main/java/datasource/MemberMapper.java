@@ -27,8 +27,8 @@ public class MemberMapper {
         String SQL = "INSERT INTO members (member_name, phone_number, address, "
                 + "email, birthday, trainer_id, membership_status, membership_type) "
                 + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-        String SQLDisciplines = "INSERT INTO member_swiming_discipline "
-                + "(member_id, discipline_id) VALUES";
+        StringBuilder SQLDisciplines = new StringBuilder("INSERT INTO member_swiming_discipline "
+                + "(member_id, discipline_id) VALUES");
         String values = " (?,?)";
         try {
             PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
@@ -59,11 +59,11 @@ public class MemberMapper {
                 //amount of (?,?) needed.
                 for (int i = 0; i < memberDisciplines.size(); i++) {
                     if (i != 0) {
-                        SQLDisciplines += ",";
+                        SQLDisciplines.append(",");
                     }
-                    SQLDisciplines += values;
+                    SQLDisciplines.append(values);
                 }
-                PreparedStatement psb = con.prepareStatement(SQLDisciplines);
+                PreparedStatement psb = con.prepareStatement(SQLDisciplines.toString());
 
                 //Then the values have to be set on the script. Since there are
                 //two values for each row, this loop is run through twice for 

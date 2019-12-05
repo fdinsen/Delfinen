@@ -2,8 +2,6 @@
 package ui.console;
 
 import Controllers.Controller;
-import model.Tournament;
-import model.Trainer;
 
 /**
  *

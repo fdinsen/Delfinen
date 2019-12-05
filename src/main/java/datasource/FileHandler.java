@@ -91,7 +91,7 @@ public class FileHandler implements DataSource {
     }
 
     @Override
-    public void updtateTrainer(Trainer trainer) {
+    public void updateTrainer(Trainer trainer) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

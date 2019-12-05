@@ -93,7 +93,7 @@ public class DBFacade implements DataSource {
     }
 
     @Override
-    public void updtateTrainer(Trainer trainer) {
+    public void updateTrainer(Trainer trainer) {
         new TrainerMapper().updateTrainer(trainer);
     }
 

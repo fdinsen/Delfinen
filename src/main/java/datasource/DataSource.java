@@ -1,15 +1,10 @@
 
 package datasource;
 
+import model.*;
+
 import java.util.ArrayList;
 import java.util.List;
-import model.Trainer;
-import model.Competition;
-import model.Tournament;
-import model.Times;
-import model.TrainingTime;
-import model.CompetitionTime;
-import model.Member;
 
 /**
  *
@@ -21,76 +16,76 @@ public interface DataSource {
     // MemberMapper //
     //--------------//
     
-    public void createMember(Member member);
-    public void updateMember(Member member);
-    public void deleteMember(int memberID);
-    public List<Member> getMemberByPhone(String phonenumber);
-    public List<Member> getMemberByEmail(String email);
-    public List<Member> getMemberByName(String name);
-    public Member getMemberByID(int memberID);
-    public ArrayList<String> getMemberSwimmingDiscipline(int memberID);
+    void createMember(Member member);
+    void updateMember(Member member);
+    void deleteMember(int memberID);
+    List<Member> getMemberByPhone(String phonenumber);
+    List<Member> getMemberByEmail(String email);
+    List<Member> getMemberByName(String name);
+    Member getMemberByID(int memberID);
+    ArrayList<String> getMemberSwimmingDiscipline(int memberID);
     
     
     //----------------//
     // RestanceMapper //
     //----------------//
-    public List<Member> getAllRestance();
-    public boolean memberHasRestance(int memberID);
-    public boolean markAsPaid(int memberID);
-    public boolean makeNewSeason();
+    List<Member> getAllRestance();
+    boolean memberHasRestance(int memberID);
+    boolean markAsPaid(int memberID);
+    boolean makeNewSeason();
     
     //---------------//
     // TrainerMapper //
     //---------------//
     
-    public void createTrainer(Trainer trainer);
-    public void updtateTrainer(Trainer trainer);
-    public void deleteTrainer(int trainerID);
-    public Trainer getTrainer(int trainerID);
-    public String[] getAllTrainers();
+    void createTrainer(Trainer trainer);
+    void updateTrainer(Trainer trainer);
+    void deleteTrainer(int trainerID);
+    Trainer getTrainer(int trainerID);
+    String[] getAllTrainers();
 
     //------------------//
     // TournamentMapper //
     //------------------//
     
-    public List<Tournament> getAllTournaments(int year);
-    public void addTournament(Tournament tournament);
-    public void updateTournament(Tournament tournament);
+    List<Tournament> getAllTournaments(int year);
+    void addTournament(Tournament tournament);
+    void updateTournament(Tournament tournament);
     
     //-------------------//
     // CompetitionMapper //
     //-------------------//
     
-    public List<Competition> getAllCompetitions(int tournamentID);
-    public void addCompetition(Competition competition);
-    public void updateCompetition(Competition competition);
+    List<Competition> getAllCompetitions(int tournamentID);
+    void addCompetition(Competition competition);
+    void updateCompetition(Competition competition);
 
     //--------------------//
     // TrainingTimeMapper //
     //--------------------//
     
-    public void addTime(TrainingTime trainingTime);
-    public List<TrainingTime> getMemberTimes(int memberID);
-    public List<TrainingTime> getTop5Senior(int swimmingDisciplineID);
-    public List<TrainingTime> getTop5Junior(int swimmingDisciplineID);
-    public String getTrainerName(int trainerID);
+    void addTime(TrainingTime trainingTime);
+    List<TrainingTime> getMemberTimes(int memberID);
+    List<TrainingTime> getTop5Senior(int swimmingDisciplineID);
+    List<TrainingTime> getTop5Junior(int swimmingDisciplineID);
+    String getTrainerName(int trainerID);
     
     //-----------------------//
     // CompetitionTimeMapper //
     //-----------------------//
     
-    public void addTime(CompetitionTime competitionTime);
-    public List<CompetitionTime> getAllTimes(int competitionID);
+    void addTime(CompetitionTime competitionTime);
+    List<CompetitionTime> getAllTimes(int competitionID);
     
     //-----------------//
     // PrivilegeMapper //
     //-----------------//
     
-    public boolean[] getPrivileges(int id);
+    boolean[] getPrivileges(int id);
     
     //------------------//
     // DisciplineMapper //
     //------------------//
     
-    public String[] getAllDisciplines();
+    String[] getAllDisciplines();
 }

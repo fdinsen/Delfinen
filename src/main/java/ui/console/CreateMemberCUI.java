@@ -25,7 +25,7 @@ public class CreateMemberCUI extends UI {
         String email = "";
         LocalDate birthday = null;
         int trainerID = 1;
-        MembershipStatus membershipStatus = null;
+        MembershipStatus membershipStatus;
         MembershipType membershipType = null;
         ArrayList<String> disciplines = new ArrayList<>();
         boolean exit = false;
@@ -176,7 +176,6 @@ public class CreateMemberCUI extends UI {
                                 }else{
                                     //Correct input
                                     correct = true;
-                                    break;
                                 }
                             }else{
                             //Wrong input
@@ -193,7 +192,6 @@ public class CreateMemberCUI extends UI {
             //Disciplines
             if (!exit){
                 personComponent = new SwimmingDisciplinesComponent();
-                IntInputComponent intValidation = new IntInputComponent();
                 String[] diciplines = controller.getAllDisciplines();
                 boolean correct = false;
 

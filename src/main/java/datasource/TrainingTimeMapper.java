@@ -58,7 +58,6 @@ public class TrainingTimeMapper {
                 String t_date = result.getString("t_date");
                 int t_time_ms = result.getInt("min(t_time_ms)");
                 int sd = result.getInt("discipline_id");
-                String name = result.getString("member_name");
                 LocalDate ld = LocalDate.parse(t_date);
                 TrainingTime tt = new TrainingTime(memeberId, ld, t_time_ms, sd);
                 trainningTimes.add(tt);

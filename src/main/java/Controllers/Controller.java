@@ -40,15 +40,15 @@ public class Controller {
     public void deleteMember(int memberID){
         datasource.deleteMember(memberID);
     }
-    public ArrayList<Member> getMemberByPhone(String phoneNumber) {
+    public ArrayList getMemberByPhone(String phoneNumber) {
         return (ArrayList) datasource.getMemberByPhone(phoneNumber);
     }
 
-    public ArrayList<Member> getMemberByEmail(String email) {
+    public ArrayList getMemberByEmail(String email) {
         return (ArrayList) datasource.getMemberByEmail(email);
     }
 
-    public ArrayList<Member> getMemberByName(String name) {
+    public ArrayList getMemberByName(String name) {
         return (ArrayList) datasource.getMemberByName(name);
     }
     
@@ -63,10 +63,7 @@ public class Controller {
     public void createMember(Member member) {
         datasource.createMember(member);
     }
-    
-    public ArrayList<String> getMemberSwimmingDisciplines(int memberID) {
-        return datasource.getMemberSwimmingDiscipline(memberID);
-    }
+
 
     //----------------//
     // RestanceMapper //
@@ -105,7 +102,7 @@ public class Controller {
     //-------------------//
     // CompetitionMapper //
     //-------------------//
-    public ArrayList<Competition> getAllCompetitions(int tournamnentID) {
+    public ArrayList getAllCompetitions(int tournamnentID) {
         return (ArrayList) datasource.getAllCompetitions(tournamnentID);
     }
 
@@ -124,7 +121,7 @@ public class Controller {
         datasource.addTime(trainingTime);
     }
 
-    public ArrayList<TrainingTime> getMemberTimes(int memberID) {
+    public ArrayList getMemberTimes(int memberID) {
         return (ArrayList) datasource.getMemberTimes(memberID);
     }
 
@@ -142,7 +139,7 @@ public class Controller {
         datasource.addTime(competitionTime);
     }
 
-    public ArrayList<CompetitionTime> getAllTimes(int competitionID) {
+    public ArrayList getAllTimes(int competitionID) {
         return (ArrayList) datasource.getAllTimes(competitionID);
     }
 
@@ -154,7 +151,7 @@ public class Controller {
     }
 
     public void updateTrainer(Trainer trainer) {
-        datasource.updtateTrainer(trainer);
+        datasource.updateTrainer(trainer);
     }
 
     public void deleteTrainer(int trainerID) {

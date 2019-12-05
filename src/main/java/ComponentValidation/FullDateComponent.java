@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class FullDateComponent implements ValidationComponent {
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
+    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
 
     @Override
     public boolean checkComponent(String date) {

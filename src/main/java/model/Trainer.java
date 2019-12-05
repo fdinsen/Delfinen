@@ -9,8 +9,8 @@ public class Trainer {
     //--------------------//
     // INSTANCE VARIABLES //
     //--------------------//
-    String name;
-    int id;
+    private String name;
+    private int id;
     
     //-------------//
     // CONSTRUCTOR //

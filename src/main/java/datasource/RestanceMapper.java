@@ -24,7 +24,7 @@ public class RestanceMapper {
     private Connection con = null;
 
     public ArrayList<Member> getAllRestance() {
-        ArrayList<Member> membersWithRestance = new ArrayList();
+        ArrayList membersWithRestance = new ArrayList();
         con = DBConnector.getConnection();
         try (Statement stmt = con.createStatement()) {
             ResultSet rs = stmt.executeQuery(

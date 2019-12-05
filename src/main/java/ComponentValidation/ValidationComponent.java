@@ -5,5 +5,5 @@ package ComponentValidation;
  * @author olvvang
  */
 public interface ValidationComponent {
-    public boolean checkComponent(String component);
+    boolean checkComponent(String component);
 }

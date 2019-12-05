@@ -1,8 +1,9 @@
 package model;
 
-import enums.TeamType;
 import enums.MembershipStatus;
 import enums.MembershipType;
+import enums.TeamType;
+
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
@@ -39,13 +40,11 @@ public class Member {
         this.membershipStatus = membershipStatus;
         this.membershipType = membershipType;
         this.disciplines = disciplines;
-        
         if(calculateAge() < 18){
-            this.teamType = teamType.JUNIOR;
+            this.teamType = TeamType.JUNIOR;
         }else{
-            this.teamType = teamType.SENIOR;
+            this.teamType = TeamType.SENIOR;
         }
-        
         calculateSubscription();
     }
     
@@ -62,27 +61,24 @@ public class Member {
         this.membershipStatus = membershipStatus;
         this.membershipType = membershipType;
         this.disciplines = disciplines;
-        
         if(calculateAge() < 18){
-            this.teamType = teamType.JUNIOR;
+            this.teamType = TeamType.JUNIOR;
         }else{
-            this.teamType = teamType.SENIOR;
+            this.teamType = TeamType.SENIOR;
         }
-        
         calculateSubscription();
     }
 
     private long calculateAge() {
         LocalDate now = LocalDate.now();
-        long years = birthDate.until(now, ChronoUnit.YEARS);
-        return years;
+        return birthDate.until(now, ChronoUnit.YEARS);
     }
 
     private void calculateSubscription() {
 
         long years = calculateAge();
 
-        if (membershipStatus == membershipStatus.PASSIVE) {
+        if (membershipStatus == MembershipStatus.PASSIVE) {
             subscription = PASSIVE_SUBSCRIPTION;
         } else {
             if (years < 18) {
@@ -165,5 +161,9 @@ public class Member {
 
     public void setMemberType(MembershipType memberType) {
         this.membershipType = memberType;
+    }
+
+    public TeamType getTeamType() {
+        return teamType;
     }
 }

@@ -6,7 +6,7 @@ import model.Member;
 import java.util.ArrayList;
 
 public class RestanceCUI extends UI {
-    int[] posibleOptionsInMenu = new int[]{6};
+    private int[] posibleOptionsInMenu = new int[]{6};
     RestanceCUI(Controller controller) {
         this.controller = controller;
         setVisibleOptionsInMenu(posibleOptionsInMenu);

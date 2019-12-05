@@ -18,11 +18,10 @@ import java.util.logging.Logger;
  * @author gamma
  */
 public class DisciplineMapper {
-    private Connection con = null;
-    
+
     public String[] getAllDisciplines() {
         ArrayList<String> allDisciplinesList = new ArrayList();
-        con = DBConnector.getConnection();
+        Connection con = DBConnector.getConnection();
         String sql = "SELECT * FROM disciplines";
         try (Statement stmt = con.createStatement()) {
             ResultSet rs = stmt.executeQuery(sql);

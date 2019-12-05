@@ -9,7 +9,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class TournamentsCUI extends UI {
-    int[] posibleOptionsInMenu = new int[]{10,8,9,15};
+    private int[] posibleOptionsInMenu = new int[]{10,8,9,15};
 
     TournamentsCUI(Controller controller) {
         this.controller = controller;

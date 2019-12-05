@@ -20,7 +20,7 @@ public abstract class Times {
         return memberID;
     }
 
-    public Times(int timeInMs, int memberID) {
+    Times(int timeInMs, int memberID) {
         this.timeInMS = timeInMs;
         this.memberID = memberID;
     }

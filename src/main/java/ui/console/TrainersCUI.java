@@ -1,18 +1,13 @@
 package ui.console;
 
-import ComponentValidation.AddressComponent;
 import ComponentValidation.NameComponent;
 import ComponentValidation.ValidationComponent;
 import Controllers.Controller;
-import model.Member;
 import model.Trainer;
-import model.TrainingTime;
-
-import java.util.ArrayList;
 
 class TrainersCUI extends UI {
 
-    int[] posibleOptionsInMenu = new int[]{3, 4};
+    private int[] posibleOptionsInMenu = new int[]{3, 4};
 
     TrainersCUI(Controller controller) {
         this.controller = controller;
@@ -112,7 +107,6 @@ class TrainersCUI extends UI {
         if (!exit) {
             Trainer trainer = new Trainer(input);
             controller.createTrainer(trainer);
-            exit = true;
         }
     }
 
