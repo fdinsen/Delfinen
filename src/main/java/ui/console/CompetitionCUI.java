@@ -67,6 +67,7 @@ public class CompetitionCUI extends UI {
                         //Se konkurrence
                         comp = seeCompetition();
                         if (comp == null) {
+                            printCompetitionMenu(null);
                             //User has exited without selecting
                         } else {
                             printCompetition(comp);

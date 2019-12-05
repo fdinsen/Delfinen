@@ -126,6 +126,7 @@ public class MemberCUI extends UI {
                 input = getMenuInput();
                 if (input == 0) {
                     exit = true;
+                    return null;
                 } else if (input < 0 || input > members.size()) {
                     print("Er ikke en bruger");
                     print("Prøv igen");
@@ -168,23 +169,23 @@ public class MemberCUI extends UI {
                     case 2:
                         //Edit member
                         print("Ret medlem");
-                        exit = true;
+                        //exit = true;
                         break;
                     case 0:
                         //Create member
                         CreateMemberCUI createMemberCUI = new CreateMemberCUI(controller);
-                        exit = true;
+                        //exit = true;
                         break;
                     case 1:
                         //see member
                         Member member = findMember();
                         if(member == null){
                             //User has "exited" from findmember
+                            printUserMenu(false);
                         }else{
                         printMember(member);
                         printUserMenu(true);
                         }
-                        
                         exit = true;
                         break;
                     default:

@@ -80,7 +80,7 @@ public class TournamentsCUI extends UI {
                             print("Ikke et tilladt input");
                         }else{
                             //Correct
-                            tournamentID = tournaments.get(inputInt).getId();
+                            tournamentID = tournaments.get(inputInt - 1).getId();
                             CompetitionCUI competitionCUI = new CompetitionCUI(controller, tournamentID);
                             exit = true;
                         }
@@ -172,6 +172,7 @@ public class TournamentsCUI extends UI {
                 do {
                     printHeader("Tilføj stævne");
                     print("Indtast navn på stævnet");
+                    printExit();
                     input = getStringInput();
                     validator = new NameComponent();
                     if(input.equals("0")){
@@ -190,6 +191,7 @@ public class TournamentsCUI extends UI {
                 do {
                     printHeader("Tilføj stævne");
                     print("Indtast adressen på stævnet (Billeshavevej 75 Korup 5210)");
+                    printExit();
                     input = getStringInput();
                     validator = new AddressComponent();
                     if(input.equals("0")){
@@ -202,6 +204,8 @@ public class TournamentsCUI extends UI {
                     location = input;
                     Tournament tournament = new Tournament(name,date,location);
                     controller.addTournament(tournament);
+                    print(tournament.getName() + " " 
+                            + tournament.getDate().getYear() + " er blevet tilføjet");
                 }
 
             }
