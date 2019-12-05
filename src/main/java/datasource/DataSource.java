@@ -71,7 +71,8 @@ public interface DataSource {
     
     public void addTime(TrainingTime trainingTime);
     public List<TrainingTime> getMemberTimes(int memberID);
-    public List<TrainingTime> getTop5(int swimmingDisciplineID);
+    public List<TrainingTime> getTop5Senior(int swimmingDisciplineID);
+    public List<TrainingTime> getTop5Junior(int swimmingDisciplineID);
     public String getTrainerName(int trainerID);
     
     //-----------------------//
