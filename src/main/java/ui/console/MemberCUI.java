@@ -79,8 +79,7 @@ public class MemberCUI extends UI {
         print("Email: " + member.getEmail());
         print("Fødselsdag: " + member.getBirthday());
         print("Hold: " + member.getTeamType());
-        if (!(member.getTrainerId() == 1));
-        {
+        if (member.getTrainerId() != 1) {
             print("Træner: " + trainer);
         }
 
