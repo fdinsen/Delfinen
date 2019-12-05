@@ -16,6 +16,7 @@ public class TrainingTime extends Times {
         this.date = date;
         this.sd = sd;
     }
+    
 
     public LocalDate getDate() {
         return date;

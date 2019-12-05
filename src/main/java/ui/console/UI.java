@@ -18,7 +18,7 @@ public abstract class UI {
     protected String[] allMenuOptions = {
         ". Opret medlem",                 //0
         ". Se Medlem",                    //1
-        ". Ret Medlem",                   //2
+        ". Fjern Medlem",                 //2
         ". Tilføj træner",                //3
         ". Ret træner",                   //4
         ". Se Restance",                  //5
