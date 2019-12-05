@@ -22,16 +22,20 @@ public class MainConsoleUI extends UI {
 
     public Controller selectUser() {
         boolean finished = false;
+        String[] users = new String[] {"Kasserer","Træner","Formand", "Admin"};
         while(!finished) {
             print("Vælg en bruger profil");
             print("-------------------------");
-            print("1. - Kaserer");
-            print("2. - Træner");
-            print("3. - Formand");
+            int count=1;
+            for(String user : users){
+                print(count+". - "+user);
+                count++;
+            }
             
             int input = getMenuInput();
             
-            if (input != -1) {
+          
+            if (input != -1 && input<=users.length) {
                 return new Controller(datasource, input);
             }
             print("\n-------------------------");
