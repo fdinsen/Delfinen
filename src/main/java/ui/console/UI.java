@@ -2,7 +2,6 @@ package ui.console;
 
 import ComponentValidation.IntInputComponent;
 import ComponentValidation.ValidationComponent;
-import ComponentValidation.StringComponent;
 import Controllers.Controller;
 import java.util.ArrayList;
 import java.util.regex.*;
@@ -60,7 +59,6 @@ public abstract class UI {
     public String getStringInput() {
         boolean exit =  false;
         String input;
-        ValidationComponent stringCo = new StringComponent();
         Scanner scan = new Scanner(System.in);
 
 
