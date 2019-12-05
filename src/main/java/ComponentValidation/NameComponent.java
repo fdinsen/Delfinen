@@ -4,7 +4,7 @@ public class NameComponent implements ValidationComponent {
 
     @Override
     public boolean checkComponent(String name) {
-        if(name.matches("[a-zA-Z ]+")){
+        if(name.matches("[^\\s]+[a-zA-Z ]+")){
         //correct name
         return true;
         }
