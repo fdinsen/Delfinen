@@ -63,7 +63,6 @@ public class MemberMapper {
                     }
                     SQLDisciplines += values;
                 }
-                System.out.println(SQLDisciplines);
                 PreparedStatement psb = con.prepareStatement(SQLDisciplines);
 
                 //Then the values have to be set on the script. Since there are
