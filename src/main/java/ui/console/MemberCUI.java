@@ -4,14 +4,17 @@ import Controllers.Controller;
 import model.Member;
 
 import java.util.ArrayList;
+import model.TrainingTime;
 
 public class MemberCUI extends UI {
 
     private int[] posibleOptionsInMenu = new int[]{1, 0, 2};
+    private String[] swimmingDisciplines;
 
     public MemberCUI(Controller controller) {
         this.controller = controller;
         setVisibleOptionsInMenu(posibleOptionsInMenu);
+        swimmingDisciplines = controller.getAllDisciplines();
         userDialog();
     }
 
@@ -65,6 +68,7 @@ public class MemberCUI extends UI {
     }
 
     private void printMember(Member member) {
+        ArrayList<TrainingTime> trainingTimes = controller.getMemberTimes(member.getMemberId());
         printHeader();
         String trainer = controller.getTrainerName(member.getTrainerId());
         print("Navn: " + member.getName());
@@ -88,7 +92,13 @@ public class MemberCUI extends UI {
         print("Medlemskab: " + member.getMembershipStatus());
         print("Medlemstype: " + member.getMembershipType());
         print("Restance: " + member.getSubscription());
-        print("");
+        if(trainingTimes != null && trainingTimes.size() != 0){
+        print("Træningstider: ");
+        print("\t\t format: mm:ss:ms");
+        for(TrainingTime trainingTime: trainingTimes){
+            print("\t"+ swimmingDisciplines[trainingTime.getSwimmingDiscipline()-1] + " - Tid: " + trainingTime.getTimeInMinutes());
+        }
+        }
 
     }
 

@@ -11,7 +11,7 @@ import java.util.List;
 import model.TrainingTime;
 
 public class TrainingTimeMapper {
-
+    private final int SENIOR_AGE = 18;
     private Connection con = null;
 
     public void addTime(TrainingTime trainingTime) {
@@ -75,12 +75,12 @@ public class TrainingTimeMapper {
         ArrayList<TrainingTime> trainningTimes = new ArrayList<>();
 
         LocalDate today = LocalDate.now();
-        LocalDate seniorAge = today.minus(12, ChronoUnit.YEARS);
+        LocalDate seniorBirthday = today.minus(SENIOR_AGE, ChronoUnit.YEARS);
 
         String SQL = "SELECT members.member_name, min(t_time_ms), training_times.member_id, t_date, discipline_id "
                 + "FROM delfinen.training_times "
                 + "join members on training_times.member_id = members.member_id "
-                + "where discipline_id = ? AND members.birthday < '?' "
+                + "where discipline_id = ? AND members.birthday < ? "
                 + "group by member_id "
                 + "order by t_time_ms limit 5";
 
@@ -90,7 +90,7 @@ public class TrainingTimeMapper {
             PreparedStatement ps = con.prepareStatement(SQL);
 
             ps.setInt(1, swimmingDisciplineID);
-            ps.setString(2, seniorAge.toString());
+            ps.setString(2, seniorBirthday.toString());
             ResultSet result = ps.executeQuery();
 
             while (result.next()) {
@@ -115,12 +115,12 @@ public class TrainingTimeMapper {
         ArrayList<TrainingTime> trainningTimes = new ArrayList<>();
 
         LocalDate today = LocalDate.now();
-        LocalDate seniorAge = today.minus(12, ChronoUnit.YEARS);
+        LocalDate seniorBirthday = today.minus(SENIOR_AGE, ChronoUnit.YEARS);
 
         String SQL = "SELECT members.member_name, min(t_time_ms), training_times.member_id, t_date, discipline_id "
                 + "FROM delfinen.training_times "
                 + "join members on training_times.member_id = members.member_id "
-                + "where discipline_id = ? AND members.birthday > '?' "
+                + "where discipline_id = ? AND members.birthday > ? "
                 + "group by member_id "
                 + "order by t_time_ms limit 5";
 
@@ -130,7 +130,7 @@ public class TrainingTimeMapper {
             PreparedStatement ps = con.prepareStatement(SQL);
 
             ps.setInt(1, swimmingDisciplineID);
-            ps.setString(2, seniorAge.toString());
+            ps.setString(2, seniorBirthday.toString());
             ResultSet result = ps.executeQuery();
 
             while (result.next()) {
