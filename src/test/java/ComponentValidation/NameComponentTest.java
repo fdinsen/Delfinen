@@ -39,13 +39,16 @@ public class NameComponentTest {
         String name = "simon 1234";
         String name1 = "Simon#";
         String name2 = "(Simon)";
+        String name3= " simon";
         NameComponent instance = new NameComponent();
         boolean expResult = false;
         boolean result = instance.checkComponent(name);
         boolean result1 = instance.checkComponent(name1);
         boolean result2 = instance.checkComponent(name2);
+        boolean result3 = instance.checkComponent(name3);
         assertEquals(expResult, result);
         assertEquals(expResult, result1);
         assertEquals(expResult, result2);
+        assertEquals(expResult, result3);
     }
 }
