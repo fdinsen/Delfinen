@@ -42,7 +42,7 @@ public class MemberMapper {
             ps.setInt(6, member.getTrainerId());
             ps.setString(7, member.getMembershipStatus().toString());
             ps.setString(8, member.getMembershipType().toString());
-
+            
             ps.execute();
             ResultSet memberIdSet = ps.getGeneratedKeys();
             ArrayList<String> memberDisciplines = member.getMemberDisciplines();
