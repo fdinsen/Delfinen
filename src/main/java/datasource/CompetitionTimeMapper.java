@@ -43,7 +43,9 @@ public class CompetitionTimeMapper {
         ArrayList<CompetitionTime> competitions = new ArrayList<>();
         try {
             con = DBConnector.getConnection();
-            PreparedStatement stmt = con.prepareStatement("SELECT * FROM competition_times WHERE competitions_id = ?");
+            PreparedStatement stmt = con.prepareStatement("SELECT * FROM competition_times "
+                    + "WHERE competitions_id = ? order by c_time_ms desc");
+            
             stmt.setInt(1, competitionID);
             ResultSet rsCompetitionTime = stmt.executeQuery();
             while (rsCompetitionTime.next()) {

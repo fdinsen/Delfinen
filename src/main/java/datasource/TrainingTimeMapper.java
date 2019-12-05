@@ -11,6 +11,7 @@ import java.util.List;
 import model.TrainingTime;
 
 public class TrainingTimeMapper {
+
     private final int SENIOR_AGE = 18;
     private Connection con = null;
 
@@ -37,10 +38,12 @@ public class TrainingTimeMapper {
 
     public List<TrainingTime> getMemberTimes(int memberID) {
         ArrayList<TrainingTime> trainningTimes = new ArrayList<>();
-        String SQL = "SELECT t_date, members.member_id, t_time_ms, "
-                + " discipline_id, members.member_name FROM training_times "
-                + " join members on training_times.member_id = members.member_id "
-                + " where members.member_id = ? order by t_time_ms desc limit 5";
+        String SQL = "SELECT t_date, members.member_id, min(t_time_ms),discipline_id, members.member_name \n"
+                + "FROM training_times \n"
+                + "join members on training_times.member_id = members.member_id \n"
+                + "where members.member_id = 1\n"
+                + "group by discipline_id \n"
+                + "order by t_time_ms desc";
         con = DBConnector.getConnection();
 
         try {
@@ -111,6 +114,7 @@ public class TrainingTimeMapper {
         }
         return trainningTimes;
     }
+
     public List<TrainingTime> getTop5Junior(int swimmingDisciplineID) {
         ArrayList<TrainingTime> trainningTimes = new ArrayList<>();
 
