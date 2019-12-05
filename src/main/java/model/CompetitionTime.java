@@ -25,5 +25,9 @@ public class CompetitionTime extends Times {
         return competitionTimeID;
     }
     public int getCompetitionID(){return  competitionID;}
-
+    
+    @Override
+    public String toString(){
+        return "" + super.toString() +" "+ competitionTimeID + " " + competitionID ;  
+    }
 }

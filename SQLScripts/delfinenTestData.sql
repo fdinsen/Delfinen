@@ -74,8 +74,8 @@ INSERT INTO training_times (t_date, member_id, t_time_ms, discipline_id) VALUES 
 INSERT INTO training_times (t_date, member_id, t_time_ms, discipline_id) VALUES ('2018-11-27',10,82000,2);
 TRUNCATE TABLE user_privileges;
 INSERT INTO user_privileges (see_member,see_restance,mark_as_payed) VALUES (1,1,1);
-INSERT INTO user_privileges (see_member,edit_member, add_training_time,see_tournament,add_tournament, see_competition,add_competition,add_member_to_competition,show_top_5,edit_competition,edit_tournament) VALUES (1,1,1,1,1,1,1,1,1,1,1);
-INSERT INTO user_privileges (create_member, see_member, edit_member, create_trainer,edit_trainer) VALUES (1,1,1,1,1); 
+INSERT INTO user_privileges (see_member, add_training_time,see_tournament,add_tournament, see_competition,add_competition,add_member_to_competition,show_top_5,edit_competition) VALUES (1,1,1,1,1,1,1,1,1);
+INSERT INTO user_privileges (create_member, see_member, create_trainer,edit_trainer) VALUES (1,1,1,1); 
 TRUNCATE TABLE disciplines;
 INSERT INTO disciplines (discipline_name) VALUES ('CRAWL');
 INSERT INTO disciplines (discipline_name) VALUES ('BACKCRAWL');

@@ -47,5 +47,8 @@ public abstract class Times {
         return -1;
 
     }
-
+    @Override
+    public String toString(){
+        return ""+timeInMS+" "+memberID;
+    }
 }

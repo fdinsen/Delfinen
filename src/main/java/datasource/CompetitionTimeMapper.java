@@ -54,6 +54,7 @@ public class CompetitionTimeMapper {
                 int competitionTimeMS = rsCompetitionTime.getInt("c_time_ms");
 
                 CompetitionTime competitionTime = new CompetitionTime(competitionsTimeID,competitionID,competitionMemberID,competitionTimeMS);
+                System.out.println(competitionTime);
                 competitions.add(competitionTime);
             }
             rsCompetitionTime.close();
