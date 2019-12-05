@@ -30,25 +30,34 @@ public class CompetitionCUI extends UI {
         this.tournamentId = tournamentId;
         setVisibleOptionsInMenu(possibleOptionsInMenu);
         disciplines = controller.getAllDisciplines();
-        printCompetitionMenu();
+        printCompetitionMenu(null);
     }
 
-    private void printCompetitionMenu() {
+    private void printCompetitionMenu(Competition comp) {
         boolean exit = false;
         int counter;
         int input;
-        Competition comp = null;
         do {
             counter = 0;
-            printHeader();
+            printHeader("Konkurrencer ");
+            if(comp != null) {
+                print("Du har valgt konkurrencen:");
+                print("1. " 
+                        + disciplines[comp.getSwimmingDiscipline() - 1]);
+                printHeader();
+            }
             for (int option : visibleOptionsInMenu) {
                 counter++;
+                if(option == 10) {
+                    print(counter + ". Se en konkurrence"); 
+                }else {
                 print(counter + allMenuOptions[option]);
+                }
             }
             printExit();
             input = getMenuInput();
 
-            if (input < 0 || input > visibleOptionsInMenu.size()) {
+            if (input < 0 || input > visibleOptionsInMenu.size() + 1) {
                 print(input + " Er ikke en mulighed i denne menu");
             } else if (input == 0) {
                 exit = true;
@@ -61,17 +70,19 @@ public class CompetitionCUI extends UI {
                             //User has exited without selecting
                         } else {
                             printCompetition(comp);
-                            printCompetitionMenu();
+                            printCompetitionMenu(comp);
                         }
                         exit = true;
                         break;
                     case 11:
                         //Tilføj ny konkurrence
                         addNewCompMenu();
+                        printCompetitionMenu(comp);
                         break;
                     case 12:
                         //Tilføj medlem til konkurrence
                         addMemberToCompMenu(comp);
+                        printCompetitionMenu(comp);
                         break;
                 }
             }
@@ -92,7 +103,7 @@ public class CompetitionCUI extends UI {
             input = getMenuInput();
             if (input == 0) {
                 exit = true;
-            } else if (input < competitions.size()){
+            } else if (input < competitions.size()) {
                 comp = competitions.get(input - 1);
                 exit = true;
             } else {
@@ -107,12 +118,17 @@ public class CompetitionCUI extends UI {
         int counter = 1;
         String line;
         print("Konkurrencer:");
-        for (Competition comp : comps) {
-            line = "";
-            line += counter + " ";
-            line += disciplines[comp.getSwimmingDiscipline() - 1];
-            print("\t" + line);
-            counter++;
+
+        if (comps.size() != 0) {
+            for (Competition comp : comps) {
+                line = "";
+                line += counter + " ";
+                line += disciplines[comp.getSwimmingDiscipline() - 1];
+                print("\t" + line);
+                counter++;
+            }
+        } else {
+            print("Der er ingen konkurrencer i dette stævne");
         }
 
     }
@@ -124,9 +140,13 @@ public class CompetitionCUI extends UI {
         String discipline = disciplines[competition.getSwimmingDiscipline() - 1];
         ArrayList<CompetitionTime> times
                 = controller.getAllTimes(competition.getCompetitionsId());
-        for (CompetitionTime time : times) {
-            member = controller.getMemberByID(time.getMemberID());
-            print(member.getName() + ": " + time.getTimeInMinutes());
+        if (times.size() != 0) {
+            for (CompetitionTime time : times) {
+                member = controller.getMemberByID(time.getMemberID());
+                print(member.getName() + ": " + time.getTimeInMinutes());
+            }
+        }else {
+            print("Der er ingen tider på denne konkurrence");
         }
         print("");
 
@@ -148,8 +168,8 @@ public class CompetitionCUI extends UI {
             if (input != "0" && timeInput.checkComponent(input)) {
                 String[] times = input.split(":");
                 int timeInMS = 0;
-                timeInMS += Integer.parseInt(times[0]) *60 * 1000;
-                timeInMS += Integer.parseInt(times[1]) *1000;
+                timeInMS += Integer.parseInt(times[0]) * 60 * 1000;
+                timeInMS += Integer.parseInt(times[1]) * 1000;
                 timeInMS += Integer.parseInt(times[2]);
                 CompetitionTime ctime = new CompetitionTime(
                         comp.getCompetitionsId(), member.getMemberId(), timeInMS);
@@ -171,11 +191,11 @@ public class CompetitionCUI extends UI {
         boolean exit = false;
         int swimmingDisciplineId;
         int counter;
-        
+
         printHeader();
         do {
             counter = 1;
-            for(String discipline : disciplines) {
+            for (String discipline : disciplines) {
                 print(counter + " " + discipline);
                 counter++;
             }
@@ -192,11 +212,10 @@ public class CompetitionCUI extends UI {
                 controller.addCompetition(comp);
                 exit = true;
             }
-        }while(!exit);
-        
+        } while (!exit);
+
     }
-    
-    
+
     //De næste to metoder er kopieret fra MemberCUI
     //Det er ikke en pæn løsning at gentage koden, det ved jeg godt,
     //men det er for sent til at jeg kan komme på en anden løsning
@@ -206,7 +225,7 @@ public class CompetitionCUI extends UI {
         boolean exit = false;
         String input = "";
         ArrayList<Member> members = new ArrayList<>();
-        
+
         do {
             printHeader();
             print("Indtast tlf. nr., email eller navn på en bruger");
@@ -233,10 +252,10 @@ public class CompetitionCUI extends UI {
                         print("Prøv igen, dit input ser ud til at være forkert");
                         break;
                 }
-                if(members.isEmpty()){
+                if (members.isEmpty()) {
                     //No member found
                     print("Der kunne ikke findes en bruger på " + input);
-                }else{
+                } else {
                     member = chooseUser(members);
                     exit = true;
                 }
@@ -244,7 +263,7 @@ public class CompetitionCUI extends UI {
         } while (!exit);
         return member;
     }
-    
+
     private Member chooseUser(ArrayList<Member> members) {
         if (members.size() == 1) {
             //Only one member
@@ -263,7 +282,7 @@ public class CompetitionCUI extends UI {
                     print(counter + ". " + member.getName() + " - " + member.getPhone());
                 }
                 printExit();
-                
+
                 //gets user input and if correct choice, returns the member
                 input = getMenuInput();
                 if (input == 0) {

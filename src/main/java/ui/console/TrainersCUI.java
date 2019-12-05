@@ -11,7 +11,9 @@ import model.TrainingTime;
 import java.util.ArrayList;
 
 class TrainersCUI extends UI {
-    int[] posibleOptionsInMenu = new int[]{3,4};
+
+    int[] posibleOptionsInMenu = new int[]{3, 4};
+
     TrainersCUI(Controller controller) {
         this.controller = controller;
         setVisibleOptionsInMenu(posibleOptionsInMenu);
@@ -55,7 +57,7 @@ class TrainersCUI extends UI {
         } while (!exit);
     }
 
-    public void printEditTrainerDialog(){
+    public void printEditTrainerDialog() {
         boolean exit = false;
         int input;
         do {
@@ -64,25 +66,25 @@ class TrainersCUI extends UI {
             printExit();
             input = getMenuInput();
 
-            if(input == 0){
+            if (input == 0) {
                 //exit
                 exit = true;
-            }else if(input < 0 || input > controller.getAllTrainers().length){
+            } else if (input < 0 || input > controller.getAllTrainers().length) {
                 print(input + ", Er ikke en mulighed i denne menu");
-            }else{
+            } else {
                 String name;
                 ValidationComponent validator = new NameComponent();
                 do {
                     print("Indtast det nye navn på træneren:");
                     name = getStringInput();
                     printExit();
-                    if(name.equals("0")){
+                    if (name.equals("0")) {
                         exit = true;
                         break;
                     }
-                }while(!validator.checkComponent(name));
-                if(!exit){
-                    Trainer trainer = new Trainer(name, input+1);
+                } while (!validator.checkComponent(name));
+                if (!exit) {
+                    Trainer trainer = new Trainer(name, input + 1);
                     controller.updateTrainer(trainer);
                     exit = true;
                 }
@@ -91,38 +93,37 @@ class TrainersCUI extends UI {
 
     }
 
-    public void printAddTrainerDialog(){
+    public void printAddTrainerDialog() {
         boolean exit = false;
         String input;
         ValidationComponent validator = new NameComponent();
         do {
-                print("Skriv navn på træneren");
-                printExit();
-                input = getStringInput();
+            printHeader();
+            print("Skriv navn på træneren");
+            printExit();
+            input = getStringInput();
 
-                if(input.equals("0")){
-                    //exit
-                    exit = true;
-                    break;
-                }
-            }while(!validator.checkComponent(input));
-                if(!exit){
-                    Trainer trainer = new Trainer(input);
-                    controller.createTrainer(trainer);
-                    exit = true;
-                }
+            if (input.equals("0")) {
+                //exit
+                exit = true;
+                break;
+            }
+        } while (!validator.checkComponent(input));
+        if (!exit) {
+            Trainer trainer = new Trainer(input);
+            controller.createTrainer(trainer);
+            exit = true;
+        }
     }
-
 
     private void printTrainers() {
         int counter = 0;
-            printHeader("Trænere ");
-            print("Trænerne:");
-            for (String trainer : controller.getAllTrainers()) {
-                counter++;
-                print("\t" + counter + ". " + trainer);
-            }
+        printHeader("Trænere ");
+        print("Trænerne:");
+        for (String trainer : controller.getAllTrainers()) {
+            counter++;
+            print("\t" + counter + ". " + trainer);
+        }
     }
-
 
 }

@@ -17,22 +17,22 @@ public abstract class UI {
     protected ArrayList<Integer> visibleOptionsInMenu = new ArrayList<>();
     protected ArrayList<Integer> userOptions = new ArrayList<>();
     protected String[] allMenuOptions = {
-        ". Opret medlem",
-        ". Se Medlem",
-        ". Ret Medlem",
-        ". Tilføj træner",
-        ". Ret træner",
-        ". Se Restance",
-        ". Marker som betalt",
-        ". Tilføj ny træningstid",
-        ". Se Stævner",
-        ". Tilføj stævne",
-        ". Se konkurrence",
-        ". Tilføj ny konkurrence",
-        ". Tilføj medlem til konkurrence",
-        ". Vis top 5 svømmere",
-        ". Ret konkurrence",
-        ". Ret stævne"
+        ". Opret medlem",                 //0
+        ". Se Medlem",                    //1
+        ". Ret Medlem",                   //2
+        ". Tilføj træner",                //3
+        ". Ret træner",                   //4
+        ". Se Restance",                  //5
+        ". Marker som betalt",            //6
+        ". Tilføj ny træningstid",        //7
+        ". Se Stævner",                   //8
+        ". Tilføj stævne",                //9
+        ". Se konkurrence",               //10
+        ". Tilføj ny konkurrence",        //11
+        ". Tilføj medlem til konkurrence",//12
+        ". Vis top 5 svømmere",           //13
+        ". Ret konkurrence",              //14
+        ". Ret stævne"                    //15
     };
     
     protected UI() {

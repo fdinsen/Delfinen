@@ -22,6 +22,7 @@ public class TournamentsCUI extends UI {
         String input;
         ValidationComponent validator = new YearComponent();
         do {
+            printHeader();
             print("Vælg et år (eks. '2017')");
             printExit();
             input = getStringInput();
@@ -50,6 +51,7 @@ public class TournamentsCUI extends UI {
         ArrayList<Tournament> tournaments;
         ValidationComponent validator = new YearComponent();
         do {
+            printHeader();
             print("Vælg et år (eks. '2017')");
             printExit();
             input = getStringInput();
@@ -95,6 +97,7 @@ public class TournamentsCUI extends UI {
         int counter;
         int input;
         do {
+            printHeader("Stævner ");
             counter = 0;
             for (int option : visibleOptionsInMenu) {
                     counter++;
