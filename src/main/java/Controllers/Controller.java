@@ -125,8 +125,11 @@ public class Controller {
         return (ArrayList) datasource.getMemberTimes(memberID);
     }
 
-    public ArrayList<TrainingTime> getTop5(int swimmingDisciplineID) {
-        return (ArrayList) datasource.getTop5(swimmingDisciplineID);
+    public ArrayList<TrainingTime> getTop5Senior(int swimmingDisciplineID) {
+        return (ArrayList) datasource.getTop5Senior(swimmingDisciplineID);
+    }
+    public ArrayList<TrainingTime> getTop5Junior(int swimmingDisciplineID) {
+        return (ArrayList) datasource.getTop5Junior(swimmingDisciplineID);
     }
 
     //-----------------------//

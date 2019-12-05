@@ -163,9 +163,13 @@ public class FileHandler implements DataSource {
     public List<TrainingTime> getMemberTimes(int memberID) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    @Override
+    public List<TrainingTime> getTop5Senior(int swimmingDisciplineID) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
     @Override
-    public List<TrainingTime> getTop5(int swimmingDisciplineID) {
+    public List<TrainingTime> getTop5Junior(int swimmingDisciplineID) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
