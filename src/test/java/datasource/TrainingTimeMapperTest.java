@@ -27,10 +27,11 @@ public class TrainingTimeMapperTest extends TestDataSetup{
     
     @Test
     public void testAddTime() {
+        System.out.println("addTime");
         LocalDate ld = LocalDate.of(2018,11,05);
         TrainingTimeMapper instanceOfTTMapper = new TrainingTimeMapper();
         TrainingTime trainingTime = new TrainingTime(10, ld, 400 , 1);
-        int exsectlength = 5;
+        int exsectlength = 4;
         instanceOfTTMapper.addTime(trainingTime);
         
         ArrayList<TrainingTime> liste = (ArrayList<TrainingTime>) instanceOfTTMapper.getMemberTimes(10);
@@ -42,7 +43,7 @@ public class TrainingTimeMapperTest extends TestDataSetup{
     public void testGetMemberTime(){
         ArrayList<TrainingTime> liste = new ArrayList<>();
         TrainingTimeMapper instanceOfTTMapper = new TrainingTimeMapper();
-        int expsectedSize = 5;
+        int expsectedSize = 3;
         liste = (ArrayList<TrainingTime>) instanceOfTTMapper.getMemberTimes(1);
         
         int actualSize = liste.size();

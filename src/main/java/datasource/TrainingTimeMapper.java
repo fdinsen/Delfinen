@@ -16,7 +16,7 @@ public class TrainingTimeMapper {
     private Connection con = null;
 
     public void addTime(TrainingTime trainingTime) {
-        String SQL = "INSERT INTO training_times (t_date, member_id, t_time_ms, discipline_id) VALUES (?,?,?,?)";
+        String SQL = "INSERT INTO training_times (t_date, member_id,t_time_ms, discipline_id) VALUES (?,?,?,?)";
         con = DBConnector.getConnection();
 
         try {
@@ -41,9 +41,9 @@ public class TrainingTimeMapper {
         String SQL = "SELECT t_date, members.member_id, min(t_time_ms),discipline_id, members.member_name \n"
                 + "FROM training_times \n"
                 + "join members on training_times.member_id = members.member_id \n"
-                + "where members.member_id = 1\n"
+                + "where members.member_id = ?\n"
                 + "group by discipline_id \n"
-                + "order by t_time_ms desc";
+                + "order by min(t_time_ms) desc";
         con = DBConnector.getConnection();
 
         try {
@@ -56,12 +56,11 @@ public class TrainingTimeMapper {
 
                 int memeberId = result.getInt("member_id");
                 String t_date = result.getString("t_date");
-                int t_time_ms = result.getInt("t_time_ms");
+                int t_time_ms = result.getInt("min(t_time_ms)");
                 int sd = result.getInt("discipline_id");
                 String name = result.getString("member_name");
                 LocalDate ld = LocalDate.parse(t_date);
                 TrainingTime tt = new TrainingTime(memeberId, ld, t_time_ms, sd);
-
                 trainningTimes.add(tt);
             }
 
@@ -85,7 +84,7 @@ public class TrainingTimeMapper {
                 + "join members on training_times.member_id = members.member_id "
                 + "where discipline_id = ? AND members.birthday < ? "
                 + "group by member_id "
-                + "order by t_time_ms limit 5";
+                + "order by min(t_time_ms) limit 5";
 
         con = DBConnector.getConnection();
 
@@ -126,7 +125,7 @@ public class TrainingTimeMapper {
                 + "join members on training_times.member_id = members.member_id "
                 + "where discipline_id = ? AND members.birthday > ? "
                 + "group by member_id "
-                + "order by t_time_ms limit 5";
+                + "order by min(t_time_ms) limit 5";
 
         con = DBConnector.getConnection();
 

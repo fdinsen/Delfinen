@@ -33,4 +33,9 @@ public class Trainer {
     public int getId() {
         return id;
     }
+
+    @Override
+    public String toString() {
+        return super.toString() + " " + name + " " + id;
+    }
 }
