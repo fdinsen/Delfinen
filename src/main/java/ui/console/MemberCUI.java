@@ -1,6 +1,7 @@
 package ui.console;
 
 import ComponentValidation.FullDateComponent;
+import ComponentValidation.TimeComponent;
 import Controllers.Controller;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -100,8 +101,8 @@ public class MemberCUI extends UI {
             print("Træningstider: ");
             print("\t\t format: mm:ss:ms");
             for (TrainingTime trainingTime : trainingTimes) {
-                print("\t" + swimmingDisciplines[trainingTime.getSwimmingDiscipline() - 1] + " - Tid: " + trainingTime.getTimeInMinutes() + 
-                     " - Dato: " + trainingTime.getDate());
+                print("\t" + swimmingDisciplines[trainingTime.getSwimmingDiscipline() - 1] + " - Tid: " + trainingTime.getTimeInMinutes()
+                        + " - Dato: " + trainingTime.getDate());
             }
         }
 
@@ -216,54 +217,26 @@ public class MemberCUI extends UI {
     private void addTrainingTimeToMember(int memberID) {
         boolean exit = false;
         String input;
-        FullDateComponent dateValidator = new FullDateComponent();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
         LocalDate date = null;
         int TimeInMs = 0;
         int disciplineID = 0;
 
-        //Date
-        do {
-            printHeader("Tilføj Trænings Tid - Dato");
-            print("Indtast dato (18/02/2004):");
-            printExit();
-            input = getStringInput();
-            if (input.equals("0")) {
-                break;
-            } else if (dateValidator.checkComponent(input)) {
-                //Correct date
-                date = LocalDate.parse(input, formatter);
-                break;
-            } else {
-                //Wrong input
-                print(input + ", er ikke tilladt her, prøv igen");
-            }
-        } while (!exit);
+        //Training Time
+        printHeader("Tilføj Trænings Tid - Dato");
+        date = getDate();
+        if (date == null) {
+            //Exit
+            exit = true;
+        }
 
         //Training time
         if (!exit) {
-            do {
-                printHeader("Tilføj Trænings Tid");
-                print("Indtast tid (mm:ss:mss)");
-                printExit();
-                input = getStringInput();
-
-                if (input.equals("0")) {
-                    break;
-                } else {
-                    int temp = Times.convertToMS(input);
-                    print(""+temp);
-                    if (temp != -1) {
-                        //Correct date
-                        TimeInMs = temp;
-                        break;
-                    }else{
-                        print(temp + ", er ikke tilladt som input her");
-                    }
-                    
-                }
-
-            } while (!exit);
+            printHeader("Tilføj Trænings Tid - Tid");
+            TimeInMs = getTime();
+            if (TimeInMs == 0) {
+                //Exit
+                exit = true;
+            }
         }
 
         //Discipline
@@ -297,8 +270,54 @@ public class MemberCUI extends UI {
         }
 
     }
-    
-    public void deleteMember(){
+
+    public LocalDate getDate() {
+        FullDateComponent dateValidator = new FullDateComponent();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
+        String input;
+        //Keeps going untill it correct or user exits
+        do {
+            print("Indtast dato (18/02/2004):");
+            printExit();
+            input = getStringInput();
+            if (input.equals("0")) {
+                return null;
+            } else if (dateValidator.checkComponent(input)) {
+                //Correct date
+                return LocalDate.parse(input, formatter);
+            } else {
+                //Wrong input
+                print(input + ", er ikke tilladt her, prøv igen");
+            }
+        } while (true);
+
+    }
+
+    public int getTime() {
+        String input;
+        TimeComponent tc = new TimeComponent();
+        do {
+            print("Indtast tid (mm:ss:mss)");
+            printExit();
+            input = getStringInput();
+
+            if (input.equals("0")) {
+                return 0;
+            } else {
+                int temp = Times.convertToMS(input);
+                print("" + temp);
+                if (temp != -1) {
+                    //Correct date
+                    return temp;
+                } else {
+                    print(temp + ", er ikke tilladt som input her");
+                }
+            }
+        } while (true);
+
+    }
+
+    public void deleteMember() {
         boolean exit = false;
         Member member;
         do {
@@ -309,12 +328,12 @@ public class MemberCUI extends UI {
                 //Found user delete
                 controller.deleteMember(member.getMemberId());
                 exit = true;
-            }else{
+            } else {
                 //User exited
                 exit = true;
             }
         } while (!exit);
-        
+
     }
 
 }
