@@ -22,7 +22,7 @@ public class MainConsoleUI extends UI {
 
     public Controller selectUser() {
         boolean finished = false;
-        String[] users = new String[] {"Kasserer","Træner","Formand", "Admin"};
+        String[] users = new String[] {"Kasserer","Træner","Formand"};
         while(!finished) {
             print("Vælg en bruger profil");
             print("-------------------------");

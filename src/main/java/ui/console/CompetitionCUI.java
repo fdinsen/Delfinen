@@ -170,13 +170,8 @@ public class CompetitionCUI extends UI {
                     } else if (timeMS == -1) {
                         //Input passer ikke
                     } else {
-                        String[] times = input.split(":");
-                        int timeInMS = 0;
-                        timeInMS += Integer.parseInt(times[0]) * 60 * 1000;
-                        timeInMS += Integer.parseInt(times[1]) * 1000;
-                        timeInMS += Integer.parseInt(times[2]);
                         CompetitionTime ctime = new CompetitionTime(
-                                comp.getCompetitionsId(), member.getMemberId(), timeInMS);
+                                comp.getCompetitionsId(), member.getMemberId(), timeMS);
                         controller.addTime(ctime);
                         comp = null;
                         exit = true;
