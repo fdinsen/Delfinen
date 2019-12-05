@@ -55,7 +55,7 @@ public class TournamentsCUI extends UI {
             print("Vælg et år (eks. '2017')");
             printExit();
             input = getStringInput();
-            int tournamentID;
+            Tournament tournament;
 
             if(input.equals("0")){
                 exit = true;
@@ -63,7 +63,7 @@ public class TournamentsCUI extends UI {
                 System.out.println(input + " er ikke et korrekt årstal");
             }else{
                 tournaments = controller.getAllTournaments(Integer.parseInt(input));
-                if(tournaments.size() == 0){
+                if(tournaments.isEmpty()){
                     //No tournaments
                     print("Ingen stævner fundet");
                 }else{
@@ -80,8 +80,8 @@ public class TournamentsCUI extends UI {
                             print("Ikke et tilladt input");
                         }else{
                             //Correct
-                            tournamentID = tournaments.get(inputInt - 1).getId();
-                            CompetitionCUI competitionCUI = new CompetitionCUI(controller, tournamentID);
+                            tournament = tournaments.get(inputInt - 1);
+                            CompetitionCUI competitionCUI = new CompetitionCUI(controller, tournament);
                             exit = true;
                         }
                     }while(!exit);
