@@ -19,7 +19,7 @@ public class CompetitionTimeMapper {
     private Connection con = null;
 
     public void addCompetitionTime(CompetitionTime ct) {
-        String SQL = "INSERT INTO competition_times (c_time_id, competitions_id, member_id, c_time_ms) VALUES (?,?,?,?);";
+        String SQL = "INSERT INTO competition_times (c_time_id, competitions_id, member_id, c_time_ms) VALUES (?,?,?,?)";
         con = DBConnector.getConnection();
 
         try {

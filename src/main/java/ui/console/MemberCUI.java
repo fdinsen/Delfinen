@@ -72,7 +72,6 @@ public class MemberCUI extends UI {
     }
 
     private void printMember(Member member) {
-        ArrayList<TrainingTime> trainingTimes = controller.getMemberTimes(member.getMemberId());
         printHeader();
         String trainer = controller.getTrainerName(member.getTrainerId());
         print("Navn: " + member.getName());
@@ -97,15 +96,22 @@ public class MemberCUI extends UI {
         print("Medlemskab: " + member.getMembershipStatus());
         print("Medlemstype: " + member.getMembershipType());
         print("Restance: " + member.getSubscription());
+        print("Træningstider: ");
+        printTrainingTimes(member.getMemberId());
+
+    }
+    
+    public void printTrainingTimes(int memberID){
+                ArrayList<TrainingTime> trainingTimes = controller.getMemberTimes(memberID);
         if (trainingTimes != null && trainingTimes.size() != 0) {
-            print("Træningstider: ");
             print("\t\t format: mm:ss:ms");
             for (TrainingTime trainingTime : trainingTimes) {
                 print("\t" + swimmingDisciplines[trainingTime.getSwimmingDiscipline() - 1] + " - Tid: " + trainingTime.getTimeInMinutes()
                         + " - Dato: " + trainingTime.getDate());
             }
+        }else{
+            print("\tIngen træningstider for denne bruger");
         }
-
     }
 
     //So user can select which member he wishes to see, if the member search returns more than one
@@ -214,109 +220,6 @@ public class MemberCUI extends UI {
         } while (!exit);
     }
 
-    private void addTrainingTimeToMember(int memberID) {
-        boolean exit = false;
-        String input;
-        LocalDate date = null;
-        int TimeInMs = 0;
-        int disciplineID = 0;
-
-        //Training Time
-        printHeader("Tilføj Trænings Tid - Dato");
-        date = getDate();
-        if (date == null) {
-            //Exit
-            exit = true;
-        }
-
-        //Training time
-        if (!exit) {
-            printHeader("Tilføj Trænings Tid - Tid");
-            TimeInMs = getTime();
-            if (TimeInMs == 0) {
-                //Exit
-                exit = true;
-            }
-        }
-
-        //Discipline
-        if (!exit) {
-            int inputInt;
-            int counter;
-            do {
-                counter = 0;
-                printHeader("Tilføj Trænings Tid - SvømmeDisciplin");
-                for (String str : swimmingDisciplines) {
-                    counter++;
-                    print(counter + ". " + str);
-                }
-                print("Vælg svømmeDisciplin");
-                printExit();
-                inputInt = getMenuInput();
-
-                if (input.equals("0")) {
-                    exit = true;
-                } else if (inputInt >= 1 && inputInt <= swimmingDisciplines.length) {
-                    //Correct input
-                    disciplineID = inputInt;
-                    break;
-                } else {
-                    //Wrong input
-                    print(inputInt + ", er ikke tilladt her, prøv igen");
-                }
-            } while (!exit);
-            TrainingTime trainingTime = new TrainingTime(memberID, date, TimeInMs, disciplineID);
-            controller.addTime(trainingTime);
-        }
-
-    }
-
-    public LocalDate getDate() {
-        FullDateComponent dateValidator = new FullDateComponent();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
-        String input;
-        //Keeps going untill it correct or user exits
-        do {
-            print("Indtast dato (18/02/2004):");
-            printExit();
-            input = getStringInput();
-            if (input.equals("0")) {
-                return null;
-            } else if (dateValidator.checkComponent(input)) {
-                //Correct date
-                return LocalDate.parse(input, formatter);
-            } else {
-                //Wrong input
-                print(input + ", er ikke tilladt her, prøv igen");
-            }
-        } while (true);
-
-    }
-
-    public int getTime() {
-        String input;
-        TimeComponent tc = new TimeComponent();
-        do {
-            print("Indtast tid (mm:ss:mss)");
-            printExit();
-            input = getStringInput();
-
-            if (input.equals("0")) {
-                return 0;
-            } else {
-                int temp = Times.convertToMS(input);
-                print("" + temp);
-                if (temp != -1) {
-                    //Correct date
-                    return temp;
-                } else {
-                    print(temp + ", er ikke tilladt som input her");
-                }
-            }
-        } while (true);
-
-    }
-
     public void deleteMember() {
         boolean exit = false;
         Member member;
@@ -334,6 +237,108 @@ public class MemberCUI extends UI {
             }
         } while (!exit);
 
+    }
+
+    private void addTrainingTimeToMember(int memberID) {
+        boolean exit = false;
+        String input;
+        LocalDate date = null;
+        int TimeInMs = 0;
+        int disciplineID = 0;
+
+        //Training Time
+        printHeader("Tilføj Trænings Tid - Dato");
+        date = getDateInput();
+        if (date == null) {
+            //Exit
+            exit = true;
+        }
+
+        //Training time
+        if (!exit) {
+            printHeader("Tilføj Trænings Tid - Tid");
+            TimeInMs = getTimeInput();
+            if (TimeInMs == 0) {
+                //Exit
+                exit = true;
+            }
+        }
+
+        //Discipline
+        if (!exit) {
+            printHeader("Tilføj Trænings Tid - Disciplin");
+            disciplineID = getDisciplineIDInput();
+            //If not 0, correct number
+            if (!(disciplineID == 0)) {    
+                TrainingTime trainingTime = new TrainingTime(memberID, date, TimeInMs, disciplineID);
+                controller.addTime(trainingTime);
+            }
+
+        }
+
+    }
+
+    public LocalDate getDateInput() {
+        FullDateComponent dateValidator = new FullDateComponent();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
+        String input;
+        //Keeps going untill it correct or user exits
+        do {
+            print("Indtast dato (18/02/2004):");
+            printExit();
+            input = getStringInput();
+            if (input.equals("0")) {
+                return null;
+            } else if (dateValidator.checkComponent(input)) {
+                //Correct date
+                return LocalDate.parse(input, formatter);
+            }
+        } while (true);
+
+    }
+
+    public int getTimeInput() {
+        String input;
+        TimeComponent tc = new TimeComponent();
+        do {
+            print("Indtast tid (mm:ss:mss)");
+            printExit();
+            input = getStringInput();
+
+            if (input.equals("0")) {
+                return 0;
+            } else {
+                int temp = Times.convertToMS(input);
+                print("" + temp);
+                if (temp != -1) {
+                    //Correct date
+                    return temp;
+                }
+            }
+        } while (true);
+
+    }
+
+    public int getDisciplineIDInput() {
+        int inputInt;
+        int counter;
+        do {
+            counter = 0;
+            for (String str : swimmingDisciplines) {
+                counter++;
+                print(counter + ". " + str);
+            }
+            print("Vælg svømmeDisciplin");
+            printExit();
+            inputInt = getMenuInput();
+
+            if (inputInt == 0) {
+                return 0;
+            } else if (inputInt >= 1 && inputInt <= swimmingDisciplines.length) {
+                //Correct input
+                return inputInt;
+            }
+        } while (true);
     }
 
 }

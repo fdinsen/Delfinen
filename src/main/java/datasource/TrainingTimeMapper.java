@@ -16,7 +16,7 @@ public class TrainingTimeMapper {
     private Connection con = null;
 
     public void addTime(TrainingTime trainingTime) {
-        String SQL = "INSERT INTO training_times (t_date, member_id, t_time_ms, discipline_id) VALUES (?,?,?,?);";
+        String SQL = "INSERT INTO training_times (t_date, member_id, t_time_ms, discipline_id) VALUES (?,?,?,?)";
         con = DBConnector.getConnection();
 
         try {
