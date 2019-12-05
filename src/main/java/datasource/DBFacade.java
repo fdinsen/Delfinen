@@ -166,7 +166,7 @@ public class DBFacade implements DataSource {
 
     @Override
     public List<TrainingTime> getTop5(int swimmingDisciplineID) {
-        return new TrainingTimeMapper().getTop5(swimmingDisciplineID);
+        return new TrainingTimeMapper().getTop5Senior(swimmingDisciplineID);
     }
     @Override
     public String getTrainerName(int trainerID) {

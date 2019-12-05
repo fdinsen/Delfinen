@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import model.TrainingTime;
@@ -37,9 +38,9 @@ public class TrainingTimeMapper {
     public List<TrainingTime> getMemberTimes(int memberID) {
         ArrayList<TrainingTime> trainningTimes = new ArrayList<>();
         String SQL = "SELECT t_date, members.member_id, t_time_ms, "
-                + "discipline_id, members.member_name FROM training_times "
-                + "join members on training_times.member_id = members.member_id "
-                + "where members.member_id = ?";
+                + " discipline_id, members.member_name FROM training_times "
+                + " join members on training_times.member_id = members.member_id "
+                + " where members.member_id = ? order by t_time_ms desc limit 5";
         con = DBConnector.getConnection();
 
         try {
@@ -49,15 +50,15 @@ public class TrainingTimeMapper {
             ResultSet result = ps.executeQuery();
 
             while (result.next()) {
-                
+
                 int memeberId = result.getInt("member_id");
                 String t_date = result.getString("t_date");
                 int t_time_ms = result.getInt("t_time_ms");
                 int sd = result.getInt("discipline_id");
                 String name = result.getString("member_name");
                 LocalDate ld = LocalDate.parse(t_date);
-                TrainingTime tt = new TrainingTime(memeberId,ld , t_time_ms, sd);
-                
+                TrainingTime tt = new TrainingTime(memeberId, ld, t_time_ms, sd);
+
                 trainningTimes.add(tt);
             }
 
@@ -70,35 +71,81 @@ public class TrainingTimeMapper {
         return trainningTimes;
     }
 
-    public List<TrainingTime> getTop5(int swimmingDisciplineID) {
-        ArrayList<TrainingTime> trainningTimes = new ArrayList<>(); 
-        String SQL = "SELECT min(t_time_ms), member_id, t_date, discipline_id "
+    public List<TrainingTime> getTop5Senior(int swimmingDisciplineID) {
+        ArrayList<TrainingTime> trainningTimes = new ArrayList<>();
+
+        LocalDate today = LocalDate.now();
+        LocalDate seniorAge = today.minus(12, ChronoUnit.YEARS);
+
+        String SQL = "SELECT members.member_name, min(t_time_ms), training_times.member_id, t_date, discipline_id "
                 + "FROM delfinen.training_times "
-                + "where discipline_id = ? "
-                + "group by member_id order by t_time_ms limit 5";
-        
+                + "join members on training_times.member_id = members.member_id "
+                + "where discipline_id = ? AND members.birthday < '?' "
+                + "group by member_id "
+                + "order by t_time_ms limit 5";
+
         con = DBConnector.getConnection();
-        
+
         try {
             PreparedStatement ps = con.prepareStatement(SQL);
-            
+
             ps.setInt(1, swimmingDisciplineID);
-            
+            ps.setString(2, seniorAge.toString());
             ResultSet result = ps.executeQuery();
-            
-            while(result.next()){
-                
+
+            while (result.next()) {
+
                 int memberID = result.getInt("member_id");
                 String t_date = result.getString("t_date");
                 LocalDate ld = LocalDate.parse(t_date);
-                
+
                 int timeInMs = result.getInt("min(t_time_ms)");
                 int sDiscipline = result.getInt("discipline_id");
-                TrainingTime tt = new TrainingTime(memberID, ld , timeInMs, sDiscipline);
+                TrainingTime tt = new TrainingTime(memberID, ld, timeInMs, sDiscipline);
                 trainningTimes.add(tt);
-                
+
             }
-            
+
+        } catch (SQLException ex) {
+            System.out.println(ex + " could not get top 5");
+        }
+        return trainningTimes;
+    }
+    public List<TrainingTime> getTop5Junior(int swimmingDisciplineID) {
+        ArrayList<TrainingTime> trainningTimes = new ArrayList<>();
+
+        LocalDate today = LocalDate.now();
+        LocalDate seniorAge = today.minus(12, ChronoUnit.YEARS);
+
+        String SQL = "SELECT members.member_name, min(t_time_ms), training_times.member_id, t_date, discipline_id "
+                + "FROM delfinen.training_times "
+                + "join members on training_times.member_id = members.member_id "
+                + "where discipline_id = ? AND members.birthday > '?' "
+                + "group by member_id "
+                + "order by t_time_ms limit 5";
+
+        con = DBConnector.getConnection();
+
+        try {
+            PreparedStatement ps = con.prepareStatement(SQL);
+
+            ps.setInt(1, swimmingDisciplineID);
+            ps.setString(2, seniorAge.toString());
+            ResultSet result = ps.executeQuery();
+
+            while (result.next()) {
+
+                int memberID = result.getInt("member_id");
+                String t_date = result.getString("t_date");
+                LocalDate ld = LocalDate.parse(t_date);
+
+                int timeInMs = result.getInt("min(t_time_ms)");
+                int sDiscipline = result.getInt("discipline_id");
+                TrainingTime tt = new TrainingTime(memberID, ld, timeInMs, sDiscipline);
+                trainningTimes.add(tt);
+
+            }
+
         } catch (SQLException ex) {
             System.out.println(ex + " could not get top 5");
         }

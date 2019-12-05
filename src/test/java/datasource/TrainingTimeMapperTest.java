@@ -58,7 +58,7 @@ public class TrainingTimeMapperTest extends TestDataSetup{
         TrainingTimeMapper instanceOfTTMapper = new TrainingTimeMapper();
         int expsected = 5;
         
-        ArrayList<TrainingTime> liste = (ArrayList<TrainingTime>) instanceOfTTMapper.getTop5(1);
+        ArrayList<TrainingTime> liste = (ArrayList<TrainingTime>) instanceOfTTMapper.getTop5Senior(1);
         int actual = liste.size();
         
         assertEquals(expsected, actual);
