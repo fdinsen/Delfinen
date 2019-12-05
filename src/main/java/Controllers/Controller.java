@@ -37,6 +37,9 @@ public class Controller {
     //--------------//
     // MemberMapper //
     //--------------//
+    public void deleteMember(int memberID){
+        datasource.deleteMember(memberID);
+    }
     public ArrayList<Member> getMemberByPhone(String phoneNumber) {
         return (ArrayList) datasource.getMemberByPhone(phoneNumber);
     }
