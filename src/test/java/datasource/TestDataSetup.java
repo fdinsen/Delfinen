@@ -20,7 +20,7 @@ public class TestDataSetup {
 
     private ArrayList<String> DBSetUp = scanFromFile("delfinenTestData.sql");
 
-    public TestDataSetup() throws IOException {
+    public TestDataSetup() {
     }
 
     public ArrayList<String> scanFromFile(String filename) {
