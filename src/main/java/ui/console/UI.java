@@ -3,9 +3,10 @@ package ui.console;
 import ComponentValidation.IntInputComponent;
 import ComponentValidation.ValidationComponent;
 import Controllers.Controller;
+
 import java.util.ArrayList;
-import java.util.regex.*;
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
 /**
  *
@@ -23,7 +24,7 @@ public abstract class UI {
         ". Ret træner",                   //4
         ". Se Restance",                  //5
         ". Marker som betalt",            //6
-        ". Tilføj ny træningstid",        //7
+            ". Træningstider",                //7
         ". Se Stævner",                   //8
         ". Tilføj stævne",                //9
         ". Se konkurrence",               //10

@@ -1,14 +1,14 @@
 package datasource;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import model.TrainingTime;
+
+import java.sql.*;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
-import model.TrainingTime;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class TrainingTimeMapper {
 
@@ -36,9 +36,9 @@ public class TrainingTimeMapper {
 
     }
 
-    public List<TrainingTime> getMemberTimes(int memberID) {
+    public ArrayList<TrainingTime> getMemberTimes(int memberID) {
         ArrayList<TrainingTime> trainningTimes = new ArrayList<>();
-        String SQL = "SELECT t_date, members.member_id, min(t_time_ms),discipline_id, members.member_name \n"
+        String SQL = "SELECT t_time_id, t_date, members.member_id, min(t_time_ms),discipline_id, members.member_name \n"
                 + "FROM training_times \n"
                 + "join members on training_times.member_id = members.member_id \n"
                 + "where members.member_id = ?\n"
@@ -53,13 +53,13 @@ public class TrainingTimeMapper {
             ResultSet result = ps.executeQuery();
 
             while (result.next()) {
-
+                int trainingTimeID = result.getInt("t_time_id");
                 int memeberId = result.getInt("member_id");
                 String t_date = result.getString("t_date");
                 int t_time_ms = result.getInt("min(t_time_ms)");
                 int sd = result.getInt("discipline_id");
                 LocalDate ld = LocalDate.parse(t_date);
-                TrainingTime tt = new TrainingTime(memeberId, ld, t_time_ms, sd);
+                TrainingTime tt = new TrainingTime(trainingTimeID, memeberId, ld, t_time_ms, sd);
                 trainningTimes.add(tt);
             }
 
@@ -152,6 +152,28 @@ public class TrainingTimeMapper {
             System.out.println(ex + " could not get top 5");
         }
         return trainningTimes;
+    }
+
+    public void updateTrainingTime(TrainingTime trainingTime) {
+        con = DBConnector.getConnection();
+        String SQL = "UPDATE training_times SET t_date = ?, member_id = ?, t_time_ms = ?, discipline_id = ? WHERE t_time_id = ?";
+        try {
+
+            PreparedStatement ps = con.prepareStatement(SQL);
+            Date date = java.sql.Date.valueOf(trainingTime.getDate().toString());
+            ps.setDate(1, date);
+            ps.setInt(2, trainingTime.getMemberID());
+            ps.setInt(3, trainingTime.getTimeInMS());
+            ps.setInt(4, trainingTime.getSwimmingDiscipline());
+            ps.setInt(5, trainingTime.getTrainingTimeID());
+
+            ps.execute();
+            ps.close();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(MemberMapper.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Kunne ikke opdatere træningstiden, prøv igen");
+        }
     }
 
 }

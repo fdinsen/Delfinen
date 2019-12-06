@@ -69,6 +69,8 @@ public interface DataSource {
     List<TrainingTime> getTop5Senior(int swimmingDisciplineID);
     List<TrainingTime> getTop5Junior(int swimmingDisciplineID);
     String getTrainerName(int trainerID);
+
+    void updateTrainingTime(TrainingTime trainingTime);
     
     //-----------------------//
     // CompetitionTimeMapper //
